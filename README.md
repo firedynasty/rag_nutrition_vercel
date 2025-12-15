@@ -104,4 +104,4 @@ The application uses:
 - CSS for styling
 - Web Audio API for sound notifications
 
-Text in the PDF is fully accessible to screen readers and other assistive technologies. Links in PDFs will open in new tabs without disrupting your reading flow.
+Text in the PDF is fully accessible to screen readers and other assistive technologies. Links in PDFs will open in new tabs without disrupting your reading flow.# react-chat-report-viewer
