@@ -1,0 +1,108 @@
+## How `loadPgnFromHighlight` Works
+
+The button allows you to **select/highlight PGN text** in the analysis report, then load it directly into the chess board viewer.
+
+### Flow:
+
+```
+1. User highlights PGN text in the report
+          ↓
+2. Click "Load PGN from Highlight" button
+          ↓
+3. window.getSelection() captures the highlighted text
+          ↓
+4. PGN is cleaned (headers removed, whitespace normalized)
+          ↓
+5. Validated (must contain move numbers like "1.")
+          ↓
+6. parsePgnToPositions() converts PGN → array of FEN positions
+          ↓
+7. Positions loaded into board2 (the study board)
+```
+
+### Key Code (index.html:2948-2987):
+
+```javascript
+loadPgnFromHighlightBtn.addEventListener('click', function() {
+    // 1. Get highlighted text from browser selection
+    const selection = window.getSelection();
+    const selectedText = selection.toString().trim();
+
+    // 2. Validate selection exists
+    if (!selectedText || selectedText === '') {
+        alert('No text is highlighted. Please highlight/select a PGN first.');
+        return;
+    }
+
+    // 3. Clean the PGN - remove headers like [Event "..."], normalize spaces
+    let pgnText = selectedText;
+    pgnText = pgnText.split('\n')
+        .filter(line => !line.trim().startsWith('['))  // Remove header lines
+        .join(' ')
+        .replace(/\s+/g, ' ')  // Collapse whitespace
+        .trim();
+
+    // 4. Validate it looks like PGN (has move numbers)
+    if (!/\d+\./.test(pgnText)) {
+        alert('Selected text does not contain valid PGN.');
+        return;
+    }
+
+    // 5. Parse and load into the board
+    window.studyReportPositions = window.parsePgnToPositions(pgnText);
+    window.studyReportPositionIndex = 0;
+    window.board2.position(window.studyReportPositions[0]);
+});
+```
+
+### Note on Clipboard
+
+This button does **not** use the clipboard. It reads directly from `window.getSelection()`.
+
+The **sibling button** `goToLichessFromHighlight` (line 2911-2945) *does* copy to clipboard and opens Lichess:
+
+```javascript
+navigator.clipboard.writeText(pgnText).then(() => {
+    if (confirm('Copied to clipboard!\n\nGo to lichess.org/analysis?')) {
+        window.open('https://lichess.org/analysis', '_blank');
+    }
+});
+```
+
+---
+
+## Reusable Pattern: Get Highlighted Text
+
+```javascript
+// Generic pattern to get user's text selection
+function getHighlightedText() {
+    const selection = window.getSelection();
+    return selection.toString().trim();
+}
+```
+
+## Reusable Pattern: Copy Selection to Clipboard
+
+```javascript
+// Copy highlighted text to clipboard and optionally open a URL
+function copySelectionToClipboard(openUrl = null) {
+    const selectedText = window.getSelection().toString().trim();
+
+    if (!selectedText) {
+        alert('No text highlighted.');
+        return;
+    }
+
+    navigator.clipboard.writeText(selectedText).then(() => {
+        if (openUrl) {
+            if (confirm('Copied to clipboard!\n\nOpen external site?')) {
+                window.open(openUrl, '_blank');
+            }
+        } else {
+            alert('Copied to clipboard!');
+        }
+    }).catch(err => {
+        console.error('Clipboard write failed:', err);
+    });
+}
+```

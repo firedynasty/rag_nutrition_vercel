@@ -1,0 +1,278 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External JSON Loader for CodePen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .loading {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .data-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+        }
+        .sample-data {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>External JSON Loader</h1>
+        <div id="status" class="status loading">Loading JSON data...</div>
+        <div id="dataInfo"></div>
+        <div id="controls" style="display:none;">
+            <button onclick="showSampleData()">Show Sample Data</button>
+            <button onclick="searchVerse()">Search for Verse</button>
+            <button onclick="getRandomVerse()">Get Random Verse</button>
+        </div>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        // Global variable to store the loaded JSON data
+        let bibleData = null;
+
+        // Method 1: Using Fetch API (Recommended)
+        async function loadJSONWithFetch() {
+            const url = 'https://assets.codepen.io/1075762/en_kjv.json';
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error loading JSON:', error);
+                throw error;
+            }
+        }
+
+        // Method 2: Using XMLHttpRequest (Alternative for older browsers)
+        function loadJSONWithXHR() {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                const url = 'https://assets.codepen.io/1075762/en_kjv.json';
+                
+                xhr.open('GET', url, true);
+                xhr.responseType = 'json';
+                
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        resolve(xhr.response);
+                    } else {
+                        reject(new Error(`XHR error! status: ${xhr.status}`));
+                    }
+                };
+                
+                xhr.onerror = function() {
+                    reject(new Error('Network error occurred'));
+                };
+                
+                xhr.send();
+            });
+        }
+
+        // Method 3: Dynamic Script Loading with JSONP callback (if supported)
+        function loadJSONWithScript() {
+            return new Promise((resolve, reject) => {
+                // Note: This method only works if the server supports JSONP
+                // The JSON file must be wrapped in a callback function
+                window.jsonCallback = function(data) {
+                    resolve(data);
+                    delete window.jsonCallback;
+                };
+
+                const script = document.createElement('script');
+                script.src = 'https://assets.codepen.io/1075762/en_kjv.json?callback=jsonCallback';
+                script.onerror = () => reject(new Error('Script loading failed'));
+                document.head.appendChild(script);
+            });
+        }
+
+        // Initialize and load the JSON data
+        async function init() {
+            const statusEl = document.getElementById('status');
+            const dataInfoEl = document.getElementById('dataInfo');
+            const controlsEl = document.getElementById('controls');
+            
+            try {
+                // Try fetch first (recommended method)
+                statusEl.textContent = 'Loading JSON data using Fetch API...';
+                bibleData = await loadJSONWithFetch();
+                
+                // If fetch fails, you could try XMLHttpRequest as fallback
+                // bibleData = await loadJSONWithXHR();
+                
+                statusEl.className = 'status success';
+                statusEl.textContent = 'JSON data loaded successfully!';
+                
+                // Display information about the loaded data
+                displayDataInfo(bibleData);
+                controlsEl.style.display = 'block';
+                
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = `Failed to load JSON: ${error.message}`;
+                
+                // Try alternative method
+                try {
+                    statusEl.textContent = 'Trying alternative loading method...';
+                    bibleData = await loadJSONWithXHR();
+                    statusEl.className = 'status success';
+                    statusEl.textContent = 'JSON data loaded successfully with XHR!';
+                    displayDataInfo(bibleData);
+                    controlsEl.style.display = 'block';
+                } catch (xhrError) {
+                    statusEl.className = 'status error';
+                    statusEl.textContent = `All loading methods failed. Error: ${xhrError.message}`;
+                }
+            }
+        }
+
+        // Display information about the loaded data
+        function displayDataInfo(data) {
+            const dataInfoEl = document.getElementById('dataInfo');
+            
+            // Assuming this is KJV Bible data
+            let infoHTML = '<div class="data-info">';
+            infoHTML += '<h3>Data Information</h3>';
+            
+            if (Array.isArray(data)) {
+                infoHTML += `<p>Total items: ${data.length}</p>`;
+                if (data.length > 0 && data[0]) {
+                    infoHTML += '<p>First item structure:</p>';
+                    infoHTML += `<pre>${JSON.stringify(data[0], null, 2).substring(0, 500)}...</pre>`;
+                }
+            } else if (typeof data === 'object') {
+                const keys = Object.keys(data);
+                infoHTML += `<p>Object with ${keys.length} keys</p>`;
+                infoHTML += `<p>Keys: ${keys.slice(0, 10).join(', ')}${keys.length > 10 ? '...' : ''}</p>`;
+            }
+            
+            infoHTML += '</div>';
+            dataInfoEl.innerHTML = infoHTML;
+        }
+
+        // Show sample data from the loaded JSON
+        function showSampleData() {
+            const outputEl = document.getElementById('output');
+            
+            if (!bibleData) {
+                outputEl.innerHTML = '<div class="status error">No data loaded</div>';
+                return;
+            }
+            
+            let sampleHTML = '<div class="sample-data">';
+            sampleHTML += '<h4>Sample Data (first 5 items):</h4>';
+            
+            if (Array.isArray(bibleData)) {
+                const sample = bibleData.slice(0, 5);
+                sampleHTML += `<pre>${JSON.stringify(sample, null, 2)}</pre>`;
+            } else {
+                const keys = Object.keys(bibleData).slice(0, 5);
+                const sample = {};
+                keys.forEach(key => sample[key] = bibleData[key]);
+                sampleHTML += `<pre>${JSON.stringify(sample, null, 2)}</pre>`;
+            }
+            
+            sampleHTML += '</div>';
+            outputEl.innerHTML = sampleHTML;
+        }
+
+        // Search for a specific verse (example function)
+        function searchVerse() {
+            const query = prompt('Enter search term:');
+            if (!query || !bibleData) return;
+            
+            const outputEl = document.getElementById('output');
+            let results = [];
+            
+            if (Array.isArray(bibleData)) {
+                results = bibleData.filter(item => 
+                    JSON.stringify(item).toLowerCase().includes(query.toLowerCase())
+                ).slice(0, 5);
+            }
+            
+            if (results.length > 0) {
+                outputEl.innerHTML = `<div class="sample-data">
+                    <h4>Search Results for "${query}":</h4>
+                    <pre>${JSON.stringify(results, null, 2)}</pre>
+                </div>`;
+            } else {
+                outputEl.innerHTML = '<div class="status error">No results found</div>';
+            }
+        }
+
+        // Get a random verse (example function)
+        function getRandomVerse() {
+            if (!bibleData || !Array.isArray(bibleData)) return;
+            
+            const outputEl = document.getElementById('output');
+            const randomIndex = Math.floor(Math.random() * bibleData.length);
+            const randomItem = bibleData[randomIndex];
+            
+            outputEl.innerHTML = `<div class="sample-data">
+                <h4>Random Item:</h4>
+                <pre>${JSON.stringify(randomItem, null, 2)}</pre>
+            </div>`;
+        }
+
+        // Load data when page loads
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

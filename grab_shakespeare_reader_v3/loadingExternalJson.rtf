@@ -1,0 +1,123 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Bold;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red111\green111\blue111;\red36\green36\blue36;
+\red133\green0\blue2;\red20\green153\blue2;\red28\green214\blue4;\red47\green180\blue29;\red220\green0\blue5;
+\red64\green11\blue217;\red46\green174\blue187;\red180\green36\blue25;}
+{\*\expandedcolortbl;;\csgray\c0;\cssrgb\c51167\c51167\c51167;\cssrgb\c18938\c18938\c18938;
+\cspthree\c54876\c10355\c6515;\cssrgb\c0\c65000\c0;\cssrgb\c0\c85000\c0;\cssrgb\c20241\c73898\c14950;\cssrgb\c90000\c0\c0;
+\cssrgb\c32309\c18666\c88229;\cssrgb\c20199\c73241\c78251;\cssrgb\c76411\c21697\c12527;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\b\fs36 \cf2 \CocoaLigature0 Update
+\f1\b0 (shakespeare_viewer.html)\
+  \uc0\u9151  \'a0Updated 
+\f0\b shakespeare_viewer.html
+\f1\b0  with 
+\f0\b 2
+\f1\b0  additions and 
+\f0\b 2
+\f1\b0  removals               \
+     \cf3   332 \cf4            let playData = null;\cf2 \
+     \cf3   333 \cf4            let currentActIndex = null;\cf2 \
+     \cf3   334 \cf4            let currentSceneIndex = null;\cf2 \
+     \cf3   335 \cf2 \cb5 -          let currentPlayFile = 'romeo_juliet.json';\cb1 \
+     \cf3   335 \cf2 \cb6 +          let currentPlayFile = '\cb7 https://assets.codepen.io/1075762/\cb1 \
+     \cf3       \cf2 \cb6 +  romeo_juliet.json';\cb1 \
+     \cf3   336 \cf4    \cf2 \
+     \cf3   337 \cf4            // Load JSON data for selected play\cf2 \
+     \cf3   338 \cf2 \cb5 -          async function loadPlayData(playFile = 'romeo_juliet.json') \{\cb1 \
+     \cf3   338 \cf2 \cb6 +          async function loadPlayData(playFile = '\cb1 \
+     \cf3       \cf2 \cb6 +  \cb7 https://assets.codepen.io/1075762/\cb6 romeo_juliet.json') \{\cb1 \
+     \cf3   339 \cf4                const statusEl = document.getElementById('status');\cf2 \
+     \cf3   340 \cf4                const dataInfoEl = document.getElementById('dataInfo');\cf2 \
+     \cf3   341 \cf4                const controlsEl = document.getElementById('controls');\cf2 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf8 \uc0\u9210 \cf2  
+\f0\b Update
+\f1\b0 (shakespeare_viewer.html)\
+  \uc0\u9151  \'a0Updated 
+\f0\b shakespeare_viewer.html
+\f1\b0  with 
+\f0\b 1
+\f1\b0  addition and 
+\f0\b 1
+\f1\b0  removal               \
+     \cf3   372 \cf4    \cf2 \
+     \cf3   373 \cf4                \} catch (error) \{\cf2 \
+     \cf3   374 \cf4                    statusEl.className = 'status error';\cf2 \
+     \cf3   375 \cf2 \cb5 -                  statusEl.textContent = `Failed to load play data: \cb1 \
+     \cf3       \cf2 \cb5 -  $\{error.message\}\cb9 . Make sure $\{playFile\} is in the same directory.\cb5 `;\cb1 \
+     \cf3   375 \cf2 \cb6 +                  statusEl.textContent = `Failed to load play data: \cb1 \
+     \cf3       \cf2 \cb6 +  $\{error.message\}`;\cb1 \
+     \cf3   376 \cf4                \}\cf2 \
+     \cf3   377 \cf4            \}\cf2 \
+     \cf3   378 \cf4    \cf2 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf4 \uc0\u9210 \cf2  Perfect! I've updated \cf10 shakespeare_viewer.html\cf2  to load plays from the CodePen URLs. Here's\
+  what changed:\
+\
+  
+\f0\b Changes Made
+\f1\b0 \
+\
+  1. 
+\f0\b Updated the play selector dropdown
+\f1\b0  (lines 287-290) - Changed all option values from local\
+   filenames to full CodePen URLs\
+  2. 
+\f0\b Updated default play URL
+\f1\b0  (line 335) - Changed the initial \cf10 currentPlayFile\cf2  variable to use\
+   the CodePen URL\
+  3. 
+\f0\b Updated loadPlayData function
+\f1\b0  (line 338) - Changed the default parameter to use the\
+  CodePen URL\
+  4. 
+\f0\b Simplified error message
+\f1\b0  (line 375) - Removed the "Make sure file is in same directory"\
+  text since we're loading from remote URLs now\
+\
+  
+\f0\b How It Works Now
+\f1\b0 \
+\
+  The app will now:\
+  - Load "Romeo and Juliet" by default from\
+  \cf10 https://assets.codepen.io/1075762/romeo_juliet.json\cf2 \
+  - Allow users to switch between all 4 plays using the dropdown\
+  - Fetch JSON data from CodePen's CDN instead of local files\
+\
+  
+\f0\b Adding More Plays (e.g., Othello, Macbeth, etc.)
+\f1\b0 \
+\
+  To add more Shakespeare plays in the future, follow these steps:\
+\
+  
+\f0\b 1. Upload your JSON file to CodePen:
+\f1\b0 \
+  - Go to CodePen.io\
+  - Upload your new play JSON file (e.g., \cf10 othello.json\cf2 )\
+  - Get the public URL (format: \cf10 https://assets.codepen.io/1075762/othello.json\cf2 )\
+\
+  
+\f0\b 2. Add the option to the dropdown
+\f1\b0  (around line 286-291):\
+  \cf3 <\cf10 select\cf3  \cf11 id\cf3 =\cf12 "playSelect"\cf3 >\cf2 \
+      \cf3 <\cf10 option\cf3  \cf11 value\cf3 =\cf12 "https://assets.codepen.io/1075762/romeo_juliet.json"\cf3 >\cf2 Romeo and\
+  Juliet\cf3 </\cf10 option\cf3 >\cf2 \
+      \cf3 <\cf10 option\cf3  \cf11 value\cf3 =\cf12 "https://assets.codepen.io/1075762/tempest.json"\cf3 >\cf2 The Tempest\cf3 </\cf10 option\cf3 >\cf2 \
+      \cf3 <\cf10 option\cf3  \cf11 value\cf3 =\cf12 "https://assets.codepen.io/1075762/much_ado_about_nothing.json"\cf3 >\cf2 Much Ado\
+  About Nothing\cf3 </\cf10 option\cf3 >\cf2 \
+      \cf3 <\cf10 option\cf3  \cf11 value\cf3 =\cf12 "https://assets.codepen.io/1075762/hamlet.json"\cf3 >\cf2 Hamlet\cf3 </\cf10 option\cf3 >\cf2 \
+      \cf3 <\cf10 option\cf3  \cf11 value\cf3 =\cf12 "https://assets.codepen.io/1075762/othello.json"\cf3 >\cf2 Othello\cf3 </\cf10 option\cf3 >\cf2 \
+      \cf3 <\cf10 option\cf3  \cf11 value\cf3 =\cf12 "https://assets.codepen.io/1075762/macbeth.json"\cf3 >\cf2 Macbeth\cf3 </\cf10 option\cf3 >\cf2 \
+  \cf3 </\cf10 select\cf3 >\cf2 \
+\
+  That's it! The code will automatically handle loading and displaying any new play you add to\
+   the dropdown, as long as the JSON follows the same structure (with \cf10 title\cf2 , \cf10 author\cf2 , \cf10 acts\cf2 ,\
+  \cf10 scenes\cf2 , and \cf10 lines\cf2  properties).\
+}

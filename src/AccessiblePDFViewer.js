@@ -11,6 +11,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 const AccessiblePDFViewer = () => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [pageInputValue, setPageInputValue] = useState("1");
+  const [isEditingPage, setIsEditingPage] = useState(false);
   const [scale, setScale] = useState(1.0);
   const [pdfFile, setPdfFile] = useState(null);
   const [error, setError] = useState(null);
@@ -70,6 +72,7 @@ const AccessiblePDFViewer = () => {
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
     setPageNumber(1);
+    setPageInputValue("1");
     setError(null);
   };
 
@@ -94,12 +97,32 @@ const AccessiblePDFViewer = () => {
     const newPage = pageNumber + offset;
     if (newPage >= 1 && newPage <= numPages) {
       setPageNumber(newPage);
+      setPageInputValue(newPage.toString());
       // Reset scroll position when changing pages
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
       });
     }
+  }, [pageNumber, numPages]);
+  
+  // Go to a specific page number directly
+  const goToSpecificPage = useCallback((targetPage) => {
+    const numericPage = parseInt(targetPage, 10);
+    if (!isNaN(numericPage) && numericPage >= 1 && numericPage <= numPages) {
+      setPageNumber(numericPage);
+      setPageInputValue(numericPage.toString());
+      // Reset scroll position
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    } else {
+      // Reset input to current page if invalid
+      setPageInputValue(pageNumber.toString());
+    }
+    // Exit editing mode
+    setIsEditingPage(false);
   }, [pageNumber, numPages]);
 
   // Change page while preserving scroll position
@@ -109,7 +132,9 @@ const AccessiblePDFViewer = () => {
       const currentScrollPosition = window.scrollY;
       
       // Update page number
-      setPageNumber(prevPageNumber => prevPageNumber + offset);
+      const newPage = pageNumber + offset;
+      setPageNumber(newPage);
+      setPageInputValue(newPage.toString());
       
       // Restore scroll position after a short delay to allow page rendering
       setTimeout(() => {
@@ -457,8 +482,53 @@ const AccessiblePDFViewer = () => {
             >
               Next (m/,)
             </button>
-            <div style={{ color: '#4b5563', margin: '0 1rem' }}>
-              {pageNumber} of {numPages || '?'}
+            <div style={{ color: '#4b5563', margin: '0 1rem', display: 'flex', alignItems: 'center' }}>
+              {isEditingPage ? (
+                <input
+                  type="text"
+                  value={pageInputValue}
+                  onChange={(e) => {
+                    // Allow only numbers
+                    const value = e.target.value.replace(/[^0-9]/g, '');
+                    setPageInputValue(value);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      goToSpecificPage(pageInputValue);
+                    } else if (e.key === 'Escape') {
+                      setIsEditingPage(false);
+                      setPageInputValue(pageNumber.toString());
+                    }
+                  }}
+                  onBlur={() => {
+                    goToSpecificPage(pageInputValue);
+                  }}
+                  autoFocus
+                  style={{
+                    width: '3rem',
+                    padding: '0.25rem',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '0.25rem',
+                    textAlign: 'center'
+                  }}
+                  aria-label="Go to page number"
+                />
+              ) : (
+                <span 
+                  onClick={() => setIsEditingPage(true)}
+                  style={{ 
+                    cursor: 'pointer',
+                    padding: '0.25rem 0.5rem',
+                    borderRadius: '0.25rem',
+                    backgroundColor: '#e5e7eb',
+                    minWidth: '1.5rem',
+                    textAlign: 'center'
+                  }}
+                  title="Click to edit page number"
+                >
+                  {pageNumber}
+                </span>
+              )} of {numPages || '?'}
             </div>
           </div>
 

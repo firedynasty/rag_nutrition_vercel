@@ -1,0 +1,2815 @@
+{
+  "title": "The Tempest",
+  "author": "William Shakespeare",
+  "acts": [
+    {
+      "act_number": 1,
+      "act_title": "ACT I",
+      "scenes": [
+        {
+          "scene_number": 1,
+          "scene_title": "Scene I",
+          "location": "",
+          "lines": [
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter a Master and a Boatswain"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter Mariners"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter ALONSO, SEBASTIAN, ANTONIO, FERDINAND, GONZALO, and others"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Good boatswain, have care. Where's the master?\nPlay the men.\nBoatswain\nI pray now, keep below."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Where is the master, boatswain?\nBoatswain\nDo you not hear him? You mar our labour: keep your\ncabins: you do assist the storm."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Nay, good, be patient.\nBoatswain\nWhen the sea is. Hence! What cares these roarers\nfor the name of king? To cabin: silence! trouble us not."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Good, yet remember whom thou hast aboard.\nBoatswain\nNone that I more love than myself. You are a\ncounsellor; if you can command these elements to\nsilence, and work the peace of the present, we will\nnot hand a rope more; use your authority: if you\ncannot, give thanks you have lived so long, and make\nyourself ready in your cabin for the mischance of\nthe hour, if it so hap. Cheerly, good hearts! Out\nof our way, I say.\nExit"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "I have great comfort from this fellow: methinks he\nhath no drowning mark upon him; his complexion is\nperfect gallows. Stand fast, good Fate, to his\nhanging: make the rope of his destiny our cable,\nfor our own doth little advantage. If he be not\nborn to be hanged, our case is miserable.\nExeunt"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Re-enter Boatswain"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Re-enter SEBASTIAN, ANTONIO, and GONZALO"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "A pox o' your throat, you bawling, blasphemous,\nincharitable dog!\nBoatswain\nWork you then."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Hang, cur! hang, you whoreson, insolent noisemaker!\nWe are less afraid to be drowned than thou art."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "I'll warrant him for drowning; though the ship were\nno stronger than a nutshell and as leaky as an\nunstanched wench.\nBoatswain\nLay her a-hold, a-hold! set her two courses off to\nsea again; lay her off."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter Mariners wet"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "The king and prince at prayers! let's assist them,\nFor our case is as theirs."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "I'm out of patience."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "We are merely cheated of our lives by drunkards:\nThis wide-chapp'd rascal--would thou mightst lie drowning\nThe washing of ten tides!"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "He'll be hang'd yet,\nThough every drop of water swear against it\nAnd gape at widest to glut him.\nA confused noise within:   'Mercy on us!'--  'We split, we split!'--'Farewell, my wife and  children!'-- 'Farewell, brother!'--'We split, we split, we split!'"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Let's all sink with the king."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Let's take leave of him."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Exeunt ANTONIO and SEBASTIAN"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Now would I give a thousand furlongs of sea for an\nacre of barren ground, long heath, brown furze, any\nthing. The wills above be done! but I would fain\ndie a dry death.\nExeunt\nSCENE II. The island. Before PROSPERO'S cell."
+            }
+          ]
+        },
+        {
+          "scene_number": 2,
+          "scene_title": "Scene II",
+          "location": "",
+          "lines": [
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter PROSPERO and MIRANDA"
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "If by your art, my dearest father, you have\nPut the wild waters in this roar, allay them.\nThe sky, it seems, would pour down stinking pitch,\nBut that the sea, mounting to the welkin's cheek,\nDashes the fire out. O, I have suffered\nWith those that I saw suffer: a brave vessel,\nWho had, no doubt, some noble creature in her,\nDash'd all to pieces. O, the cry did knock\nAgainst my very heart. Poor souls, they perish'd.\nHad I been any god of power, I would\nHave sunk the sea within the earth or ere\nIt should the good ship so have swallow'd and\nThe fraughting souls within her."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Be collected:\nNo more amazement: tell your piteous heart\nThere's no harm done."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "O, woe the day!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "No harm.\nI have done nothing but in care of thee,\nOf thee, my dear one, thee, my daughter, who\nArt ignorant of what thou art, nought knowing\nOf whence I am, nor that I am more better\nThan Prospero, master of a full poor cell,\nAnd thy no greater father."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "More to know\nDid never meddle with my thoughts."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "'Tis time\nI should inform thee farther. Lend thy hand,\nAnd pluck my magic garment from me. So:\nLays down his mantle\nLie there, my art. Wipe thou thine eyes; have comfort.\nThe direful spectacle of the wreck, which touch'd\nThe very virtue of compassion in thee,\nI have with such provision in mine art\nSo safely ordered that there is no soul--\nNo, not so much perdition as an hair\nBetid to any creature in the vessel\nWhich thou heard'st cry, which thou saw'st sink. Sit down;\nFor thou must now know farther."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "You have often\nBegun to tell me what I am, but stopp'd\nAnd left me to a bootless inquisition,\nConcluding 'Stay: not yet.'"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "The hour's now come;\nThe very minute bids thee ope thine ear;\nObey and be attentive. Canst thou remember\nA time before we came unto this cell?\nI do not think thou canst, for then thou wast not\nOut three years old."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Certainly, sir, I can."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "By what? by any other house or person?\nOf any thing the image tell me that\nHath kept with thy remembrance."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "'Tis far off\nAnd rather like a dream than an assurance\nThat my remembrance warrants. Had I not\nFour or five women once that tended me?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Thou hadst, and more, Miranda. But how is it\nThat this lives in thy mind? What seest thou else\nIn the dark backward and abysm of time?\nIf thou remember'st aught ere thou camest here,\nHow thou camest here thou mayst."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "But that I do not."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Twelve year since, Miranda, twelve year since,\nThy father was the Duke of Milan and\nA prince of power."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Sir, are not you my father?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Thy mother was a piece of virtue, and\nShe said thou wast my daughter; and thy father\nWas Duke of Milan; and thou his only heir\nAnd princess no worse issued."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "O the heavens!\nWhat foul play had we, that we came from thence?\nOr blessed was't we did?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Both, both, my girl:\nBy foul play, as thou say'st, were we heaved thence,\nBut blessedly holp hither."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "O, my heart bleeds\nTo think o' the teen that I have turn'd you to,\nWhich is from my remembrance! Please you, farther."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "My brother and thy uncle, call'd Antonio--\nI pray thee, mark me--that a brother should\nBe so perfidious!--he whom next thyself\nOf all the world I loved and to him put\nThe manage of my state; as at that time\nThrough all the signories it was the first\nAnd Prospero the prime duke, being so reputed\nIn dignity, and for the liberal arts\nWithout a parallel; those being all my study,\nThe government I cast upon my brother\nAnd to my state grew stranger, being transported\nAnd rapt in secret studies. Thy false uncle--\nDost thou attend me?"
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Sir, most heedfully."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Being once perfected how to grant suits,\nHow to deny them, who to advance and who\nTo trash for over-topping, new created\nThe creatures that were mine, I say, or changed 'em,\nOr else new form'd 'em; having both the key\nOf officer and office, set all hearts i' the state\nTo what tune pleased his ear; that now he was\nThe ivy which had hid my princely trunk,\nAnd suck'd my verdure out on't. Thou attend'st not."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "O, good sir, I do."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "I pray thee, mark me.\nI, thus neglecting worldly ends, all dedicated\nTo closeness and the bettering of my mind\nWith that which, but by being so retired,\nO'er-prized all popular rate, in my false brother\nAwaked an evil nature; and my trust,\nLike a good parent, did beget of him\nA falsehood in its contrary as great\nAs my trust was; which had indeed no limit,\nA confidence sans bound. He being thus lorded,\nNot only with what my revenue yielded,\nBut what my power might else exact, like one\nWho having into truth, by telling of it,\nMade such a sinner of his memory,\nTo credit his own lie, he did believe\nHe was indeed the duke; out o' the substitution\nAnd executing the outward face of royalty,\nWith all prerogative: hence his ambition growing--\nDost thou hear?"
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Your tale, sir, would cure deafness."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "To have no screen between this part he play'd\nAnd him he play'd it for, he needs will be\nAbsolute Milan. Me, poor man, my library\nWas dukedom large enough: of temporal royalties\nHe thinks me now incapable; confederates--\nSo dry he was for sway--wi' the King of Naples\nTo give him annual tribute, do him homage,\nSubject his coronet to his crown and bend\nThe dukedom yet unbow'd--alas, poor Milan!--\nTo most ignoble stooping."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "O the heavens!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Mark his condition and the event; then tell me\nIf this might be a brother."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "I should sin\nTo think but nobly of my grandmother:\nGood wombs have borne bad sons."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Now the condition.\nThe King of Naples, being an enemy\nTo me inveterate, hearkens my brother's suit;\nWhich was, that he, in lieu o' the premises\nOf homage and I know not how much tribute,\nShould presently extirpate me and mine\nOut of the dukedom and confer fair Milan\nWith all the honours on my brother: whereon,\nA treacherous army levied, one midnight\nFated to the purpose did Antonio open\nThe gates of Milan, and, i' the dead of darkness,\nThe ministers for the purpose hurried thence\nMe and thy crying self."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Alack, for pity!\nI, not remembering how I cried out then,\nWill cry it o'er again: it is a hint\nThat wrings mine eyes to't."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Hear a little further\nAnd then I'll bring thee to the present business\nWhich now's upon's; without the which this story\nWere most impertinent."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Wherefore did they not\nThat hour destroy us?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Well demanded, wench:\nMy tale provokes that question. Dear, they durst not,\nSo dear the love my people bore me, nor set\nA mark so bloody on the business, but\nWith colours fairer painted their foul ends.\nIn few, they hurried us aboard a bark,\nBore us some leagues to sea; where they prepared\nA rotten carcass of a boat, not rigg'd,\nNor tackle, sail, nor mast; the very rats\nInstinctively had quit it: there they hoist us,\nTo cry to the sea that roar'd to us, to sigh\nTo the winds whose pity, sighing back again,\nDid us but loving wrong."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Alack, what trouble\nWas I then to you!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "O, a cherubim\nThou wast that did preserve me. Thou didst smile.\nInfused with a fortitude from heaven,\nWhen I have deck'd the sea with drops full salt,\nUnder my burthen groan'd; which raised in me\nAn undergoing stomach, to bear up\nAgainst what should ensue."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "How came we ashore?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "By Providence divine.\nSome food we had and some fresh water that\nA noble Neapolitan, Gonzalo,\nOut of his charity, being then appointed\nMaster of this design, did give us, with\nRich garments, linens, stuffs and necessaries,\nWhich since have steaded much; so, of his gentleness,\nKnowing I loved my books, he furnish'd me\nFrom mine own library with volumes that\nI prize above my dukedom."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Would I might\nBut ever see that man!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Now I arise:\nResumes his mantle\nSit still, and hear the last of our sea-sorrow.\nHere in this island we arrived; and here\nHave I, thy schoolmaster, made thee more profit\nThan other princesses can that have more time\nFor vainer hours and tutors not so careful."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Heavens thank you for't! And now, I pray you, sir,\nFor still 'tis beating in my mind, your reason\nFor raising this sea-storm?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Know thus far forth.\nBy accident most strange, bountiful Fortune,\nNow my dear lady, hath mine enemies\nBrought to this shore; and by my prescience\nI find my zenith doth depend upon\nA most auspicious star, whose influence\nIf now I court not but omit, my fortunes\nWill ever after droop. Here cease more questions:\nThou art inclined to sleep; 'tis a good dulness,\nAnd give it way: I know thou canst not choose.\nMIRANDA sleeps\nCome away, servant, come. I am ready now.\nApproach, my Ariel, come."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter ARIEL"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "All hail, great master! grave sir, hail! I come\nTo answer thy best pleasure; be't to fly,\nTo swim, to dive into the fire, to ride\nOn the curl'd clouds, to thy strong bidding task\nAriel and all his quality."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Hast thou, spirit,\nPerform'd to point the tempest that I bade thee?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "To every article.\nI boarded the king's ship; now on the beak,\nNow in the waist, the deck, in every cabin,\nI flamed amazement: sometime I'ld divide,\nAnd burn in many places; on the topmast,\nThe yards and bowsprit, would I flame distinctly,\nThen meet and join. Jove's lightnings, the precursors\nO' the dreadful thunder-claps, more momentary\nAnd sight-outrunning were not; the fire and cracks\nOf sulphurous roaring the most mighty Neptune\nSeem to besiege and make his bold waves tremble,\nYea, his dread trident shake."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "My brave spirit!\nWho was so firm, so constant, that this coil\nWould not infect his reason?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Not a soul\nBut felt a fever of the mad and play'd\nSome tricks of desperation. All but mariners\nPlunged in the foaming brine and quit the vessel,\nThen all afire with me: the king's son, Ferdinand,\nWith hair up-staring,--then like reeds, not hair,--\nWas the first man that leap'd; cried, 'Hell is empty\nAnd all the devils are here.'"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Why that's my spirit!\nBut was not this nigh shore?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Close by, my master."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "But are they, Ariel, safe?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Not a hair perish'd;\nOn their sustaining garments not a blemish,\nBut fresher than before: and, as thou badest me,\nIn troops I have dispersed them 'bout the isle.\nThe king's son have I landed by himself;\nWhom I left cooling of the air with sighs\nIn an odd angle of the isle and sitting,\nHis arms in this sad knot."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Of the king's ship\nThe mariners say how thou hast disposed\nAnd all the rest o' the fleet."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Safely in harbour\nIs the king's ship; in the deep nook, where once\nThou call'dst me up at midnight to fetch dew\nFrom the still-vex'd Bermoothes, there she's hid:\nThe mariners all under hatches stow'd;\nWho, with a charm join'd to their suffer'd labour,\nI have left asleep; and for the rest o' the fleet\nWhich I dispersed, they all have met again\nAnd are upon the Mediterranean flote,\nBound sadly home for Naples,\nSupposing that they saw the king's ship wreck'd\nAnd his great person perish."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Ariel, thy charge\nExactly is perform'd: but there's more work.\nWhat is the time o' the day?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Past the mid season."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "At least two glasses. The time 'twixt six and now\nMust by us both be spent most preciously."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Is there more toil? Since thou dost give me pains,\nLet me remember thee what thou hast promised,\nWhich is not yet perform'd me."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "How now? moody?\nWhat is't thou canst demand?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "My liberty."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Before the time be out? no more!"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "I prithee,\nRemember I have done thee worthy service;\nTold thee no lies, made thee no mistakings, served\nWithout or grudge or grumblings: thou didst promise\nTo bate me a full year."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Dost thou forget\nFrom what a torment I did free thee?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "No."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Thou dost, and think'st it much to tread the ooze\nOf the salt deep,\nTo run upon the sharp wind of the north,\nTo do me business in the veins o' the earth\nWhen it is baked with frost."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "I do not, sir."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Thou liest, malignant thing! Hast thou forgot\nThe foul witch Sycorax, who with age and envy\nWas grown into a hoop? hast thou forgot her?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "No, sir."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Thou hast. Where was she born? speak; tell me."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Sir, in Argier."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "O, was she so? I must\nOnce in a month recount what thou hast been,\nWhich thou forget'st. This damn'd witch Sycorax,\nFor mischiefs manifold and sorceries terrible\nTo enter human hearing, from Argier,\nThou know'st, was banish'd: for one thing she did\nThey would not take her life. Is not this true?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Ay, sir."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "This blue-eyed hag was hither brought with child\nAnd here was left by the sailors. Thou, my slave,\nAs thou report'st thyself, wast then her servant;\nAnd, for thou wast a spirit too delicate\nTo act her earthy and abhorr'd commands,\nRefusing her grand hests, she did confine thee,\nBy help of her more potent ministers\nAnd in her most unmitigable rage,\nInto a cloven pine; within which rift\nImprison'd thou didst painfully remain\nA dozen years; within which space she died\nAnd left thee there; where thou didst vent thy groans\nAs fast as mill-wheels strike. Then was this island--\nSave for the son that she did litter here,\nA freckled whelp hag-born--not honour'd with\nA human shape."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Yes, Caliban her son."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Dull thing, I say so; he, that Caliban\nWhom now I keep in service. Thou best know'st\nWhat torment I did find thee in; thy groans\nDid make wolves howl and penetrate the breasts\nOf ever angry bears: it was a torment\nTo lay upon the damn'd, which Sycorax\nCould not again undo: it was mine art,\nWhen I arrived and heard thee, that made gape\nThe pine and let thee out."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "I thank thee, master."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "If thou more murmur'st, I will rend an oak\nAnd peg thee in his knotty entrails till\nThou hast howl'd away twelve winters."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Pardon, master;\nI will be correspondent to command\nAnd do my spiriting gently."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Do so, and after two days\nI will discharge thee."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "That's my noble master!\nWhat shall I do? say what; what shall I do?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Go make thyself like a nymph o' the sea: be subject\nTo no sight but thine and mine, invisible\nTo every eyeball else. Go take this shape\nAnd hither come in't: go, hence with diligence!"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Exit ARIEL"
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "The strangeness of your story put\nHeaviness in me."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Shake it off. Come on;\nWe'll visit Caliban my slave, who never\nYields us kind answer."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "'Tis a villain, sir,\nI do not love to look on."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "But, as 'tis,\nWe cannot miss him: he does make our fire,\nFetch in our wood and serves in offices\nThat profit us. What, ho! slave! Caliban!\nThou earth, thou! speak."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "[Within]  There's wood enough within."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Come forth, I say! there's other business for thee:\nCome, thou tortoise! when?"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Re-enter ARIEL like a water-nymph"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "My lord it shall be done.\nExit"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Thou poisonous slave, got by the devil himself\nUpon thy wicked dam, come forth!"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter CALIBAN"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "As wicked dew as e'er my mother brush'd\nWith raven's feather from unwholesome fen\nDrop on you both! a south-west blow on ye\nAnd blister you all o'er!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "For this, be sure, to-night thou shalt have cramps,\nSide-stitches that shall pen thy breath up; urchins\nShall, for that vast of night that they may work,\nAll exercise on thee; thou shalt be pinch'd\nAs thick as honeycomb, each pinch more stinging\nThan bees that made 'em."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "I must eat my dinner.\nThis island's mine, by Sycorax my mother,\nWhich thou takest from me. When thou camest first,\nThou strokedst me and madest much of me, wouldst give me\nWater with berries in't, and teach me how\nTo name the bigger light, and how the less,\nThat burn by day and night: and then I loved thee\nAnd show'd thee all the qualities o' the isle,\nThe fresh springs, brine-pits, barren place and fertile:\nCursed be I that did so! All the charms\nOf Sycorax, toads, beetles, bats, light on you!\nFor I am all the subjects that you have,\nWhich first was mine own king: and here you sty me\nIn this hard rock, whiles you do keep from me\nThe rest o' the island."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Thou most lying slave,\nWhom stripes may move, not kindness! I have used thee,\nFilth as thou art, with human care, and lodged thee\nIn mine own cell, till thou didst seek to violate\nThe honour of my child."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "O ho, O ho! would't had been done!\nThou didst prevent me; I had peopled else\nThis isle with Calibans."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Abhorred slave,\nWhich any print of goodness wilt not take,\nBeing capable of all ill! I pitied thee,\nTook pains to make thee speak, taught thee each hour\nOne thing or other: when thou didst not, savage,\nKnow thine own meaning, but wouldst gabble like\nA thing most brutish, I endow'd thy purposes\nWith words that made them known. But thy vile race,\nThough thou didst learn, had that in't which\ngood natures\nCould not abide to be with; therefore wast thou\nDeservedly confined into this rock,\nWho hadst deserved more than a prison."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "You taught me language; and my profit on't\nIs, I know how to curse. The red plague rid you\nFor learning me your language!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Hag-seed, hence!\nFetch us in fuel; and be quick, thou'rt best,\nTo answer other business. Shrug'st thou, malice?\nIf thou neglect'st or dost unwillingly\nWhat I command, I'll rack thee with old cramps,\nFill all thy bones with aches, make thee roar\nThat beasts shall tremble at thy din."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "No, pray thee.\nAside\nI must obey: his art is of such power,\nIt would control my dam's god, Setebos,\nand make a vassal of him."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "So, slave; hence!"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Exit CALIBAN"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Re-enter ARIEL, invisible, playing and singing; FERDINAND following"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "Where should this music be? i' the air or the earth?\nIt sounds no more: and sure, it waits upon\nSome god o' the island. Sitting on a bank,\nWeeping again the king my father's wreck,\nThis music crept by me upon the waters,\nAllaying both their fury and my passion\nWith its sweet air: thence I have follow'd it,\nOr it hath drawn me rather. But 'tis gone.\nNo, it begins again.\nARIEL sings\nFull fathom five thy father lies;\nOf his bones are coral made;\nThose are pearls that were his eyes:\nNothing of him that doth fade\nBut doth suffer a sea-change\nInto something rich and strange.\nSea-nymphs hourly ring his knell\nBurthen Ding-dong\nHark! now I hear them,--Ding-dong, bell."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "The ditty does remember my drown'd father.\nThis is no mortal business, nor no sound\nThat the earth owes. I hear it now above me."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "The fringed curtains of thine eye advance\nAnd say what thou seest yond."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "What is't? a spirit?\nLord, how it looks about! Believe me, sir,\nIt carries a brave form. But 'tis a spirit."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "No, wench; it eats and sleeps and hath such senses\nAs we have, such. This gallant which thou seest\nWas in the wreck; and, but he's something stain'd\nWith grief that's beauty's canker, thou mightst call him\nA goodly person: he hath lost his fellows\nAnd strays about to find 'em."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "I might call him\nA thing divine, for nothing natural\nI ever saw so noble."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "[Aside] It goes on, I see,\nAs my soul prompts it. Spirit, fine spirit! I'll free thee"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Within two days for this."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "Most sure, the goddess\nOn whom these airs attend! Vouchsafe my prayer\nMay know if you remain upon this island;\nAnd that you will some good instruction give\nHow I may bear me here: my prime request,\nWhich I do last pronounce, is, O you wonder!\nIf you be maid or no?"
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "No wonder, sir;\nBut certainly a maid."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "My language! heavens!\nI am the best of them that speak this speech,\nWere I but where 'tis spoken."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "How? the best?\nWhat wert thou, if the King of Naples heard thee?"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "A single thing, as I am now, that wonders\nTo hear thee speak of Naples. He does hear me;\nAnd that he does I weep: myself am Naples,\nWho with mine eyes, never since at ebb, beheld\nThe king my father wreck'd."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Alack, for mercy!"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "Yes, faith, and all his lords; the Duke of Milan\nAnd his brave son being twain."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "[Aside]\tThe Duke of Milan\nAnd his more braver daughter could control thee,\nIf now 'twere fit to do't. At the first sight\nThey have changed eyes. Delicate Ariel,\nI'll set thee free for this.\nTo FERDINAND\nA word, good sir;\nI fear you have done yourself some wrong: a word."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Why speaks my father so ungently? This\nIs the third man that e'er I saw, the first\nThat e'er I sigh'd for: pity move my father\nTo be inclined my way!"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "O, if a virgin,\nAnd your affection not gone forth, I'll make you\nThe queen of Naples."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Soft, sir! one word more.\nAside\nThey are both in either's powers; but this swift business\nI must uneasy make, lest too light winning\nMake the prize light.\nTo FERDINAND\nOne word more; I charge thee\nThat thou attend me: thou dost here usurp\nThe name thou owest not; and hast put thyself\nUpon this island as a spy, to win it\nFrom me, the lord on't."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "No, as I am a man."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "There's nothing ill can dwell in such a temple:\nIf the ill spirit have so fair a house,\nGood things will strive to dwell with't."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Follow me.\nSpeak not you for him; he's a traitor. Come;\nI'll manacle thy neck and feet together:\nSea-water shalt thou drink; thy food shall be\nThe fresh-brook muscles, wither'd roots and husks\nWherein the acorn cradled. Follow."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "No;\nI will resist such entertainment till\nMine enemy has more power.\nDraws, and is charmed from moving"
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "O dear father,\nMake not too rash a trial of him, for\nHe's gentle and not fearful."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "What? I say,\nMy foot my tutor? Put thy sword up, traitor;\nWho makest a show but darest not strike, thy conscience\nIs so possess'd with guilt: come from thy ward,\nFor I can here disarm thee with this stick\nAnd make thy weapon drop."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Beseech you, father."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Hence! hang not on my garments."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Sir, have pity;\nI'll be his surety."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Silence! one word more\nShall make me chide thee, if not hate thee. What!\nAn advocate for an imposter! hush!\nThou think'st there is no more such shapes as he,\nHaving seen but him and Caliban: foolish wench!\nTo the most of men this is a Caliban\nAnd they to him are angels."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "My affections\nAre then most humble; I have no ambition\nTo see a goodlier man."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Come on; obey:\nThy nerves are in their infancy again\nAnd have no vigour in them."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "So they are;\nMy spirits, as in a dream, are all bound up.\nMy father's loss, the weakness which I feel,\nThe wreck of all my friends, nor this man's threats,\nTo whom I am subdued, are but light to me,\nMight I but through my prison once a day\nBehold this maid: all corners else o' the earth\nLet liberty make use of; space enough\nHave I in such a prison."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "[Aside]                It works.\nTo FERDINAND\nCome on.\nThou hast done well, fine Ariel!\nTo FERDINAND\nFollow me.\nTo ARIEL\nHark what thou else shalt do me."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Be of comfort;\nMy father's of a better nature, sir,\nThan he appears by speech: this is unwonted\nWhich now came from him."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Thou shalt be free\nAs mountain winds: but then exactly do\nAll points of my command."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "To the syllable."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Come, follow. Speak not for him.\nExeunt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "act_number": 2,
+      "act_title": "ACT II",
+      "scenes": [
+        {
+          "scene_number": 1,
+          "scene_title": "Scene I",
+          "location": "",
+          "lines": [
+            {
+              "speaker": "ACT II",
+              "text": "SCENE I. Another part of the island."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter ALONSO, SEBASTIAN, ANTONIO, GONZALO, ADRIAN, FRANCISCO, and others"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Beseech you, sir, be merry; you have cause,\nSo have we all, of joy; for our escape\nIs much beyond our loss. Our hint of woe\nIs common; every day some sailor's wife,\nThe masters of some merchant and the merchant\nHave just our theme of woe; but for the miracle,\nI mean our preservation, few in millions\nCan speak like us: then wisely, good sir, weigh\nOur sorrow with our comfort."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Prithee, peace."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "He receives comfort like cold porridge."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "The visitor will not give him o'er so."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Look he's winding up the watch of his wit;\nby and by it will strike."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Sir,--"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "One: tell."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "When every grief is entertain'd that's offer'd,\nComes to the entertainer--"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "A dollar."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Dolour comes to him, indeed: you\nhave spoken truer than you purposed."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "You have taken it wiselier than I meant you should."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Therefore, my lord,--"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Fie, what a spendthrift is he of his tongue!"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "I prithee, spare."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Well, I have done: but yet,--"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "He will be talking."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Which, of he or Adrian, for a good\nwager, first begins to crow?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "The old cock."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "The cockerel."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Done. The wager?"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "A laughter."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "A match!"
+            },
+            {
+              "speaker": "ADRIAN",
+              "text": "Though this island seem to be desert,--"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Ha, ha, ha! So, you're paid."
+            },
+            {
+              "speaker": "ADRIAN",
+              "text": "Uninhabitable and almost inaccessible,--"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Yet,--"
+            },
+            {
+              "speaker": "ADRIAN",
+              "text": "Yet,--"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "He could not miss't."
+            },
+            {
+              "speaker": "ADRIAN",
+              "text": "It must needs be of subtle, tender and delicate\ntemperance."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Temperance was a delicate wench."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Ay, and a subtle; as he most learnedly delivered."
+            },
+            {
+              "speaker": "ADRIAN",
+              "text": "The air breathes upon us here most sweetly."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "As if it had lungs and rotten ones."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Or as 'twere perfumed by a fen."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Here is everything advantageous to life."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "True; save means to live."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Of that there's none, or little."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "How lush and lusty the grass looks! how green!"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "The ground indeed is tawny."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "With an eye of green in't."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "He misses not much."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "No; he doth but mistake the truth totally."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "But the rarity of it is,--which is indeed almost\nbeyond credit,--"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "As many vouched rarities are."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "That our garments, being, as they were, drenched in\nthe sea, hold notwithstanding their freshness and\nglosses, being rather new-dyed than stained with\nsalt water."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "If but one of his pockets could speak, would it not\nsay he lies?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Ay, or very falsely pocket up his report"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Methinks our garments are now as fresh as when we\nput them on first in Afric, at the marriage of\nthe king's fair daughter Claribel to the King of Tunis."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "'Twas a sweet marriage, and we prosper well in our return."
+            },
+            {
+              "speaker": "ADRIAN",
+              "text": "Tunis was never graced before with such a paragon to\ntheir queen."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Not since widow Dido's time."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Widow! a pox o' that! How came that widow in?\nwidow Dido!"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "What if he had said 'widower AEneas' too? Good Lord,\nhow you take it!"
+            },
+            {
+              "speaker": "ADRIAN",
+              "text": "'Widow Dido' said you? you make me study of that:\nshe was of Carthage, not of Tunis."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "This Tunis, sir, was Carthage."
+            },
+            {
+              "speaker": "ADRIAN",
+              "text": "Carthage?"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "I assure you, Carthage."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "His word is more than the miraculous harp; he hath\nraised the wall and houses too."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "What impossible matter will he make easy next?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "I think he will carry this island home in his pocket\nand give it his son for an apple."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "And, sowing the kernels of it in the sea, bring\nforth more islands."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Ay."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Why, in good time."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Sir, we were talking that our garments seem now\nas fresh as when we were at Tunis at the marriage\nof your daughter, who is now queen."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "And the rarest that e'er came there."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Bate, I beseech you, widow Dido."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "O, widow Dido! ay, widow Dido."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Is not, sir, my doublet as fresh as the first day I\nwore it? I mean, in a sort."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "That sort was well fished for."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "When I wore it at your daughter's marriage?"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "You cram these words into mine ears against\nThe stomach of my sense. Would I had never\nMarried my daughter there! for, coming thence,\nMy son is lost and, in my rate, she too,\nWho is so far from Italy removed\nI ne'er again shall see her. O thou mine heir\nOf Naples and of Milan, what strange fish\nHath made his meal on thee?"
+            },
+            {
+              "speaker": "FRANCISCO",
+              "text": "Sir, he may live:\nI saw him beat the surges under him,\nAnd ride upon their backs; he trod the water,\nWhose enmity he flung aside, and breasted\nThe surge most swoln that met him; his bold head\n'Bove the contentious waves he kept, and oar'd\nHimself with his good arms in lusty stroke\nTo the shore, that o'er his wave-worn basis bow'd,\nAs stooping to relieve him: I not doubt\nHe came alive to land."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "No, no, he's gone."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Sir, you may thank yourself for this great loss,\nThat would not bless our Europe with your daughter,\nBut rather lose her to an African;\nWhere she at least is banish'd from your eye,\nWho hath cause to wet the grief on't."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Prithee, peace."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "You were kneel'd to and importuned otherwise\nBy all of us, and the fair soul herself\nWeigh'd between loathness and obedience, at\nWhich end o' the beam should bow. We have lost your\nson,\nI fear, for ever: Milan and Naples have\nMore widows in them of this business' making\nThan we bring men to comfort them:\nThe fault's your own."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "So is the dear'st o' the loss."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "My lord Sebastian,\nThe truth you speak doth lack some gentleness\nAnd time to speak it in: you rub the sore,\nWhen you should bring the plaster."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Very well."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "And most chirurgeonly."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "It is foul weather in us all, good sir,\nWhen you are cloudy."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Foul weather?"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Very foul."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Had I plantation of this isle, my lord,--"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "He'ld sow't with nettle-seed."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Or docks, or mallows."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "And were the king on't, what would I do?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "'Scape being drunk for want of wine."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "I' the commonwealth I would by contraries\nExecute all things; for no kind of traffic\nWould I admit; no name of magistrate;\nLetters should not be known; riches, poverty,\nAnd use of service, none; contract, succession,\nBourn, bound of land, tilth, vineyard, none;\nNo use of metal, corn, or wine, or oil;\nNo occupation; all men idle, all;\nAnd women too, but innocent and pure;\nNo sovereignty;--"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Yet he would be king on't."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "The latter end of his commonwealth forgets the\nbeginning."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "All things in common nature should produce\nWithout sweat or endeavour: treason, felony,\nSword, pike, knife, gun, or need of any engine,\nWould I not have; but nature should bring forth,\nOf its own kind, all foison, all abundance,\nTo feed my innocent people."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "No marrying 'mong his subjects?"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "None, man; all idle: whores and knaves."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "I would with such perfection govern, sir,\nTo excel the golden age."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "God save his majesty!"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Long live Gonzalo!"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "And,--do you mark me, sir?"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Prithee, no more: thou dost talk nothing to me."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "I do well believe your highness; and\ndid it to minister occasion to these gentlemen,\nwho are of such sensible and nimble lungs that\nthey always use to laugh at nothing."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "'Twas you we laughed at."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Who in this kind of merry fooling am nothing\nto you: so you may continue and laugh at\nnothing still."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "What a blow was there given!"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "An it had not fallen flat-long."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "You are gentlemen of brave metal; you would lift\nthe moon out of her sphere, if she would continue\nin it five weeks without changing."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter ARIEL, invisible, playing solemn music"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "We would so, and then go a bat-fowling."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Nay, good my lord, be not angry."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "No, I warrant you; I will not adventure\nmy discretion so weakly. Will you laugh\nme asleep, for I am very heavy?"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Go sleep, and hear us.\nAll sleep except ALONSO, SEBASTIAN, and ANTONIO"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "What, all so soon asleep! I wish mine eyes\nWould, with themselves, shut up my thoughts: I find\nThey are inclined to do so."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Please you, sir,\nDo not omit the heavy offer of it:\nIt seldom visits sorrow; when it doth,\nIt is a comforter."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "We two, my lord,\nWill guard your person while you take your rest,\nAnd watch your safety."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Thank you. Wondrous heavy.\nALONSO sleeps. Exit ARIEL"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "What a strange drowsiness possesses them!"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "It is the quality o' the climate."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Why\nDoth it not then our eyelids sink? I find not\nMyself disposed to sleep."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Nor I; my spirits are nimble.\nThey fell together all, as by consent;\nThey dropp'd, as by a thunder-stroke. What might,\nWorthy Sebastian? O, what might?--No more:--\nAnd yet me thinks I see it in thy face,\nWhat thou shouldst be: the occasion speaks thee, and\nMy strong imagination sees a crown\nDropping upon thy head."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "What, art thou waking?"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Do you not hear me speak?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "I do; and surely\nIt is a sleepy language and thou speak'st\nOut of thy sleep. What is it thou didst say?\nThis is a strange repose, to be asleep\nWith eyes wide open; standing, speaking, moving,\nAnd yet so fast asleep."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Noble Sebastian,\nThou let'st thy fortune sleep--die, rather; wink'st\nWhiles thou art waking."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Thou dost snore distinctly;\nThere's meaning in thy snores."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "I am more serious than my custom: you\nMust be so too, if heed me; which to do\nTrebles thee o'er."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Well, I am standing water."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "I'll teach you how to flow."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Do so: to ebb\nHereditary sloth instructs me."
+            },
+            {
+              "speaker": "O,",
+              "text": "If you but knew how you the purpose cherish\nWhiles thus you mock it! how, in stripping it,\nYou more invest it! Ebbing men, indeed,\nMost often do so near the bottom run\nBy their own fear or sloth."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Prithee, say on:\nThe setting of thine eye and cheek proclaim\nA matter from thee, and a birth indeed\nWhich throes thee much to yield."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Thus, sir:\nAlthough this lord of weak remembrance, this,\nWho shall be of as little memory\nWhen he is earth'd, hath here almost persuade,--\nFor he's a spirit of persuasion, only\nProfesses to persuade,--the king his son's alive,\n'Tis as impossible that he's undrown'd\nAnd he that sleeps here swims."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "I have no hope\nThat he's undrown'd."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "O, out of that 'no hope'\nWhat great hope have you! no hope that way is\nAnother way so high a hope that even\nAmbition cannot pierce a wink beyond,\nBut doubt discovery there. Will you grant with me\nThat Ferdinand is drown'd?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "He's gone."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Then, tell me,\nWho's the next heir of Naples?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Claribel."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "She that is queen of Tunis; she that dwells\nTen leagues beyond man's life; she that from Naples\nCan have no note, unless the sun were post--\nThe man i' the moon's too slow--till new-born chins\nBe rough and razorable; she that--from whom?\nWe all were sea-swallow'd, though some cast again,\nAnd by that destiny to perform an act\nWhereof what's past is prologue, what to come\nIn yours and my discharge."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "What stuff is this! how say you?\n'Tis true, my brother's daughter's queen of Tunis;\nSo is she heir of Naples; 'twixt which regions\nThere is some space."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "A space whose every cubit\nSeems to cry out, 'How shall that Claribel\nMeasure us back to Naples? Keep in Tunis,\nAnd let Sebastian wake.' Say, this were death\nThat now hath seized them; why, they were no worse\nThan now they are. There be that can rule Naples\nAs well as he that sleeps; lords that can prate\nAs amply and unnecessarily\nAs this Gonzalo; I myself could make\nA chough of as deep chat. O, that you bore\nThe mind that I do! what a sleep were this\nFor your advancement! Do you understand me?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Methinks I do."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "And how does your content\nTender your own good fortune?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "I remember\nYou did supplant your brother Prospero."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "True:\nAnd look how well my garments sit upon me;\nMuch feater than before: my brother's servants\nWere then my fellows; now they are my men."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "But, for your conscience?"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Ay, sir; where lies that? if 'twere a kibe,\n'Twould put me to my slipper: but I feel not\nThis deity in my bosom: twenty consciences,\nThat stand 'twixt me and Milan, candied be they\nAnd melt ere they molest! Here lies your brother,\nNo better than the earth he lies upon,\nIf he were that which now he's like, that's dead;\nWhom I, with this obedient steel, three inches of it,\nCan lay to bed for ever; whiles you, doing thus,\nTo the perpetual wink for aye might put\nThis ancient morsel, this Sir Prudence, who\nShould not upbraid our course. For all the rest,\nThey'll take suggestion as a cat laps milk;\nThey'll tell the clock to any business that\nWe say befits the hour."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Thy case, dear friend,\nShall be my precedent; as thou got'st Milan,\nI'll come by Naples. Draw thy sword: one stroke\nShall free thee from the tribute which thou payest;\nAnd I the king shall love thee."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Draw together;\nAnd when I rear my hand, do you the like,\nTo fall it on Gonzalo."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "O, but one word.\nThey talk apart"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Re-enter ARIEL, invisible"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "My master through his art foresees the danger\nThat you, his friend, are in; and sends me forth--\nFor else his project dies--to keep them living.\nSings in GONZALO's ear\nWhile you here do snoring lie,\nOpen-eyed conspiracy\nHis time doth take.\nIf of life you keep a care,\nShake off slumber, and beware:\nAwake, awake!"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Then let us both be sudden."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Now, good angels\nPreserve the king.\nThey wake"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Why, how now? ho, awake! Why are you drawn?\nWherefore this ghastly looking?"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "What's the matter?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Whiles we stood here securing your repose,\nEven now, we heard a hollow burst of bellowing\nLike bulls, or rather lions: did't not wake you?\nIt struck mine ear most terribly."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "I heard nothing."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "O, 'twas a din to fright a monster's ear,\nTo make an earthquake! sure, it was the roar\nOf a whole herd of lions."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Heard you this, Gonzalo?"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Upon mine honour, sir, I heard a humming,\nAnd that a strange one too, which did awake me:\nI shaked you, sir, and cried: as mine eyes open'd,\nI saw their weapons drawn: there was a noise,\nThat's verily. 'Tis best we stand upon our guard,\nOr that we quit this place; let's draw our weapons."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Lead off this ground; and let's make further search\nFor my poor son."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Heavens keep him from these beasts!\nFor he is, sure, i' the island."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Lead away."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Prospero my lord shall know what I have done:\nSo, king, go safely on to seek thy son.\nExeunt"
+            }
+          ]
+        },
+        {
+          "scene_number": 2,
+          "scene_title": "Scene II",
+          "location": "",
+          "lines": [
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter CALIBAN with a burden of wood. A noise of thunder heard"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "All the infections that the sun sucks up\nFrom bogs, fens, flats, on Prosper fall and make him\nBy inch-meal a disease! His spirits hear me\nAnd yet I needs must curse. But they'll nor pinch,\nFright me with urchin--shows, pitch me i' the mire,\nNor lead me, like a firebrand, in the dark\nOut of my way, unless he bid 'em; but\nFor every trifle are they set upon me;\nSometime like apes that mow and chatter at me\nAnd after bite me, then like hedgehogs which\nLie tumbling in my barefoot way and mount\nTheir pricks at my footfall; sometime am I\nAll wound with adders who with cloven tongues\nDo hiss me into madness."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter TRINCULO"
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Here's neither bush nor shrub, to bear off\nany weather at all, and another storm brewing;\nI hear it sing i' the wind: yond same black\ncloud, yond huge one, looks like a foul\nbombard that would shed his liquor. If it\nshould thunder as it did before, I know not\nwhere to hide my head: yond same cloud cannot\nchoose but fall by pailfuls. What have we\nhere? a man or a fish? dead or alive? A fish:\nhe smells like a fish; a very ancient and fish-\nlike smell; a kind of not of the newest Poor-\nJohn. A strange fish! Were I in England now,\nas once I was, and had but this fish painted,\nnot a holiday fool there but would give a piece\nof silver: there would this monster make a\nman; any strange beast there makes a man:\nwhen they will not give a doit to relieve a lame\nbeggar, they will lazy out ten to see a dead\nIndian. Legged like a man and his fins like\narms! Warm o' my troth! I do now let loose\nmy opinion; hold it no longer: this is no fish,\nbut an islander, that hath lately suffered by a\nthunderbolt.\nThunder\nAlas, the storm is come again! my best way is to\ncreep under his gaberdine; there is no other\nshelter hereabouts: misery acquaints a man with\nstrange bed-fellows. I will here shroud till the\ndregs of the storm be past."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter STEPHANO, singing: a bottle in his hand"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "I shall no more to sea, to sea,\nHere shall I die ashore--\nThis is a very scurvy tune to sing at a man's\nfuneral: well, here's my comfort.\nDrinks\nSings\nThe master, the swabber, the boatswain and I,\nThe gunner and his mate\nLoved Mall, Meg and Marian and Margery,\nBut none of us cared for Kate;\nFor she had a tongue with a tang,\nWould cry to a sailor, Go hang!\nShe loved not the savour of tar nor of pitch,\nYet a tailor might scratch her where'er she did itch:\nThen to sea, boys, and let her go hang!\nThis is a scurvy tune too: but here's my comfort.\nDrinks"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Do not torment me: Oh!"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "What's the matter? Have we devils here? Do you put\ntricks upon's with savages and men of Ind, ha? I\nhave not scaped drowning to be afeard now of your\nfour legs; for it hath been said, As proper a man as\never went on four legs cannot make him give ground;\nand it shall be said so again while Stephano\nbreathes at's nostrils."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "The spirit torments me; Oh!"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "This is some monster of the isle with four legs, who\nhath got, as I take it, an ague. Where the devil\nshould he learn our language? I will give him some\nrelief, if it be but for that. if I can recover him\nand keep him tame and get to Naples with him, he's a\npresent for any emperor that ever trod on neat's leather."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Do not torment me, prithee; I'll bring my wood home faster."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "He's in his fit now and does not talk after the\nwisest. He shall taste of my bottle: if he have\nnever drunk wine afore will go near to remove his\nfit. If I can recover him and keep him tame, I will\nnot take too much for him; he shall pay for him that\nhath him, and that soundly."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Thou dost me yet but little hurt; thou wilt anon, I\nknow it by thy trembling: now Prosper works upon thee."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Come on your ways; open your mouth; here is that\nwhich will give language to you, cat: open your\nmouth; this will shake your shaking, I can tell you,\nand that soundly: you cannot tell who's your friend:\nopen your chaps again."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "I should know that voice: it should be--but he is\ndrowned; and these are devils: O defend me!"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Four legs and two voices: a most delicate monster!\nHis forward voice now is to speak well of his\nfriend; his backward voice is to utter foul speeches\nand to detract. If all the wine in my bottle will\nrecover him, I will help his ague. Come. Amen! I\nwill pour some in thy other mouth."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Stephano!"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Doth thy other mouth call me? Mercy, mercy! This is\na devil, and no monster: I will leave him; I have no\nlong spoon."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Stephano! If thou beest Stephano, touch me and\nspeak to me: for I am Trinculo--be not afeard--thy\ngood friend Trinculo."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "If thou beest Trinculo, come forth: I'll pull thee\nby the lesser legs: if any be Trinculo's legs,\nthese are they. Thou art very Trinculo indeed! How\ncamest thou to be the siege of this moon-calf? can\nhe vent Trinculos?"
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "I took him to be killed with a thunder-stroke. But\nart thou not drowned, Stephano? I hope now thou art\nnot drowned. Is the storm overblown? I hid me\nunder the dead moon-calf's gaberdine for fear of\nthe storm. And art thou living, Stephano? O\nStephano, two Neapolitans 'scaped!"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Prithee, do not turn me about; my stomach is not constant."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "[Aside]  These be fine things, an if they be\nnot sprites.\nThat's a brave god and bears celestial liquor.\nI will kneel to him."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "How didst thou 'scape? How camest thou hither?\nswear by this bottle how thou camest hither. I\nescaped upon a butt of sack which the sailors\nheaved o'erboard, by this bottle; which I made of\nthe bark of a tree with mine own hands since I was\ncast ashore."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "I'll swear upon that bottle to be thy true subject;\nfor the liquor is not earthly."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Here; swear then how thou escapedst."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Swum ashore. man, like a duck: I can swim like a\nduck, I'll be sworn."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Here, kiss the book. Though thou canst swim like a\nduck, thou art made like a goose."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "O Stephano. hast any more of this?"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "The whole butt, man: my cellar is in a rock by the\nsea-side where my wine is hid. How now, moon-calf!\nhow does thine ague?"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Hast thou not dropp'd from heaven?"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Out o' the moon, I do assure thee: I was the man i'\nthe moon when time was."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "I have seen thee in her and I do adore thee:\nMy mistress show'd me thee and thy dog and thy bush."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Come, swear to that; kiss the book: I will furnish\nit anon with new contents swear."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "By this good light, this is a very shallow monster!\nI afeard of him! A very weak monster! The man i'\nthe moon! A most poor credulous monster! Well\ndrawn, monster, in good sooth!"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "I'll show thee every fertile inch o' th' island;\nAnd I will kiss thy foot: I prithee, be my god."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "By this light, a most perfidious and drunken\nmonster! when 's god's asleep, he'll rob his bottle."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "I'll kiss thy foot; I'll swear myself thy subject."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Come on then; down, and swear."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "I shall laugh myself to death at this puppy-headed\nmonster. A most scurvy monster! I could find in my\nheart to beat him,--"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Come, kiss."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "But that the poor monster's in drink: an abominable monster!"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "I'll show thee the best springs; I'll pluck thee berries;\nI'll fish for thee and get thee wood enough.\nA plague upon the tyrant that I serve!\nI'll bear him no more sticks, but follow thee,\nThou wondrous man."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "A most ridiculous monster, to make a wonder of a\nPoor drunkard!"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "I prithee, let me bring thee where crabs grow;\nAnd I with my long nails will dig thee pignuts;\nShow thee a jay's nest and instruct thee how\nTo snare the nimble marmoset; I'll bring thee\nTo clustering filberts and sometimes I'll get thee\nYoung scamels from the rock. Wilt thou go with me?"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "I prithee now, lead the way without any more\ntalking. Trinculo, the king and all our company\nelse being drowned, we will inherit here: here;\nbear my bottle: fellow Trinculo, we'll fill him by\nand by again."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "[Sings drunkenly]\nFarewell master; farewell, farewell!"
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "A howling monster: a drunken monster!"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "No more dams I'll make for fish\nNor fetch in firing\nAt requiring;\nNor scrape trencher, nor wash dish\n'Ban, 'Ban, Cacaliban\nHas a new master: get a new man.\nFreedom, hey-day! hey-day, freedom! freedom,\nhey-day, freedom!"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "O brave monster! Lead the way.\nExeunt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "act_number": 3,
+      "act_title": "ACT III",
+      "scenes": [
+        {
+          "scene_number": 1,
+          "scene_title": "Scene I",
+          "location": "",
+          "lines": [
+            {
+              "speaker": "ACT III",
+              "text": "SCENE I. Before PROSPERO'S Cell."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter FERDINAND, bearing a log"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "There be some sports are painful, and their labour\nDelight in them sets off: some kinds of baseness\nAre nobly undergone and most poor matters\nPoint to rich ends. This my mean task\nWould be as heavy to me as odious, but\nThe mistress which I serve quickens what's dead\nAnd makes my labours pleasures: O, she is\nTen times more gentle than her father's crabbed,\nAnd he's composed of harshness. I must remove\nSome thousands of these logs and pile them up,\nUpon a sore injunction: my sweet mistress\nWeeps when she sees me work, and says, such baseness\nHad never like executor. I forget:\nBut these sweet thoughts do even refresh my labours,\nMost busy lest, when I do it."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter MIRANDA; and PROSPERO at a distance, unseen"
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Alas, now, pray you,\nWork not so hard: I would the lightning had\nBurnt up those logs that you are enjoin'd to pile!\nPray, set it down and rest you: when this burns,\n'Twill weep for having wearied you. My father\nIs hard at study; pray now, rest yourself;\nHe's safe for these three hours."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "O most dear mistress,\nThe sun will set before I shall discharge\nWhat I must strive to do."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "If you'll sit down,\nI'll bear your logs the while: pray, give me that;\nI'll carry it to the pile."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "No, precious creature;\nI had rather crack my sinews, break my back,\nThan you should such dishonour undergo,\nWhile I sit lazy by."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "It would become me\nAs well as it does you: and I should do it\nWith much more ease; for my good will is to it,\nAnd yours it is against."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Poor worm, thou art infected!\nThis visitation shows it."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "You look wearily."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "No, noble mistress;'tis fresh morning with me\nWhen you are by at night. I do beseech you--\nChiefly that I might set it in my prayers--\nWhat is your name?"
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Miranda.--O my father,\nI have broke your hest to say so!"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "Admired Miranda!\nIndeed the top of admiration! worth\nWhat's dearest to the world! Full many a lady\nI have eyed with best regard and many a time\nThe harmony of their tongues hath into bondage\nBrought my too diligent ear: for several virtues\nHave I liked several women; never any\nWith so fun soul, but some defect in her\nDid quarrel with the noblest grace she owed\nAnd put it to the foil: but you, O you,\nSo perfect and so peerless, are created\nOf every creature's best!"
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "I do not know\nOne of my sex; no woman's face remember,\nSave, from my glass, mine own; nor have I seen\nMore that I may call men than you, good friend,\nAnd my dear father: how features are abroad,\nI am skilless of; but, by my modesty,\nThe jewel in my dower, I would not wish\nAny companion in the world but you,\nNor can imagination form a shape,\nBesides yourself, to like of. But I prattle\nSomething too wildly and my father's precepts\nI therein do forget."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "I am in my condition\nA prince, Miranda; I do think, a king;\nI would, not so!--and would no more endure\nThis wooden slavery than to suffer\nThe flesh-fly blow my mouth. Hear my soul speak:\nThe very instant that I saw you, did\nMy heart fly to your service; there resides,\nTo make me slave to it; and for your sake\nAm I this patient log--man."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Do you love me?"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "O heaven, O earth, bear witness to this sound\nAnd crown what I profess with kind event\nIf I speak true! if hollowly, invert\nWhat best is boded me to mischief! I\nBeyond all limit of what else i' the world\nDo love, prize, honour you."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "I am a fool\nTo weep at what I am glad of."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Fair encounter\nOf two most rare affections! Heavens rain grace\nOn that which breeds between 'em!"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "Wherefore weep you?"
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "At mine unworthiness that dare not offer\nWhat I desire to give, and much less take\nWhat I shall die to want. But this is trifling;\nAnd all the more it seeks to hide itself,\nThe bigger bulk it shows. Hence, bashful cunning!\nAnd prompt me, plain and holy innocence!\nI am your wife, if you will marry me;\nIf not, I'll die your maid: to be your fellow\nYou may deny me; but I'll be your servant,\nWhether you will or no."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "My mistress, dearest;\nAnd I thus humble ever."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "My husband, then?"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "Ay, with a heart as willing\nAs bondage e'er of freedom: here's my hand."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "And mine, with my heart in't; and now farewell\nTill half an hour hence."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "A thousand thousand!"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Exeunt FERDINAND and MIRANDA severally"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "So glad of this as they I cannot be,\nWho are surprised withal; but my rejoicing\nAt nothing can be more. I'll to my book,\nFor yet ere supper-time must I perform\nMuch business appertaining.\nExit"
+            }
+          ]
+        },
+        {
+          "scene_number": 2,
+          "scene_title": "Scene II",
+          "location": "",
+          "lines": [
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter CALIBAN, STEPHANO, and TRINCULO"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Tell not me; when the butt is out, we will drink\nwater; not a drop before: therefore bear up, and\nboard 'em. Servant-monster, drink to me."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Servant-monster! the folly of this island! They\nsay there's but five upon this isle: we are three\nof them; if th' other two be brained like us, the\nstate totters."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Drink, servant-monster, when I bid thee: thy eyes\nare almost set in thy head."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Where should they be set else? he were a brave\nmonster indeed, if they were set in his tail."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "My man-monster hath drown'd his tongue in sack:\nfor my part, the sea cannot drown me; I swam, ere I\ncould recover the shore, five and thirty leagues off\nand on. By this light, thou shalt be my lieutenant,\nmonster, or my standard."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Your lieutenant, if you list; he's no standard."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "We'll not run, Monsieur Monster."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Nor go neither; but you'll lie like dogs and yet say\nnothing neither."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Moon-calf, speak once in thy life, if thou beest a\ngood moon-calf."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "How does thy honour? Let me lick thy shoe.\nI'll not serve him; he's not valiant."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Thou liest, most ignorant monster: I am in case to\njustle a constable. Why, thou deboshed fish thou,\nwas there ever man a coward that hath drunk so much\nsack as I to-day? Wilt thou tell a monstrous lie,\nbeing but half a fish and half a monster?"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Lo, how he mocks me! wilt thou let him, my lord?"
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "'Lord' quoth he! That a monster should be such a natural!"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Lo, lo, again! bite him to death, I prithee."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Trinculo, keep a good tongue in your head: if you\nprove a mutineer,--the next tree! The poor monster's\nmy subject and he shall not suffer indignity."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "I thank my noble lord. Wilt thou be pleased to\nhearken once again to the suit I made to thee?"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Marry, will I\tkneel and repeat it; I will stand,\nand so shall Trinculo."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter ARIEL, invisible"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "As I told thee before, I am subject to a tyrant, a\nsorcerer, that by his cunning hath cheated me of the island."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Thou liest."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Thou liest, thou jesting monkey, thou: I would my\nvaliant master would destroy thee! I do not lie."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Trinculo, if you trouble him any more in's tale, by\nthis hand, I will supplant some of your teeth."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Why, I said nothing."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Mum, then, and no more. Proceed."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "I say, by sorcery he got this isle;\nFrom me he got it. if thy greatness will\nRevenge it on him,--for I know thou darest,\nBut this thing dare not,--"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "That's most certain."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Thou shalt be lord of it and I'll serve thee."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "How now shall this be compassed?\nCanst thou bring me to the party?"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Yea, yea, my lord: I'll yield him thee asleep,\nWhere thou mayst knock a nail into his bead."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Thou liest; thou canst not."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "What a pied ninny's this! Thou scurvy patch!\nI do beseech thy greatness, give him blows\nAnd take his bottle from him: when that's gone\nHe shall drink nought but brine; for I'll not show him\nWhere the quick freshes are."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Trinculo, run into no further danger:\ninterrupt the monster one word further, and,\nby this hand, I'll turn my mercy out o' doors\nand make a stock-fish of thee."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Why, what did I? I did nothing. I'll go farther\noff."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Didst thou not say he lied?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Thou liest."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Do I so? take thou that.\nBeats TRINCULO\nAs you like this, give me the lie another time."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "I did not give the lie. Out o' your\nwits and bearing too? A pox o' your bottle!\nthis can sack and drinking do. A murrain on\nyour monster, and the devil take your fingers!"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Ha, ha, ha!"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Now, forward with your tale. Prithee, stand farther\noff."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Beat him enough: after a little time\nI'll beat him too."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Stand farther. Come, proceed."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Why, as I told thee, 'tis a custom with him,\nI' th' afternoon to sleep: there thou mayst brain him,\nHaving first seized his books, or with a log\nBatter his skull, or paunch him with a stake,\nOr cut his wezand with thy knife. Remember\nFirst to possess his books; for without them\nHe's but a sot, as I am, nor hath not\nOne spirit to command: they all do hate him\nAs rootedly as I. Burn but his books.\nHe has brave utensils,--for so he calls them--\nWhich when he has a house, he'll deck withal\nAnd that most deeply to consider is\nThe beauty of his daughter; he himself\nCalls her a nonpareil: I never saw a woman,\nBut only Sycorax my dam and she;\nBut she as far surpasseth Sycorax\nAs great'st does least."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Is it so brave a lass?"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Ay, lord; she will become thy bed, I warrant.\nAnd bring thee forth brave brood."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Monster, I will kill this man: his daughter and I\nwill be king and queen--save our graces!--and\nTrinculo and thyself shall be viceroys. Dost thou\nlike the plot, Trinculo?"
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Excellent."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Give me thy hand: I am sorry I beat thee; but,\nwhile thou livest, keep a good tongue in thy head."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Within this half hour will he be asleep:"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Wilt thou destroy him then?"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Ay, on mine honour."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "This will I tell my master."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Thou makest me merry; I am full of pleasure:\nLet us be jocund: will you troll the catch\nYou taught me but while-ere?"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "At thy request, monster, I will do reason, any\nreason. Come on, Trinculo, let us sing.\nSings\nFlout 'em and scout 'em\nAnd scout 'em and flout 'em\nThought is free."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "That's not the tune.\nAriel plays the tune on a tabour and pipe"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "What is this same?"
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "This is the tune of our catch, played by the picture\nof Nobody."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "If thou beest a man, show thyself in thy likeness:\nif thou beest a devil, take't as thou list."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "O, forgive me my sins!"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "He that dies pays all debts: I defy thee. Mercy upon us!"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Art thou afeard?"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "No, monster, not I."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Be not afeard; the isle is full of noises,\nSounds and sweet airs, that give delight and hurt not.\nSometimes a thousand twangling instruments\nWill hum about mine ears, and sometime voices\nThat, if I then had waked after long sleep,\nWill make me sleep again: and then, in dreaming,\nThe clouds methought would open and show riches\nReady to drop upon me that, when I waked,\nI cried to dream again."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "This will prove a brave kingdom to me, where I shall\nhave my music for nothing."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "When Prospero is destroyed."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "That shall be by and by: I remember the story."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "The sound is going away; let's follow it, and\nafter do our work."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Lead, monster; we'll follow. I would I could see\nthis tabourer; he lays it on."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Wilt come? I'll follow, Stephano.\nExeunt"
+            }
+          ]
+        },
+        {
+          "scene_number": 3,
+          "scene_title": "Scene III",
+          "location": "",
+          "lines": [
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter ALONSO, SEBASTIAN, ANTONIO, GONZALO, ADRIAN, FRANCISCO, and others"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "By'r lakin, I can go no further, sir;\nMy old bones ache: here's a maze trod indeed\nThrough forth-rights and meanders! By your patience,\nI needs must rest me."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Old lord, I cannot blame thee,\nWho am myself attach'd with weariness,\nTo the dulling of my spirits: sit down, and rest.\nEven here I will put off my hope and keep it\nNo longer for my flatterer: he is drown'd\nWhom thus we stray to find, and the sea mocks\nOur frustrate search on land. Well, let him go."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "[Aside to SEBASTIAN]  I am right glad that he's so\nout of hope.\nDo not, for one repulse, forego the purpose\nThat you resolved to effect."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "[Aside to ANTONIO]  The next advantage\nWill we take throughly."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "[Aside to SEBASTIAN]  Let it be to-night;\nFor, now they are oppress'd with travel, they\nWill not, nor cannot, use such vigilance\nAs when they are fresh."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "[Aside to ANTONIO]  I say, to-night: no more.\nSolemn and strange music"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "What harmony is this? My good friends, hark!"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Marvellous sweet music!"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter PROSPERO above, invisible. Enter several  strange Shapes, bringing in a banquet;  they dance about it with gentle actions of  salutation; and, inviting the King,  & c. to eat, they depart"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Give us kind keepers, heavens! What were these?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "A living drollery. Now I will believe\nThat there are unicorns, that in Arabia\nThere is one tree, the phoenix' throne, one phoenix\nAt this hour reigning there."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "I'll believe both;\nAnd what does else want credit, come to me,\nAnd I'll be sworn 'tis true: travellers ne'er did\nlie,\nThough fools at home condemn 'em."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "If in Naples\nI should report this now, would they believe me?\nIf I should say, I saw such islanders--\nFor, certes, these are people of the island--\nWho, though they are of monstrous shape, yet, note,\nTheir manners are more gentle-kind than of\nOur human generation you shall find\nMany, nay, almost any."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "[Aside]              Honest lord,\nThou hast said well; for some of you there present\nAre worse than devils."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "I cannot too much muse\nSuch shapes, such gesture and such sound, expressing,\nAlthough they want the use of tongue, a kind\nOf excellent dumb discourse."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "[Aside]\tPraise in departing."
+            },
+            {
+              "speaker": "FRANCISCO",
+              "text": "They vanish'd strangely."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "No matter, since\nThey have left their viands behind; for we have stomachs.\nWill't please you taste of what is here?"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Not I."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Faith, sir, you need not fear. When we were boys,\nWho would believe that there were mountaineers\nDew-lapp'd like bulls, whose throats had hanging at 'em\nWallets of flesh? or that there were such men\nWhose heads stood in their breasts? which now we find\nEach putter-out of five for one will bring us\nGood warrant of."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "I will stand to and feed,\nAlthough my last: no matter, since I feel\nThe best is past. Brother, my lord the duke,\nStand to and do as we.\nThunder and lightning. Enter ARIEL, like a  harpy; claps his wings upon the table; and, with a quaint device, the banquet vanishes"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "You are three men of sin, whom Destiny,\nThat hath to instrument this lower world\nAnd what is in't, the never-surfeited sea\nHath caused to belch up you; and on this island\nWhere man doth not inhabit; you 'mongst men\nBeing most unfit to live. I have made you mad;\nAnd even with such-like valour men hang and drown\nTheir proper selves.\nALONSO, SEBASTIAN  & c. draw their swords\nYou fools! I and my fellows\nAre ministers of Fate: the elements,\nOf whom your swords are temper'd, may as well\nWound the loud winds, or with bemock'd-at stabs\nKill the still-closing waters, as diminish\nOne dowle that's in my plume: my fellow-ministers\nAre like invulnerable. If you could hurt,\nYour swords are now too massy for your strengths\nAnd will not be uplifted. But remember--\nFor that's my business to you--that you three\nFrom Milan did supplant good Prospero;\nExposed unto the sea, which hath requit it,\nHim and his innocent child: for which foul deed\nThe powers, delaying, not forgetting, have\nIncensed the seas and shores, yea, all the creatures,\nAgainst your peace. Thee of thy son, Alonso,\nThey have bereft; and do pronounce by me:\nLingering perdition, worse than any death\nCan be at once, shall step by step attend\nYou and your ways; whose wraths to guard you from--\nWhich here, in this most desolate isle, else falls\nUpon your heads--is nothing but heart-sorrow\nAnd a clear life ensuing.\nHe vanishes in thunder; then, to soft music  enter the Shapes again, and dance, with mocks and mows, and carrying out the table"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Bravely the figure of this harpy hast thou\nPerform'd, my Ariel; a grace it had, devouring:\nOf my instruction hast thou nothing bated\nIn what thou hadst to say: so, with good life\nAnd observation strange, my meaner ministers\nTheir several kinds have done. My high charms work\nAnd these mine enemies are all knit up\nIn their distractions; they now are in my power;\nAnd in these fits I leave them, while I visit\nYoung Ferdinand, whom they suppose is drown'd,\nAnd his and mine loved darling."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Exit above"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "I' the name of something holy, sir, why stand you\nIn this strange stare?"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "O, it is monstrous, monstrous:\nMethought the billows spoke and told me of it;\nThe winds did sing it to me, and the thunder,\nThat deep and dreadful organ-pipe, pronounced\nThe name of Prosper: it did bass my trespass.\nTherefore my son i' the ooze is bedded, and\nI'll seek him deeper than e'er plummet sounded\nAnd with him there lie mudded.\nExit"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "But one fiend at a time,\nI'll fight their legions o'er."
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "I'll be thy second."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Exeunt SEBASTIAN, and ANTONIO"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "All three of them are desperate: their great guilt,\nLike poison given to work a great time after,\nNow 'gins to bite the spirits. I do beseech you\nThat are of suppler joints, follow them swiftly\nAnd hinder them from what this ecstasy\nMay now provoke them to."
+            },
+            {
+              "speaker": "ADRIAN",
+              "text": "Follow, I pray you.\nExeunt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "act_number": 4,
+      "act_title": "ACT IV",
+      "scenes": [
+        {
+          "scene_number": 1,
+          "scene_title": "Scene I",
+          "location": "",
+          "lines": [
+            {
+              "speaker": "ACT IV",
+              "text": "SCENE I. Before PROSPERO'S cell."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter PROSPERO, FERDINAND, and MIRANDA"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "If I have too austerely punish'd you,\nYour compensation makes amends, for I\nHave given you here a third of mine own life,\nOr that for which I live; who once again\nI tender to thy hand: all thy vexations\nWere but my trials of thy love and thou\nHast strangely stood the test here, afore Heaven,\nI ratify this my rich gift. O Ferdinand,\nDo not smile at me that I boast her off,\nFor thou shalt find she will outstrip all praise\nAnd make it halt behind her."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "I do believe it\nAgainst an oracle."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Then, as my gift and thine own acquisition\nWorthily purchased take my daughter: but\nIf thou dost break her virgin-knot before\nAll sanctimonious ceremonies may\nWith full and holy rite be minister'd,\nNo sweet aspersion shall the heavens let fall\nTo make this contract grow: but barren hate,\nSour-eyed disdain and discord shall bestrew\nThe union of your bed with weeds so loathly\nThat you shall hate it both: therefore take heed,\nAs Hymen's lamps shall light you."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "As I hope\nFor quiet days, fair issue and long life,\nWith such love as 'tis now, the murkiest den,\nThe most opportune place, the strong'st suggestion.\nOur worser genius can, shall never melt\nMine honour into lust, to take away\nThe edge of that day's celebration\nWhen I shall think: or Phoebus' steeds are founder'd,\nOr Night kept chain'd below."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Fairly spoke.\nSit then and talk with her; she is thine own.\nWhat, Ariel! my industrious servant, Ariel!"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter ARIEL"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "What would my potent master? here I am."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Thou and thy meaner fellows your last service\nDid worthily perform; and I must use you\nIn such another trick. Go bring the rabble,\nO'er whom I give thee power, here to this place:\nIncite them to quick motion; for I must\nBestow upon the eyes of this young couple\nSome vanity of mine art: it is my promise,\nAnd they expect it from me."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Presently?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Ay, with a twink."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Before you can say 'come' and 'go,'\nAnd breathe twice and cry 'so, so,'\nEach one, tripping on his toe,\nWill be here with mop and mow.\nDo you love me, master? no?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Dearly my delicate Ariel. Do not approach\nTill thou dost hear me call."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Well, I conceive.\nExit"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Look thou be true; do not give dalliance\nToo much the rein: the strongest oaths are straw\nTo the fire i' the blood: be more abstemious,\nOr else, good night your vow!"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "I warrant you sir;\nThe white cold virgin snow upon my heart\nAbates the ardour of my liver."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Well.\nNow come, my Ariel! bring a corollary,\nRather than want a spirit: appear and pertly!\nNo tongue! all eyes! be silent.\nSoft music"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter IRIS"
+            },
+            {
+              "speaker": "IRIS",
+              "text": "Ceres, most bounteous lady, thy rich leas\nOf wheat, rye, barley, vetches, oats and pease;\nThy turfy mountains, where live nibbling sheep,\nAnd flat meads thatch'd with stover, them to keep;\nThy banks with pioned and twilled brims,\nWhich spongy April at thy hest betrims,\nTo make cold nymphs chaste crowns; and thy broom -groves,\nWhose shadow the dismissed bachelor loves,\nBeing lass-lorn: thy pole-clipt vineyard;\nAnd thy sea-marge, sterile and rocky-hard,\nWhere thou thyself dost air;--the queen o' the sky,\nWhose watery arch and messenger am I,\nBids thee leave these, and with her sovereign grace,\nHere on this grass-plot, in this very place,\nTo come and sport: her peacocks fly amain:\nApproach, rich Ceres, her to entertain."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter CERES"
+            },
+            {
+              "speaker": "CERES",
+              "text": "Hail, many-colour'd messenger, that ne'er\nDost disobey the wife of Jupiter;\nWho with thy saffron wings upon my flowers\nDiffusest honey-drops, refreshing showers,\nAnd with each end of thy blue bow dost crown\nMy bosky acres and my unshrubb'd down,\nRich scarf to my proud earth; why hath thy queen\nSummon'd me hither, to this short-grass'd green?"
+            },
+            {
+              "speaker": "IRIS",
+              "text": "A contract of true love to celebrate;\nAnd some donation freely to estate\nOn the blest lovers."
+            },
+            {
+              "speaker": "CERES",
+              "text": "Tell me, heavenly bow,\nIf Venus or her son, as thou dost know,\nDo now attend the queen? Since they did plot\nThe means that dusky Dis my daughter got,\nHer and her blind boy's scandal'd company\nI have forsworn."
+            },
+            {
+              "speaker": "IRIS",
+              "text": "Of her society\nBe not afraid: I met her deity\nCutting the clouds towards Paphos and her son\nDove-drawn with her. Here thought they to have done\nSome wanton charm upon this man and maid,\nWhose vows are, that no bed-right shall be paid\nTill Hymen's torch be lighted: but vain;\nMars's hot minion is returned again;\nHer waspish-headed son has broke his arrows,\nSwears he will shoot no more but play with sparrows\nAnd be a boy right out."
+            },
+            {
+              "speaker": "CERES",
+              "text": "High'st queen of state,\nGreat Juno, comes; I know her by her gait."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter JUNO"
+            },
+            {
+              "speaker": "JUNO",
+              "text": "How does my bounteous sister? Go with me\nTo bless this twain, that they may prosperous be\nAnd honour'd in their issue.\nThey sing:"
+            },
+            {
+              "speaker": "JUNO",
+              "text": "Honour, riches, marriage-blessing,\nLong continuance, and increasing,\nHourly joys be still upon you!\nJuno sings her blessings upon you."
+            },
+            {
+              "speaker": "CERES",
+              "text": "Earth's increase, foison plenty,\nBarns and garners never empty,\nVines and clustering bunches growing,\nPlants with goodly burthen bowing;\nSpring come to you at the farthest\nIn the very end of harvest!\nScarcity and want shall shun you;\nCeres' blessing so is on you."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "This is a most majestic vision, and\nHarmoniously charmingly. May I be bold\nTo think these spirits?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Spirits, which by mine art\nI have from their confines call'd to enact\nMy present fancies."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "Let me live here ever;\nSo rare a wonder'd father and a wife\nMakes this place Paradise.\nJuno and Ceres whisper, and send Iris on employment"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Sweet, now, silence!\nJuno and Ceres whisper seriously;\nThere's something else to do: hush, and be mute,\nOr else our spell is marr'd."
+            },
+            {
+              "speaker": "IRIS",
+              "text": "You nymphs, call'd Naiads, of the windring brooks,\nWith your sedged crowns and ever-harmless looks,\nLeave your crisp channels and on this green land\nAnswer your summons; Juno does command:\nCome, temperate nymphs, and help to celebrate\nA contract of true love; be not too late."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter certain Nymphs"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter certain Reapers, properly habited: they  join with the Nymphs in a graceful dance;  towards the end whereof PROSPERO starts  suddenly, and speaks; after which, to a  strange, hollow, and confused noise, they heavily vanish"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "[Aside]  I had forgot that foul conspiracy\nOf the beast Caliban and his confederates\nAgainst my life: the minute of their plot\nIs almost come.\nTo the Spirits\nWell done! avoid; no more!"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "This is strange: your father's in some passion\nThat works him strongly."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Never till this day\nSaw I him touch'd with anger so distemper'd."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "You do look, my son, in a moved sort,\nAs if you were dismay'd: be cheerful, sir.\nOur revels now are ended. These our actors,\nAs I foretold you, were all spirits and\nAre melted into air, into thin air:\nAnd, like the baseless fabric of this vision,\nThe cloud-capp'd towers, the gorgeous palaces,\nThe solemn temples, the great globe itself,\nYe all which it inherit, shall dissolve\nAnd, like this insubstantial pageant faded,\nLeave not a rack behind. We are such stuff\nAs dreams are made on, and our little life\nIs rounded with a sleep. Sir, I am vex'd;\nBear with my weakness; my, brain is troubled:\nBe not disturb'd with my infirmity:\nIf you be pleased, retire into my cell\nAnd there repose: a turn or two I'll walk,\nTo still my beating mind."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "We wish your peace.\nExeunt"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Come with a thought I thank thee, Ariel: come."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter ARIEL"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Thy thoughts I cleave to. What's thy pleasure?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Spirit,\nWe must prepare to meet with Caliban."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Ay, my commander: when I presented Ceres,\nI thought to have told thee of it, but I fear'd\nLest I might anger thee."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Say again, where didst thou leave these varlets?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "I told you, sir, they were red-hot with drinking;\nSo fun of valour that they smote the air\nFor breathing in their faces; beat the ground\nFor kissing of their feet; yet always bending\nTowards their project. Then I beat my tabour;\nAt which, like unback'd colts, they prick'd\ntheir ears,\nAdvanced their eyelids, lifted up their noses\nAs they smelt music: so I charm'd their ears\nThat calf-like they my lowing follow'd through\nTooth'd briers, sharp furzes, pricking goss and thorns,\nWhich entered their frail shins: at last I left them\nI' the filthy-mantled pool beyond your cell,\nThere dancing up to the chins, that the foul lake\nO'erstunk their feet."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "This was well done, my bird.\nThy shape invisible retain thou still:\nThe trumpery in my house, go bring it hither,\nFor stale to catch these thieves."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "I go, I go.\nExit"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "A devil, a born devil, on whose nature\nNurture can never stick; on whom my pains,\nHumanely taken, all, all lost, quite lost;\nAnd as with age his body uglier grows,\nSo his mind cankers. I will plague them all,\nEven to roaring."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Re-enter ARIEL, loaden with glistering apparel,  & c"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Pray you, tread softly, that the blind mole may not\nHear a foot fall: we now are near his cell."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Monster, your fairy, which you say is\na harmless fairy, has done little better than\nplayed the Jack with us."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Monster, I do smell all horse-piss; at\nwhich my nose is in great indignation."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "So is mine. Do you hear, monster? If I should take\na displeasure against you, look you,--"
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Thou wert but a lost monster."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Good my lord, give me thy favour still.\nBe patient, for the prize I'll bring thee to\nShall hoodwink this mischance: therefore speak softly.\nAll's hush'd as midnight yet."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Ay, but to lose our bottles in the pool,--"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "There is not only disgrace and dishonour in that,\nmonster, but an infinite loss."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "That's more to me than my wetting: yet this is your\nharmless fairy, monster."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "I will fetch off my bottle, though I be o'er ears\nfor my labour."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Prithee, my king, be quiet. Seest thou here,\nThis is the mouth o' the cell: no noise, and enter.\nDo that good mischief which may make this island\nThine own for ever, and I, thy Caliban,\nFor aye thy foot-licker."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Give me thy hand. I do begin to have bloody thoughts."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "O king Stephano! O peer! O worthy Stephano! look\nwhat a wardrobe here is for thee!"
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Let it alone, thou fool; it is but trash."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "O, ho, monster! we know what belongs to a frippery.\nO king Stephano!"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Put off that gown, Trinculo; by this hand, I'll have\nthat gown."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Thy grace shall have it."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "The dropsy drown this fool I what do you mean\nTo dote thus on such luggage? Let's alone\nAnd do the murder first: if he awake,\nFrom toe to crown he'll fill our skins with pinches,\nMake us strange stuff."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Be you quiet, monster. Mistress line,\nis not this my jerkin? Now is the jerkin under\nthe line: now, jerkin, you are like to lose your\nhair and prove a bald jerkin."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Do, do: we steal by line and level, an't like your grace."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "I thank thee for that jest; here's a garment for't:\nwit shall not go unrewarded while I am king of this\ncountry. 'Steal by line and level' is an excellent\npass of pate; there's another garment for't."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "Monster, come, put some lime upon your fingers, and\naway with the rest."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "I will have none on't: we shall lose our time,\nAnd all be turn'd to barnacles, or to apes\nWith foreheads villanous low."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Monster, lay-to your fingers: help to bear this\naway where my hogshead of wine is, or I'll turn you\nout of my kingdom: go to, carry this."
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "And this."
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Ay, and this.\nA noise of hunters heard. Enter divers Spirits,  in shape of dogs and hounds, and hunt them about, PROSPERO and ARIEL setting them on"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Hey, Mountain, hey!"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Silver I there it goes, Silver!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Fury, Fury! there, Tyrant, there! hark! hark!\nCALIBAN, STEPHANO, and TRINCULO, are driven out\nGo charge my goblins that they grind their joints\nWith dry convulsions, shorten up their sinews\nWith aged cramps, and more pinch-spotted make them\nThan pard or cat o' mountain."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Hark, they roar!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Let them be hunted soundly. At this hour\nLie at my mercy all mine enemies:\nShortly shall all my labours end, and thou\nShalt have the air at freedom: for a little\nFollow, and do me service.\nExeunt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "act_number": 5,
+      "act_title": "ACT V",
+      "scenes": [
+        {
+          "scene_number": 1,
+          "scene_title": "Scene I",
+          "location": "",
+          "lines": [
+            {
+              "speaker": "ACT V",
+              "text": "SCENE I. Before PROSPERO'S cell."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Enter PROSPERO in his magic robes, and ARIEL"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Now does my project gather to a head:\nMy charms crack not; my spirits obey; and time\nGoes upright with his carriage. How's the day?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "On the sixth hour; at which time, my lord,\nYou said our work should cease."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "I did say so,\nWhen first I raised the tempest. Say, my spirit,\nHow fares the king and's followers?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Confined together\nIn the same fashion as you gave in charge,\nJust as you left them; all prisoners, sir,\nIn the line-grove which weather-fends your cell;\nThey cannot budge till your release. The king,\nHis brother and yours, abide all three distracted\nAnd the remainder mourning over them,\nBrimful of sorrow and dismay; but chiefly\nHim that you term'd, sir, 'The good old lord Gonzalo;'\nHis tears run down his beard, like winter's drops\nFrom eaves of reeds. Your charm so strongly works 'em\nThat if you now beheld them, your affections\nWould become tender."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Dost thou think so, spirit?"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "Mine would, sir, were I human."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "And mine shall.\nHast thou, which art but air, a touch, a feeling\nOf their afflictions, and shall not myself,\nOne of their kind, that relish all as sharply,\nPassion as they, be kindlier moved than thou art?\nThough with their high wrongs I am struck to the quick,\nYet with my nobler reason 'gaitist my fury\nDo I take part: the rarer action is\nIn virtue than in vengeance: they being penitent,\nThe sole drift of my purpose doth extend\nNot a frown further. Go release them, Ariel:\nMy charms I'll break, their senses I'll restore,\nAnd they shall be themselves."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "I'll fetch them, sir.\nExit"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Ye elves of hills, brooks, standing lakes and groves,\nAnd ye that on the sands with printless foot\nDo chase the ebbing Neptune and do fly him\nWhen he comes back; you demi-puppets that\nBy moonshine do the green sour ringlets make,\nWhereof the ewe not bites, and you whose pastime\nIs to make midnight mushrooms, that rejoice\nTo hear the solemn curfew; by whose aid,\nWeak masters though ye be, I have bedimm'd\nThe noontide sun, call'd forth the mutinous winds,\nAnd 'twixt the green sea and the azured vault\nSet roaring war: to the dread rattling thunder\nHave I given fire and rifted Jove's stout oak\nWith his own bolt; the strong-based promontory\nHave I made shake and by the spurs pluck'd up\nThe pine and cedar: graves at my command\nHave waked their sleepers, oped, and let 'em forth\nBy my so potent art. But this rough magic\nI here abjure, and, when I have required\nSome heavenly music, which even now I do,\nTo work mine end upon their senses that\nThis airy charm is for, I'll break my staff,\nBury it certain fathoms in the earth,\nAnd deeper than did ever plummet sound\nI'll drown my book.\nSolemn music"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Re-enter ARIEL before: then ALONSO, with a  frantic gesture, attended by GONZALO;  SEBASTIAN and ANTONIO in like manner,  attended by ADRIAN and FRANCISCO   they all  enter the circle which PROSPERO had made,  and there stand charmed; which PROSPERO observing, speaks:"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Why, that's my dainty Ariel! I shall miss thee:\nBut yet thou shalt have freedom: so, so, so.\nTo the king's ship, invisible as thou art:\nThere shalt thou find the mariners asleep\nUnder the hatches; the master and the boatswain\nBeing awake, enforce them to this place,\nAnd presently, I prithee."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "I drink the air before me, and return\nOr ere your pulse twice beat.\nExit"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "All torment, trouble, wonder and amazement\nInhabits here: some heavenly power guide us\nOut of this fearful country!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Behold, sir king,\nThe wronged Duke of Milan, Prospero:\nFor more assurance that a living prince\nDoes now speak to thee, I embrace thy body;\nAnd to thee and thy company I bid\nA hearty welcome."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Whether thou best he or no,\nOr some enchanted trifle to abuse me,\nAs late I have been, I not know: thy pulse\nBeats as of flesh and blood; and, since I saw thee,\nThe affliction of my mind amends, with which,\nI fear, a madness held me: this must crave,\nAn if this be at all, a most strange story.\nThy dukedom I resign and do entreat\nThou pardon me my wrongs. But how should Prospero\nBe living and be here?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "First, noble friend,\nLet me embrace thine age, whose honour cannot\nBe measured or confined."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Whether this be\nOr be not, I'll not swear."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "You do yet taste\nSome subtilties o' the isle, that will not let you\nBelieve things certain. Welcome, my friends all!"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Aside to SEBASTIAN and ANTONIO"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "[Aside]  The devil speaks in him."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "No.\nFor you, most wicked sir, whom to call brother\nWould even infect my mouth, I do forgive\nThy rankest fault; all of them; and require\nMy dukedom of thee, which perforce, I know,\nThou must restore."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "If thou be'st Prospero,\nGive us particulars of thy preservation;\nHow thou hast met us here, who three hours since\nWere wreck'd upon this shore; where I have lost--\nHow sharp the point of this remembrance is!--\nMy dear son Ferdinand."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "I am woe for't, sir."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Irreparable is the loss, and patience\nSays it is past her cure."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "I rather think\nYou have not sought her help, of whose soft grace\nFor the like loss I have her sovereign aid\nAnd rest myself content."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "You the like loss!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "As great to me as late; and, supportable\nTo make the dear loss, have I means much weaker\nThan you may call to comfort you, for I\nHave lost my daughter."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "A daughter?\nO heavens, that they were living both in Naples,\nThe king and queen there! that they were, I wish\nMyself were mudded in that oozy bed\nWhere my son lies. When did you lose your daughter?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "In this last tempest. I perceive these lords\nAt this encounter do so much admire\nThat they devour their reason and scarce think\nTheir eyes do offices of truth, their words\nAre natural breath: but, howsoe'er you have\nBeen justled from your senses, know for certain\nThat I am Prospero and that very duke\nWhich was thrust forth of Milan, who most strangely\nUpon this shore, where you were wreck'd, was landed,\nTo be the lord on't. No more yet of this;\nFor 'tis a chronicle of day by day,\nNot a relation for a breakfast nor\nBefitting this first meeting. Welcome, sir;\nThis cell's my court: here have I few attendants\nAnd subjects none abroad: pray you, look in.\nMy dukedom since you have given me again,\nI will requite you with as good a thing;\nAt least bring forth a wonder, to content ye\nAs much as me my dukedom.\nHere PROSPERO discovers FERDINAND and MIRANDA playing at chess"
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Sweet lord, you play me false."
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "No, my dear'st love,\nI would not for the world."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "Yes, for a score of kingdoms you should wrangle,\nAnd I would call it, fair play."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "If this prove\nA vision of the Island, one dear son\nShall I twice lose."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "A most high miracle!"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "Though the seas threaten, they are merciful;\nI have cursed them without cause.\nKneels"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Now all the blessings\nOf a glad father compass thee about!\nArise, and say how thou camest here."
+            },
+            {
+              "speaker": "MIRANDA",
+              "text": "O, wonder!\nHow many goodly creatures are there here!\nHow beauteous mankind is! O brave new world,\nThat has such people in't!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "'Tis new to thee."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "What is this maid with whom thou wast at play?\nYour eld'st acquaintance cannot be three hours:\nIs she the goddess that hath sever'd us,\nAnd brought us thus together?"
+            },
+            {
+              "speaker": "FERDINAND",
+              "text": "Sir, she is mortal;\nBut by immortal Providence she's mine:\nI chose her when I could not ask my father\nFor his advice, nor thought I had one. She\nIs daughter to this famous Duke of Milan,\nOf whom so often I have heard renown,\nBut never saw before; of whom I have\nReceived a second life; and second father\nThis lady makes him to me."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "I am hers:\nBut, O, how oddly will it sound that I\nMust ask my child forgiveness!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "There, sir, stop:\nLet us not burthen our remembrance with\nA heaviness that's gone."
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "I have inly wept,\nOr should have spoke ere this. Look down, you god,\nAnd on this couple drop a blessed crown!\nFor it is you that have chalk'd forth the way\nWhich brought us hither."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "I say, Amen, Gonzalo!"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Was Milan thrust from Milan, that his issue\nShould become kings of Naples? O, rejoice\nBeyond a common joy, and set it down\nWith gold on lasting pillars: In one voyage\nDid Claribel her husband find at Tunis,\nAnd Ferdinand, her brother, found a wife\nWhere he himself was lost, Prospero his dukedom\nIn a poor isle and all of us ourselves\nWhen no man was his own."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "[To FERDINAND and MIRANDA]  Give me your hands:\nLet grief and sorrow still embrace his heart\nThat doth not wish you joy!"
+            },
+            {
+              "speaker": "GONZALO",
+              "text": "Be it so! Amen!"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Re-enter ARIEL, with the Master and Boatswain amazedly following"
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "[Aside to PROSPERO]  Sir, all this service\nHave I done since I went."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "[Aside to ARIEL]  My tricksy spirit!"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "These are not natural events; they strengthen\nFrom strange to stranger. Say, how came you hither?\nBoatswain\nIf I did think, sir, I were well awake,\nI'ld strive to tell you. We were dead of sleep,\nAnd--how we know not--all clapp'd under hatches;\nWhere but even now with strange and several noises\nOf roaring, shrieking, howling, jingling chains,\nAnd more diversity of sounds, all horrible,\nWe were awaked; straightway, at liberty;\nWhere we, in all her trim, freshly beheld\nOur royal, good and gallant ship, our master\nCapering to eye her: on a trice, so please you,\nEven in a dream, were we divided from them\nAnd were brought moping hither."
+            },
+            {
+              "speaker": "ARIEL",
+              "text": "[Aside to PROSPERO]          Was't well done?"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "[Aside to ARIEL]  Bravely, my diligence. Thou shalt be free."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "This is as strange a maze as e'er men trod\nAnd there is in this business more than nature\nWas ever conduct of: some oracle\nMust rectify our knowledge."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Sir, my liege,\nDo not infest your mind with beating on\nThe strangeness of this business; at pick'd leisure\nWhich shall be shortly, single I'll resolve you,\nWhich to you shall seem probable, of every\nThese happen'd accidents; till when, be cheerful\nAnd think of each thing well."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Aside to ARIEL"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Exit ARIEL"
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Re-enter ARIEL, driving in CALIBAN, STEPHANO and TRINCULO, in their stolen apparel"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "Every man shift for all the rest, and\nlet no man take care for himself; for all is\nbut fortune. Coragio, bully-monster, coragio!"
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "If these be true spies which I wear in my head,\nhere's a goodly sight."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "O Setebos, these be brave spirits indeed!\nHow fine my master is! I am afraid\nHe will chastise me."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Ha, ha!\nWhat things are these, my lord Antonio?\nWill money buy 'em?"
+            },
+            {
+              "speaker": "ANTONIO",
+              "text": "Very like; one of them\nIs a plain fish, and, no doubt, marketable."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Mark but the badges of these men, my lords,\nThen say if they be true. This mis-shapen knave,\nHis mother was a witch, and one so strong\nThat could control the moon, make flows and ebbs,\nAnd deal in her command without her power.\nThese three have robb'd me; and this demi-devil--\nFor he's a bastard one--had plotted with them\nTo take my life. Two of these fellows you\nMust know and own; this thing of darkness!\nAcknowledge mine."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "I shall be pinch'd to death."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Is not this Stephano, my drunken butler?"
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "He is drunk now: where had he wine?"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "And Trinculo is reeling ripe: where should they\nFind this grand liquor that hath gilded 'em?\nHow camest thou in this pickle?"
+            },
+            {
+              "speaker": "TRINCULO",
+              "text": "I have been in such a pickle since I\nsaw you last that, I fear me, will never out of\nmy bones: I shall not fear fly-blowing."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Why, how now, Stephano!"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "O, touch me not; I am not Stephano, but a cramp."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "You'ld be king o' the isle, sirrah?"
+            },
+            {
+              "speaker": "STEPHANO",
+              "text": "I should have been a sore one then."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "This is a strange thing as e'er I look'd on.\nPointing to Caliban"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "He is as disproportion'd in his manners\nAs in his shape. Go, sirrah, to my cell;\nTake with you your companions; as you look\nTo have my pardon, trim it handsomely."
+            },
+            {
+              "speaker": "CALIBAN",
+              "text": "Ay, that I will; and I'll be wise hereafter\nAnd seek for grace. What a thrice-double ass\nWas I, to take this drunkard for a god\nAnd worship this dull fool!"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Go to; away!"
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "Hence, and bestow your luggage where you found it."
+            },
+            {
+              "speaker": "SEBASTIAN",
+              "text": "Or stole it, rather."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Exeunt CALIBAN, STEPHANO, and TRINCULO"
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "Sir, I invite your highness and your train\nTo my poor cell, where you shall take your rest\nFor this one night; which, part of it, I'll waste\nWith such discourse as, I not doubt, shall make it\nGo quick away; the story of my life\nAnd the particular accidents gone by\nSince I came to this isle: and in the morn\nI'll bring you to your ship and so to Naples,\nWhere I have hope to see the nuptial\nOf these our dear-beloved solemnized;\nAnd thence retire me to my Milan, where\nEvery third thought shall be my grave."
+            },
+            {
+              "speaker": "ALONSO",
+              "text": "I long\nTo hear the story of your life, which must\nTake the ear strangely."
+            },
+            {
+              "speaker": "PROSPERO",
+              "text": "I'll deliver all;\nAnd promise you calm seas, auspicious gales\nAnd sail so expeditious that shall catch\nYour royal fleet far off."
+            },
+            {
+              "speaker": "STAGE_DIRECTION",
+              "text": "Aside to ARIEL"
+            },
+            {
+              "speaker": "SPOKEN BY PROSPERO",
+              "text": "Now my charms are all o'erthrown,\nAnd what strength I have's mine own,\nWhich is most faint: now, 'tis true,\nI must be here confined by you,\nOr sent to Naples. Let me not,\nSince I have my dukedom got\nAnd pardon'd the deceiver, dwell\nIn this bare island by your spell;\nBut release me from my bands\nWith the help of your good hands:\nGentle breath of yours my sails\nMust fill, or else my project fails,\nWhich was to please. Now I want\nSpirits to enforce, art to enchant,\nAnd my ending is despair,\nUnless I be relieved by prayer,\nWhich pierces so that it assaults\nMercy itself and frees all faults.\nAs you from crimes would pardon'd be,\nLet your indulgence set me free."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

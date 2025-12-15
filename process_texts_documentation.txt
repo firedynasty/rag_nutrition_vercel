@@ -1,0 +1,155 @@
+  process_texts.py Documentation
+
+  Overview
+
+  process_texts.py is a Python script that processes text files (.txt and
+  .csv) from a directory and generates JavaScript data files for the web
+  application. It converts plain text content into structured JSON data that
+   populates the navigation sidebar.
+
+  Usage
+
+  # Basic usage (interactive mode)
+  python process_texts.py
+
+  # Specify input directory
+  python process_texts.py -p ./folder_w_text
+
+  # Specify output file
+  python process_texts.py -o template_data.js
+
+  # Generate combined script.js (template data + base script)
+  python process_texts.py -o script.js
+
+  # Skip clipboard copy
+  python process_texts.py --no-copy
+
+  Command Line Arguments
+
+  | Argument     | Description
+          |
+  |--------------|----------------------------------------------------------
+  --------|
+  | -p, --path   | Input directory containing text files (default:
+  ./folder_w_text) |
+  | -i, --input  | Alias for -p (backwards compatibility)
+          |
+  | -o, --output | Output file path (default: prompts interactively)
+          |
+  | --no-copy    | Skip copying result to clipboard
+          |
+
+  How It Works
+
+  1. File Discovery
+
+  The script scans the input directory for:
+  - .txt files
+  - .csv files
+
+  Files are sorted alphabetically before processing.
+
+  2. Title Extraction (extract_title_from_file)
+
+  - Special case for elementary_chinese_pg* files: Extracts title from
+  content after | delimiter
+  - All other files: Uses filename without extension as the title (e.g.,
+  basketball_handles.txt → basketball_handles)
+
+  3. Content Processing (process_txt_file)
+
+  The script applies several markdown-to-HTML transformations:
+
+  a) Markdown Images/Videos (parse_markdown_images)
+
+  Converts ![alt](path) syntax to HTML:
+  - Images: <img> tags with styling
+  - Videos: <video> tags with controls (detects by extension: .mp4, .webm,
+  .ogg, .mov, .avi, .mkv, .m4v)
+
+  ![description](./images/photo.jpg)  →  <img 
+  src="./folder_w_text/images/photo.jpg">
+  ![](./videos/clip.mp4)              →  <video controls><source 
+  src="..."></video>
+
+  b) Markdown Links (parse_markdown_links)
+
+  Converts [text](url) to styled anchor tags:
+  [Google](https://google.com)  →  <a href="https://google.com" 
+  target="_blank">Google</a>
+
+  c) Markdown Headings (parse_markdown_headings)
+
+  Converts # headings to HTML:
+  # Title     →  <h1>Title</h1>
+  ## Section  →  <h2>Section</h2>
+
+  d) Code Blocks (parse_code_blocks)
+
+  Converts fenced code blocks to <pre><code> with Prism.js classes:
+  ```python
+  print("hello")
+  ```  →  <pre><code class="language-python">print("hello")</code></pre>
+
+  e) Vocabulary Section Detection
+
+  Special handling for Chinese vocabulary files - extracts and formats
+  vocabulary entries.
+
+  4. Output Generation
+
+  Mode 1: Template Data Only (process_directory)
+
+  Generates template_data.js:
+  const templates = {
+    "1": {
+      "title": "filename",
+      "content": "processed HTML content..."
+    },
+    "2": { ... }
+  }
+
+  Mode 2: Combined Script (process_directory_for_codepen)
+
+  When output is script.js:
+  1. Generates template data JSON
+  2. Reads script_without_template_data_base.js
+  3. Combines both into single script.js file
+  4. Copies combined content to clipboard
+
+  5. Clipboard Copy (copy_to_clipboard)
+
+  Cross-platform clipboard support:
+  - macOS: pbcopy
+  - Linux: xclip
+  - Windows: clip
+
+  Output Format
+
+  The generated JavaScript creates a templates object where:
+  - Keys: Sequential numbers as strings ("1", "2", etc.)
+  - Values: Objects with title and content properties
+
+  const templates = {
+    "1": {
+      "title": "1main_links",
+      "content": "<a href=\"...\">link</a>\n<p>text</p>..."
+    },
+    "2": {
+      "title": "basketball_handles",
+      "content": "..."
+    }
+  }
+
+  File Processing Flow
+
+  folder_w_text/
+  ├── 1main_links.txt     ──┐
+  ├── basketball_handles.txt ├──> process_texts.py ──> template_data.js
+  ├── chess_links.txt     ──┤                          (or script.js)
+  └── data.csv            ──┘
+
+  Dependencies
+
+  - Python 3.x (standard library only)
+  - Uses: os, json, csv, re, argparse, subprocess, sys, html

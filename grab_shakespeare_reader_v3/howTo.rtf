@@ -1,0 +1,35 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red47\green180\blue29;\red64\green11\blue217;
+\red111\green111\blue111;\red46\green174\blue187;\red180\green36\blue25;}
+{\*\expandedcolortbl;;\csgray\c0;\cssrgb\c20241\c73898\c14950;\cssrgb\c32309\c18666\c88229;
+\cssrgb\c51167\c51167\c51167;\cssrgb\c20199\c73241\c78251;\cssrgb\c76411\c21697\c12527;}
+\margl1440\margr1440\vieww33080\viewh18260\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf2 \CocoaLigature0 python text_to_json_v2.py your_play.txt your_play.json\
+\
+python text_to_json_v2.py much_ado_about_nothing.txt much_ado_about_nothing.json\
+\
+\
+To add more Shakespeare plays:\
+\
+use v2.py to convert but first you need to add Act 1 Scene 2 by finding scene in the text file\
+(which is converted from MIT full play.html then drive the conversion to a .txt file in python/convert_html_to_txt) \
+\
+\
+  \cf3 # For plays with "Act X Scene Y" format (like tempest1.txt)\cf2 \
+  python text_to_json_v2.py your_play.txt your_play.json\
+\
+  \cf3 # For plays with "ACT I" format (like romeo_juliet.txt)\cf2 \
+  python text_to_json.py your_play.txt your_play.json\
+\
+  Then add to the dropdown in \cf4 shakespeare_viewer.html\cf2 :\
+  \cf5 <\cf4 select\cf5  \cf6 id\cf5 =\cf7 "playSelect"\cf5 >\cf2 \
+      \cf5 <\cf4 option\cf5  \cf6 value\cf5 =\cf7 "romeo_juliet.json"\cf5 >\cf2 Romeo and Juliet\cf5 </\cf4 option\cf5 >\cf2 \
+      \cf5 <\cf4 option\cf5  \cf6 value\cf5 =\cf7 "tempest.json"\cf5 >\cf2 The Tempest\cf5 </\cf4 option\cf5 >\cf2 \
+      \cf5 <\cf4 option\cf5  \cf6 value\cf5 =\cf7 "your_play.json"\cf5 >\cf2 Your Play Name\cf5 </\cf4 option\cf5 >\cf2 \
+  \cf5 </\cf4 select\cf5 >\cf2 \
+\
+\
+.}

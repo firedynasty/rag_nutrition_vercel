@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romeo and Juliet - Shakespeare Reader</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        .status {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 1em;
+            display: none;
+        }
+
+        .loading {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        .controls {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .control-group {
+            margin: 15px 0;
+        }
+
+        .control-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #495057;
+            font-size: 0.8em;
+        }
+
+        select, input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-family: inherit;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 19px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 0.8em;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button.secondary {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+        }
+
+        .output {
+            margin-top: 25px;
+            padding: 25px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            max-height: calc(100vh - 400px);
+            overflow-y: auto;
+        }
+
+        .scene-content {
+            margin: 20px 0;
+        }
+
+        .scene-header {
+            background-color: #6c757d;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin: 20px 0 15px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .act-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin: 25px 0 15px 0;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .line {
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .speaker {
+            font-weight: bold;
+            color: #495057;
+            text-transform: uppercase;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .dialogue {
+            margin-left: 20px;
+            color: #212529;
+            font-size: 1.25em;
+        }
+
+        .stage-direction {
+            font-style: italic;
+            color: #6c757d;
+            margin: 12px 0;
+            margin-left: 20px;
+            font-size: 1.2em;
+        }
+
+        .data-info {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #e7f3ff;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            min-width: 150px;
+            margin: 10px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .search-results {
+            margin-top: 20px;
+        }
+
+        .search-result-item {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+        }
+
+        .result-location {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        mark {
+            background-color: #ffc107;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .line.highlight {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+
+            .container {
+                padding: 15px;
+                min-height: 100vh;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1.3em;
+            }
+
+            .dialogue {
+                margin-left: 10px;
+                font-size: 1.45em;
+            }
+
+            .speaker {
+                font-size: 1.3em;
+            }
+
+            .stage-direction {
+                font-size: 1.4em;
+            }
+
+            .act-header {
+                font-size: 1.6em;
+            }
+
+            .scene-header {
+                font-size: 1.4em;
+            }
+
+            button {
+                font-size: 0.88em;
+                padding: 11px 16px;
+            }
+
+            .control-group label {
+                font-size: 0.88em;
+            }
+
+            select, input[type="text"], input[type="number"] {
+                font-size: 0.88em;
+                padding: 10px;
+            }
+
+            .output {
+                max-height: calc(100vh - 280px);
+                min-height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Romeo and Juliet</h1>
+        <div class="subtitle">by William Shakespeare</div>
+
+        <div id="status" class="status loading">Loading play data...</div>
+
+        <div id="dataInfo"></div>
+
+        <div id="controls" class="controls" style="display:none;">
+            <div class="control-group">
+                <label for="playSelect">Select Play:</label>
+                <select id="playSelect">
+                    <option value="https://assets.codepen.io/1075762/romeo_juliet.json">Romeo and Juliet</option>
+                    <option value="https://assets.codepen.io/1075762/tempest.json">The Tempest</option>
+                    <option value="https://assets.codepen.io/1075762/much_ado_about_nothing.json">Much Ado About Nothing</option>
+                    <option value="https://assets.codepen.io/1075762/hamlet.json">Hamlet</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="actSelect">Select Act:</label>
+                <select id="actSelect">
+                    <option value="">-- Select an Act --</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="sceneSelect">Select Scene:</label>
+                <select id="sceneSelect" disabled>
+                    <option value="">-- Select a Scene --</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="searchText">Search for text:</label>
+                <input type="text" id="searchText" placeholder="Enter text to search...">
+            </div>
+
+            <div class="control-group" style="display: none;">
+                <label for="numLines">Number of lines to extract:</label>
+                <input type="number" id="numLines" value="500" min="1" max="5000">
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="displaySelectedScene()" style="display: none;">Display Scene</button>
+                <button onclick="searchPlay()" class="secondary">Search Play</button>
+                <button onclick="decreaseFontSize()" class="secondary">A-</button>
+                <button onclick="increaseFontSize()" class="secondary">A+</button>
+                <button onclick="setMobileFontSize()" class="secondary" id="mobileButton">📱 Mobile</button>
+                <button onclick="extractLines()" class="secondary" style="display: none;">Extract Lines</button>
+                <button onclick="getRandomScene()" class="secondary" style="display: none;">Random Scene</button>
+                <button onclick="glossSelectedText()" class="secondary" id="glossButton" style="margin-left: 0.25rem;">📖 Gloss</button>
+                <button onclick="nextScene()" class="secondary">Next Scene</button>
+            </div>
+        </div>
+
+        <div id="output" class="output"></div>
+    </div>
+
+    <script>
+        let playData = null;
+        let currentActIndex = null;
+        let currentSceneIndex = null;
+        let currentPlayFile = 'https://assets.codepen.io/1075762/romeo_juliet.json';
+
+        // Load JSON data for selected play
+        async function loadPlayData(playFile = 'https://assets.codepen.io/1075762/romeo_juliet.json') {
+            const statusEl = document.getElementById('status');
+            const dataInfoEl = document.getElementById('dataInfo');
+            const controlsEl = document.getElementById('controls');
+            const outputEl = document.getElementById('output');
+
+            try {
+                statusEl.textContent = 'Loading play data...';
+                statusEl.className = 'status loading';
+
+                // Try to load from local file
+                const response = await fetch(playFile);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                playData = await response.json();
+                currentPlayFile = playFile;
+
+                // Reset selections
+                currentActIndex = null;
+                currentSceneIndex = null;
+                outputEl.innerHTML = '';
+
+                statusEl.className = 'status success';
+                statusEl.textContent = `${playData.title} loaded successfully!`;
+
+                // Update page title
+                document.querySelector('h1').textContent = playData.title;
+                document.querySelector('.subtitle').textContent = `by ${playData.author}`;
+
+                displayDataInfo();
+                populateActSelect();
+                controlsEl.style.display = 'block';
+
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = `Failed to load play data: ${error.message}`;
+            }
+        }
+
+        // Setup play selector
+        function setupPlaySelector() {
+            const playSelect = document.getElementById('playSelect');
+            playSelect.addEventListener('change', function() {
+                loadPlayData(this.value);
+            });
+        }
+
+        function displayDataInfo() {
+            const dataInfoEl = document.getElementById('dataInfo');
+
+            const totalScenes = playData.acts.reduce((sum, act) => sum + act.scenes.length, 0);
+            const totalLines = playData.acts.reduce((sum, act) =>
+                sum + act.scenes.reduce((sceneSum, scene) => sceneSum + scene.lines.length, 0), 0
+            );
+
+            dataInfoEl.innerHTML = `
+                <div class="data-info">
+                    <h3 style="margin-bottom: 15px;">Play Information</h3>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">${playData.acts.length}</div>
+                            <div class="stat-label">Acts</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">${totalScenes}</div>
+                            <div class="stat-label">Scenes</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">${totalLines}</div>
+                            <div class="stat-label">Lines/Entries</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function populateActSelect() {
+            const actSelect = document.getElementById('actSelect');
+            actSelect.innerHTML = '<option value="">-- Select an Act --</option>';
+
+            playData.acts.forEach((act, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `Act ${act.act_number}`;
+                actSelect.appendChild(option);
+            });
+
+            actSelect.addEventListener('change', function() {
+                if (this.value !== '') {
+                    currentActIndex = parseInt(this.value);
+                    populateSceneSelect();
+
+                    // Automatically select first scene and display after 500ms
+                    setTimeout(() => {
+                        const sceneSelect = document.getElementById('sceneSelect');
+                        if (sceneSelect.options.length > 1) {
+                            sceneSelect.value = '0'; // Select first scene
+                            currentSceneIndex = 0;
+                            displaySelectedScene();
+                        }
+                    }, 500);
+                } else {
+                    currentActIndex = null;
+                    const sceneSelect = document.getElementById('sceneSelect');
+                    sceneSelect.innerHTML = '<option value="">-- Select a Scene --</option>';
+                    sceneSelect.disabled = true;
+                }
+            });
+        }
+
+        function populateSceneSelect() {
+            const sceneSelect = document.getElementById('sceneSelect');
+            sceneSelect.innerHTML = '<option value="">-- Select a Scene --</option>';
+
+            if (currentActIndex !== null) {
+                const act = playData.acts[currentActIndex];
+                act.scenes.forEach((scene, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = `Scene ${scene.scene_number}: ${scene.location}`;
+                    sceneSelect.appendChild(option);
+                });
+                sceneSelect.disabled = false;
+
+                // Add event listener for manual scene selection
+                // Remove old listener first to avoid duplicates
+                sceneSelect.removeEventListener('change', handleSceneChange);
+                sceneSelect.addEventListener('change', handleSceneChange);
+            }
+        }
+
+        function handleSceneChange() {
+            const sceneSelect = document.getElementById('sceneSelect');
+            if (sceneSelect.value !== '') {
+                displaySelectedScene();
+            }
+        }
+
+        function displaySelectedScene() {
+            const sceneSelect = document.getElementById('sceneSelect');
+            const outputEl = document.getElementById('output');
+
+            if (currentActIndex === null || sceneSelect.value === '') {
+                outputEl.innerHTML = '<div class="status error">Please select an Act and Scene</div>';
+                return;
+            }
+
+            currentSceneIndex = parseInt(sceneSelect.value);
+            const act = playData.acts[currentActIndex];
+            const scene = act.scenes[currentSceneIndex];
+
+            displayScene(act, scene);
+        }
+
+        function displayScene(act, scene) {
+            const outputEl = document.getElementById('output');
+
+            let html = `
+                <div class="scene-content">
+                    <div class="act-header">${act.act_title}</div>
+                    <div class="scene-header">${scene.scene_title}</div>
+            `;
+
+            if (scene.location) {
+                html += `<div class="stage-direction">[${scene.location}]</div>`;
+            }
+
+            scene.lines.forEach(line => {
+                if (line.speaker === 'STAGE_DIRECTION') {
+                    html += `<div class="stage-direction">${line.text}</div>`;
+                } else {
+                    html += `
+                        <div class="line">
+                            <div class="speaker">${line.speaker}</div>
+                            <div class="dialogue">${line.text}</div>
+                        </div>
+                    `;
+                }
+            });
+
+            html += '</div>';
+            outputEl.innerHTML = html;
+            outputEl.scrollTop = 0;
+
+            // Reapply saved font size after scene change
+            applyFontSize();
+        }
+
+        function searchPlay() {
+            const searchText = document.getElementById('searchText').value.trim().toLowerCase();
+            const outputEl = document.getElementById('output');
+
+            if (!searchText) {
+                outputEl.innerHTML = '<div class="status error">Please enter search text</div>';
+                return;
+            }
+
+            // Find all scenes containing the search text
+            const matchingScenes = [];
+            const seenScenes = new Set();
+
+            playData.acts.forEach((act, actIdx) => {
+                act.scenes.forEach((scene, sceneIdx) => {
+                    let hasMatch = false;
+                    const matchingLines = [];
+
+                    scene.lines.forEach((line, lineIdx) => {
+                        if (line.text.toLowerCase().includes(searchText)) {
+                            hasMatch = true;
+                            matchingLines.push(lineIdx);
+                        }
+                    });
+
+                    if (hasMatch) {
+                        const sceneKey = `${actIdx}-${sceneIdx}`;
+                        if (!seenScenes.has(sceneKey)) {
+                            seenScenes.add(sceneKey);
+                            matchingScenes.push({
+                                act: act,
+                                scene: scene,
+                                actIdx: actIdx,
+                                sceneIdx: sceneIdx,
+                                matchingLines: matchingLines
+                            });
+                        }
+                    }
+                });
+            });
+
+            if (matchingScenes.length === 0) {
+                outputEl.innerHTML = '<div class="status error">No results found</div>';
+                return;
+            }
+
+            // Count total matches
+            const totalMatches = matchingScenes.reduce((sum, s) => sum + s.matchingLines.length, 0);
+
+            let html = `
+                <div class="search-results">
+                    <h3>Search Results for "${searchText}" (${totalMatches} found in ${matchingScenes.length} scene${matchingScenes.length > 1 ? 's' : ''})</h3>
+            `;
+
+            // Display complete scenes
+            matchingScenes.forEach((result, index) => {
+                html += `<div class="scene-content" style="margin-top: ${index > 0 ? '30px' : '20px'}; border-top: ${index > 0 ? '3px solid #e9ecef' : 'none'}; padding-top: ${index > 0 ? '20px' : '0'};">`;
+                html += `<div class="act-header">${result.act.act_title}</div>`;
+                html += `<div class="scene-header">${result.scene.scene_title}</div>`;
+
+                if (result.scene.location) {
+                    html += `<div class="stage-direction">[${result.scene.location}]</div>`;
+                }
+
+                // Display all lines in the scene
+                result.scene.lines.forEach((line, lineIdx) => {
+                    const isMatchingLine = result.matchingLines.includes(lineIdx);
+
+                    if (line.speaker === 'STAGE_DIRECTION') {
+                        html += `<div class="stage-direction" ${isMatchingLine ? 'style="background-color: #fff3cd; padding: 8px; border-radius: 4px; margin: 12px 0;"' : ''}>${highlightText(line.text, searchText)}</div>`;
+                    } else {
+                        html += `
+                            <div class="line" ${isMatchingLine ? 'style="background-color: #fff3cd; padding: 10px; border-radius: 4px; margin: 15px 0;"' : ''}>
+                                <div class="speaker">${line.speaker}</div>
+                                <div class="dialogue">${highlightText(line.text, searchText)}</div>
+                            </div>
+                        `;
+                    }
+                });
+
+                html += '</div>';
+            });
+
+            html += '</div>';
+            outputEl.innerHTML = html;
+            outputEl.scrollTop = 0;
+        }
+
+        // Helper function to highlight search text
+        function highlightText(text, searchText) {
+            if (!searchText) return text;
+
+            const regex = new RegExp(`(${escapeRegex(searchText)})`, 'gi');
+            return text.replace(regex, '<mark style="background-color: #ffc107; padding: 2px 4px; border-radius: 2px; font-weight: bold;">$1</mark>');
+        }
+
+        // Escape special regex characters
+        function escapeRegex(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function extractLines() {
+            const searchText = document.getElementById('searchText').value.trim().toLowerCase();
+            const numLines = parseInt(document.getElementById('numLines').value) || 500;
+            const outputEl = document.getElementById('output');
+
+            if (!searchText) {
+                outputEl.innerHTML = '<div class="status error">Please enter text to search for extraction</div>';
+                return;
+            }
+
+            // Find the starting point
+            let found = false;
+            let startActIdx, startSceneIdx, startLineIdx;
+
+            outerLoop:
+            for (let actIdx = 0; actIdx < playData.acts.length; actIdx++) {
+                const act = playData.acts[actIdx];
+                for (let sceneIdx = 0; sceneIdx < act.scenes.length; sceneIdx++) {
+                    const scene = act.scenes[sceneIdx];
+                    for (let lineIdx = 0; lineIdx < scene.lines.length; lineIdx++) {
+                        if (scene.lines[lineIdx].text.toLowerCase().includes(searchText)) {
+                            startActIdx = actIdx;
+                            startSceneIdx = sceneIdx;
+                            startLineIdx = lineIdx;
+                            found = true;
+                            break outerLoop;
+                        }
+                    }
+                }
+            }
+
+            if (!found) {
+                outputEl.innerHTML = '<div class="status error">Text not found</div>';
+                return;
+            }
+
+            // Extract lines
+            let extractedLines = [];
+            let currentActIdx = startActIdx;
+            let currentSceneIdx = startSceneIdx;
+            let currentLineIdx = startLineIdx;
+
+            while (extractedLines.length < numLines) {
+                if (currentActIdx >= playData.acts.length) break;
+
+                const act = playData.acts[currentActIdx];
+                if (currentSceneIdx >= act.scenes.length) {
+                    currentActIdx++;
+                    currentSceneIdx = 0;
+                    currentLineIdx = 0;
+                    continue;
+                }
+
+                const scene = act.scenes[currentSceneIdx];
+                if (currentLineIdx >= scene.lines.length) {
+                    currentSceneIdx++;
+                    currentLineIdx = 0;
+                    continue;
+                }
+
+                extractedLines.push({
+                    act: act,
+                    scene: scene,
+                    line: scene.lines[currentLineIdx],
+                    isNewScene: currentLineIdx === 0
+                });
+
+                currentLineIdx++;
+            }
+
+            // Display extracted text
+            let html = `
+                <div class="scene-content">
+                    <h3>Extracted ${extractedLines.length} lines starting from "${searchText}"</h3>
+            `;
+
+            let lastActTitle = '';
+            let lastSceneTitle = '';
+
+            extractedLines.forEach(item => {
+                if (item.act.act_title !== lastActTitle) {
+                    html += `<div class="act-header">${item.act.act_title}</div>`;
+                    lastActTitle = item.act.act_title;
+                }
+
+                if (item.isNewScene) {
+                    html += `<div class="scene-header">${item.scene.scene_title}</div>`;
+                    if (item.scene.location) {
+                        html += `<div class="stage-direction">[${item.scene.location}]</div>`;
+                    }
+                }
+
+                if (item.line.speaker === 'STAGE_DIRECTION') {
+                    html += `<div class="stage-direction">${item.line.text}</div>`;
+                } else {
+                    html += `
+                        <div class="line">
+                            <div class="speaker">${item.line.speaker}</div>
+                            <div class="dialogue">${item.line.text}</div>
+                        </div>
+                    `;
+                }
+            });
+
+            html += '</div>';
+
+            // Create text version for clipboard
+            let textVersion = extractedLines.map(item => {
+                if (item.line.speaker === 'STAGE_DIRECTION') {
+                    return item.line.text;
+                } else {
+                    return `${item.line.speaker}\n${item.line.text}`;
+                }
+            }).join('\n\n');
+
+            // Try to copy to clipboard
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(textVersion).then(() => {
+                    html += '<div class="status success" style="margin-top: 20px;">Text copied to clipboard!</div>';
+                    outputEl.innerHTML = html;
+                }).catch(() => {
+                    outputEl.innerHTML = html;
+                });
+            } else {
+                outputEl.innerHTML = html;
+            }
+
+            outputEl.scrollTop = 0;
+        }
+
+        function nextScene() {
+            const outputEl = document.getElementById('output');
+
+            // Check if we have a current position
+            if (currentActIndex === null || currentSceneIndex === null) {
+                // Start from the beginning if no scene is selected
+                currentActIndex = 0;
+                currentSceneIndex = 0;
+            } else {
+                // Move to next scene
+                const currentAct = playData.acts[currentActIndex];
+                currentSceneIndex++;
+
+                // Check if we've exceeded scenes in current act
+                if (currentSceneIndex >= currentAct.scenes.length) {
+                    // Move to next act
+                    currentActIndex++;
+                    currentSceneIndex = 0;
+
+                    // Check if we've exceeded all acts (wrap around to beginning)
+                    if (currentActIndex >= playData.acts.length) {
+                        currentActIndex = 0;
+                        currentSceneIndex = 0;
+                    }
+                }
+            }
+
+            // Update the act dropdown
+            const actSelect = document.getElementById('actSelect');
+            actSelect.value = currentActIndex.toString();
+
+            // Populate and update the scene dropdown
+            populateSceneSelect();
+            const sceneSelect = document.getElementById('sceneSelect');
+            sceneSelect.value = currentSceneIndex.toString();
+
+            // Display the scene
+            const act = playData.acts[currentActIndex];
+            const scene = act.scenes[currentSceneIndex];
+            displayScene(act, scene);
+        }
+
+        function getRandomScene() {
+            const randomActIdx = Math.floor(Math.random() * playData.acts.length);
+            const act = playData.acts[randomActIdx];
+            const randomSceneIdx = Math.floor(Math.random() * act.scenes.length);
+            const scene = act.scenes[randomSceneIdx];
+
+            displayScene(act, scene);
+        }
+
+        function glossSelectedText() {
+            console.log('=== GLOSS BUTTON CLICKED ===');
+
+            // Get the selected text
+            const selection = window.getSelection();
+            let selectedText = selection.toString().trim();
+            console.log('Selected text:', selectedText);
+            console.log('Selection range count:', selection.rangeCount);
+
+            if (!selectedText) {
+                alert('Please highlight some text first before clicking the Gloss button.');
+                return;
+            }
+
+            // Check if selection already includes speaker names
+            // If not, try to find the speaker for single-line selections
+            const lineCount = selectedText.split('\n').length;
+            const hasMultipleLines = lineCount > 5; // Heuristic for multi-line
+            console.log('Line count:', lineCount);
+            console.log('Has multiple lines?', hasMultipleLines);
+
+            if (!hasMultipleLines && selection.rangeCount > 0) {
+                try {
+                    const range = selection.getRangeAt(0);
+                    console.log('Range:', range);
+                    console.log('Start container:', range.startContainer);
+                    console.log('End container:', range.endContainer);
+
+                    // Use startContainer instead of commonAncestorContainer
+                    // This gives us the element where the selection actually begins
+                    let container = range.startContainer;
+                    console.log('Container (before check):', container, 'nodeType:', container.nodeType);
+
+                    if (container.nodeType === 3) { // Text node
+                        container = container.parentNode;
+                        console.log('Container was text node, now:', container);
+                    }
+
+                    // Check if we're inside a .dialogue element
+                    let dialogueElement = container;
+                    let steps = 0;
+                    while (dialogueElement && !dialogueElement.classList?.contains('dialogue')) {
+                        console.log(`Step ${steps}: Checking element:`, dialogueElement, 'classList:', dialogueElement.classList);
+                        if (dialogueElement.classList?.contains('line')) {
+                            console.log('Found .line element, stopping');
+                            break; // Stop at .line element
+                        }
+                        dialogueElement = dialogueElement.parentElement;
+                        steps++;
+                        if (steps > 10) {
+                            console.log('Too many steps, breaking');
+                            break;
+                        }
+                    }
+                    console.log('Final dialogueElement:', dialogueElement);
+
+                    // If we found a dialogue element, look for its sibling speaker
+                    if (dialogueElement && dialogueElement.classList?.contains('dialogue')) {
+                        console.log('Found .dialogue element!');
+                        const lineElement = dialogueElement.closest('.line');
+                        console.log('Line element:', lineElement);
+
+                        if (lineElement) {
+                            const speakerElement = lineElement.querySelector('.speaker');
+                            console.log('Speaker element:', speakerElement);
+
+                            if (speakerElement) {
+                                const speakerName = speakerElement.textContent.trim();
+                                console.log('Speaker name:', speakerName);
+                                // Prepend speaker name to selected text
+                                selectedText = `${speakerName}\n${selectedText}`;
+                                console.log('Updated selected text with speaker');
+                            } else {
+                                console.log('No speaker element found');
+                            }
+                        } else {
+                            console.log('No line element found');
+                        }
+                    } else {
+                        console.log('dialogueElement does not have .dialogue class or is null');
+                    }
+                } catch (e) {
+                    // If anything fails, just use the selected text as is
+                    console.log('ERROR in speaker detection:', e);
+                }
+            } else {
+                console.log('Skipping speaker detection (multi-line selection)');
+            }
+
+            // Get play title
+            const playTitle = playData ? playData.title : 'Unknown Play';
+
+            // Get current act and scene
+            let actSceneInfo = '';
+            if (currentActIndex !== null && currentSceneIndex !== null) {
+                const act = playData.acts[currentActIndex];
+                const scene = act.scenes[currentSceneIndex];
+                actSceneInfo = `act ${act.act_number} scene ${scene.scene_number}`;
+            } else {
+                actSceneInfo = 'act unknown scene unknown';
+            }
+
+            // Create the gloss prompt
+            const glossPrompt = `Gloss this passage from Shakespeare, with brief definitions in parentheses after archaic or unclear words:
+
+${playTitle}
+${actSceneInfo}
+
+${selectedText}`;
+
+            // Copy to clipboard
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(glossPrompt).then(() => {
+                    // Show success message
+                    const glossButton = document.getElementById('glossButton');
+                    const originalText = glossButton.innerHTML;
+                    glossButton.innerHTML = '✅ Copied!';
+                    glossButton.style.backgroundColor = '#28a745';
+
+                    setTimeout(() => {
+                        glossButton.innerHTML = originalText;
+                        glossButton.style.backgroundColor = '';
+                    }, 2000);
+                }).catch(err => {
+                    alert('Failed to copy to clipboard. Please try again.');
+                    console.error('Clipboard error:', err);
+                });
+            } else {
+                // Fallback: show the text in an alert
+                alert('Gloss prompt created (clipboard not available):\n\n' + glossPrompt);
+            }
+        }
+
+        // Font size control
+        let currentFontSize = 1.25; // Default dialogue font size in em
+
+        // Load saved font size from localStorage
+        function loadFontSize() {
+            const savedSize = localStorage.getItem('shakespeareFontSize');
+            if (savedSize) {
+                currentFontSize = parseFloat(savedSize);
+            }
+        }
+
+        // Save font size to localStorage
+        function saveFontSize() {
+            localStorage.setItem('shakespeareFontSize', currentFontSize.toString());
+        }
+
+        function decreaseFontSize() {
+            currentFontSize = Math.max(0.8, currentFontSize - 0.1); // Minimum 0.8em
+            applyFontSize();
+            saveFontSize();
+        }
+
+        function increaseFontSize() {
+            currentFontSize = Math.min(3.0, currentFontSize + 0.1); // Maximum 3.0em
+            applyFontSize();
+            saveFontSize();
+        }
+
+        function setMobileFontSize() {
+            currentFontSize = 2.5;
+            applyFontSize();
+            saveFontSize();
+        }
+
+        function applyFontSize() {
+            const outputEl = document.getElementById('output');
+            const dialogues = outputEl.querySelectorAll('.dialogue');
+            const speakers = outputEl.querySelectorAll('.speaker');
+            const stageDirections = outputEl.querySelectorAll('.stage-direction');
+
+            dialogues.forEach(el => {
+                el.style.fontSize = currentFontSize + 'em';
+            });
+
+            speakers.forEach(el => {
+                el.style.fontSize = (currentFontSize - 0.15) + 'em';
+            });
+
+            stageDirections.forEach(el => {
+                el.style.fontSize = (currentFontSize - 0.05) + 'em';
+            });
+        }
+
+        // Load data when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            loadFontSize();
+            setupPlaySelector();
+            loadPlayData();
+        });
+    </script>
+</body>
+</html>

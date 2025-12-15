@@ -1,0 +1,30 @@
+ 1. generate_preloaded.py - Python script that scans ./preloaded_reports/
+  for folders containing .txt and .md files, and generates JSON files in
+  ./public/preloaded/
+  2. public/preloaded/index.json - Lists available folders
+  3. public/preloaded/<folder_name>.json - Contains all file contents for
+  each folder
+
+  How it works
+
+  1. The app fetches /preloaded/index.json on load to get the list of
+  folders
+  2. A dropdown appears in the sidebar under "Preloaded Reports:"
+  3. When you select a folder, it fetches /<folder_name>.json and loads all
+  files
+  4. Large files (>100k chars) are automatically set as "Literature"
+  5. Works with one folder or multiple folders
+
+  Usage
+
+  # When you add/change folders in ./preloaded_reports/, run:
+  python generate_preloaded.py
+
+  # Then start the app:
+  npm start
+
+  The app is now running at http://localhost:3000 - you should see a
+  "Preloaded Reports" dropdown with:
+  - don_quixote (7 files)
+  - nutrition (3 files)
+
