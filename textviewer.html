@@ -1,0 +1,3017 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Gallery with Thumbnail Carousel</title>
+    <!-- Markdown and syntax highlighting libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/default.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+    <!-- JSZip for downloading multiple edited files -->
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Open Sans", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #gallery {
+            position: relative;
+            background: url('https://cdn.pixabay.com/photo/2013/11/03/08/05/cheers-204742_1280.jpg');
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s linear;
+            padding: 0;
+            padding-top: 80px;
+            margin-left: 250px;
+        }
+
+        #gallery::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 0;
+        }
+
+        .gallery-section-headline,
+        .gallery-preview-container,
+        .gallery-btn,
+        .thumbnails-section {
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery-section-headline {
+            display: none;
+        }
+
+        .gallery-preview-container {
+            position: relative;
+            max-width: 100%;
+            height: calc(100vh - 80px);
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-preview-title {
+            display: none;
+        }
+
+        .content-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007acc;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #007acc;
+        }
+
+        .gallery-preview-image,
+        .gallery-preview-video {
+            max-width: 90%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s linear;
+        }
+
+        .gallery-preview-video {
+            display: none;
+        }
+
+        .gallery-preview-image {
+            display: block;
+        }
+
+        .gallery-preview-text {
+            display: none;
+            max-width: 95%;
+            max-height: 100%;
+            background: white;
+            color: #333;
+            padding: 40px;
+            border-radius: 10px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            text-align: left;
+        }
+
+        .gallery-preview-markdown {
+            display: none;
+            max-width: 95%;
+            max-height: 100%;
+            background: white;
+            color: #333;
+            padding: 40px;
+            border-radius: 10px;
+            overflow-y: auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .gallery-preview-markdown h1 {
+            font-size: 2em;
+            font-weight: bold;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 0.3em;
+        }
+
+        .gallery-preview-markdown h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 0.3em;
+        }
+
+        .gallery-preview-markdown h3 {
+            font-size: 1.25em;
+            font-weight: bold;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .gallery-preview-markdown h4, .gallery-preview-markdown h5, .gallery-preview-markdown h6 {
+            font-weight: bold;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .gallery-preview-markdown p {
+            margin-bottom: 16px;
+        }
+
+        .gallery-preview-markdown strong {
+            font-weight: bold;
+        }
+
+        .gallery-preview-markdown em {
+            font-style: italic;
+        }
+
+        .gallery-preview-markdown code {
+            background-color: rgba(27, 31, 35, 0.05);
+            border-radius: 3px;
+            font-family: 'Courier New', Consolas, Monaco, monospace;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+        }
+
+        .gallery-preview-markdown pre {
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            padding: 16px;
+            overflow: auto;
+            margin-bottom: 16px;
+        }
+
+        .gallery-preview-markdown pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: 100%;
+            line-height: 1.45;
+            display: block;
+        }
+
+        .gallery-preview-markdown ul, .gallery-preview-markdown ol {
+            margin-bottom: 16px;
+            padding-left: 2em;
+        }
+
+        .gallery-preview-markdown li {
+            margin-bottom: 0.25em;
+        }
+
+        .gallery-preview-markdown blockquote {
+            border-left: 4px solid #dfe2e5;
+            color: #6a737d;
+            padding-left: 1em;
+            margin-bottom: 16px;
+        }
+
+        .gallery-preview-markdown a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        .gallery-preview-markdown a:hover {
+            text-decoration: underline;
+        }
+
+        .gallery-preview-markdown hr {
+            border: none;
+            border-top: 1px solid #e1e4e8;
+            margin: 24px 0;
+        }
+
+        .gallery-preview-markdown table {
+            border-collapse: collapse;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        .gallery-preview-markdown table th,
+        .gallery-preview-markdown table td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
+        }
+
+        .gallery-preview-markdown table th {
+            background-color: #f6f8fa;
+            font-weight: bold;
+        }
+
+        .gallery-preview-markdown table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+
+        .gallery-preview-divider {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .divider-title {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .divider-subtitle {
+            font-size: 1.5em;
+            opacity: 0.9;
+        }
+
+        .gallery-btn {
+            width: 64px;
+            height: 64px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-btn:active {
+            transform: translateY(-50%) scale(0.9);
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
+        /* Sidebar Section (Left) */
+        .thumbnails-section {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: #f5f5f5;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+            z-index: 50;
+        }
+
+        .thumbnails-container {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .thumbnails-slider {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .thumbnail {
+            cursor: pointer;
+            padding: 8px 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .thumbnail:hover {
+            background-color: #e0e0e0;
+        }
+
+        .thumbnail.active {
+            background-color: #d0d0d0;
+        }
+
+        .thumbnail-image-wrapper {
+            display: none;
+        }
+
+        .thumbnail-caption {
+            font-size: 13px;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .thumbnail-divider {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-weight: bold;
+            font-size: 12px;
+            color: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+
+        .thumbnail-divider .thumbnail-caption {
+            color: white;
+        }
+
+        /* Hide thumbnail nav buttons */
+        .thumbnail-nav-btn {
+            display: none;
+        }
+
+        /* Control Bar Container */
+        .control-bar {
+            position: fixed;
+            top: 0;
+            left: 250px;
+            right: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 100;
+            flex-wrap: wrap;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 20px;
+        }
+
+        /* URL Instructions */
+        .url-instructions {
+            display: none;
+        }
+
+        /* Reference Button */
+        .reference-btn {
+            display: none;
+            background: rgba(255, 165, 0, 0.9);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .reference-btn:hover {
+            background: rgba(255, 140, 0, 1);
+            transform: scale(1.05);
+        }
+
+        /* Drop Folder Button */
+        #dragDropFolderBtn {
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            border: 3px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        #dragDropFolderBtn:hover {
+            background: rgba(67, 160, 71, 1);
+            transform: scale(1.05);
+        }
+
+        #dragDropFolderBtn.drag-over {
+            background: rgba(33, 150, 243, 0.9);
+            border-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+
+        /* Drag-Drop Button */
+        .drag-drop-btn {
+            position: absolute;
+            top: 120px;
+            left: 20px;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            border: 3px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            display: none; /* Hidden by default */
+        }
+
+        .drag-drop-btn:hover {
+            background: rgba(67, 160, 71, 1);
+            transform: scale(1.05);
+        }
+
+        .drag-drop-btn.drag-over {
+            background: rgba(33, 150, 243, 0.9);
+            border-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+
+        /* Hidden file input */
+        #file_input {
+            display: none;
+        }
+
+        /* Navigation Input */
+        .nav-input-container {
+            position: absolute;
+            top: 170px;
+            left: 20px;
+            display: none; /* Hidden */
+            gap: 8px;
+            align-items: center;
+            z-index: 100;
+        }
+
+        /* Folder Path Input */
+        .folder-path-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .folder-path-input {
+            width: 250px;
+            padding: 10px 12px;
+            font-size: 13px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-weight: normal;
+            font-family: monospace;
+            transition: all 0.3s ease;
+        }
+
+        .folder-path-input:focus {
+            outline: none;
+            border-color: rgba(255, 165, 0, 0.9);
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .folder-path-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .load-folder-btn {
+            padding: 10px 16px;
+            background: rgba(255, 165, 0, 0.9);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+        }
+
+        .load-folder-btn:hover {
+            background: rgba(255, 140, 0, 1);
+            transform: scale(1.05);
+        }
+
+        .load-folder-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Font Size Controls */
+        .font-size-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Edit Mode Controls */
+        .edit-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .edit-btn, .save-btn, .cancel-btn, .save-all-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .edit-btn {
+            background: rgba(156, 39, 176, 0.9);
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: rgba(142, 36, 170, 1);
+            transform: scale(1.05);
+        }
+
+        .save-btn {
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: rgba(67, 160, 71, 1);
+            transform: scale(1.05);
+        }
+
+        .cancel-btn {
+            background: rgba(244, 67, 54, 0.9);
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: rgba(229, 57, 53, 1);
+            transform: scale(1.05);
+        }
+
+        .save-all-btn {
+            background: rgba(255, 152, 0, 0.9);
+            color: white;
+        }
+
+        .save-all-btn:hover {
+            background: rgba(245, 124, 0, 1);
+            transform: scale(1.05);
+        }
+
+        .save-all-btn:disabled {
+            background: rgba(158, 158, 158, 0.5);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Edit Textarea */
+        .gallery-preview-edit {
+            display: none;
+            width: 95%;
+            height: calc(100vh - 150px);
+            background: white;
+            color: #333;
+            padding: 40px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.6;
+            resize: none;
+            border: 3px solid rgba(156, 39, 176, 0.5);
+            box-sizing: border-box;
+        }
+
+        .gallery-preview-edit:focus {
+            outline: none;
+            border-color: rgba(156, 39, 176, 0.9);
+        }
+
+        /* Modified indicator for thumbnails */
+        .thumbnail.modified .thumbnail-caption::after {
+            content: " *";
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        .thumbnail.modified {
+            border-left: 3px solid #ff9800;
+        }
+
+        .font-size-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(33, 150, 243, 0.9);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .font-size-btn:hover {
+            background: rgba(25, 118, 210, 1);
+            transform: scale(1.05);
+        }
+
+        .font-size-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-input {
+            width: 80px;
+            padding: 10px 12px;
+            font-size: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-input:focus {
+            outline: none;
+            border-color: rgba(255, 165, 0, 0.9);
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-input.typing {
+            border-color: rgba(0, 255, 0, 0.7);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .nav-go-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 165, 0, 0.9);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-go-btn:hover {
+            background: rgba(255, 140, 0, 1);
+            transform: scale(1.1);
+        }
+
+        .nav-go-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-go-btn svg {
+            color: white;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #007acc;
+            font-size: 24px;
+        }
+
+        .modal-instructions {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #007acc;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .modal-instructions code {
+            background: #e3f2fd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: #d63384;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: #cc0000;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .reference-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .reference-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007acc;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+
+        .reference-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007acc;
+            min-width: 50px;
+        }
+
+        .reference-key {
+            font-family: monospace;
+            font-size: 14px;
+            color: #333;
+            flex-grow: 1;
+            margin: 0 15px;
+        }
+
+        .reference-go-btn {
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 6px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .reference-go-btn:hover {
+            background: #005a99;
+        }
+
+        .reference-go-btn:active {
+            transform: scale(0.95);
+        }
+
+        .reference-go-btn.clicked {
+            background: #28a745;
+        }
+
+        /* Scrollbar for modal */
+        .modal-body::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: #007acc;
+            border-radius: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: #005a99;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .gallery-section-headline {
+                font-size: 28px;
+                height: 10vh;
+            }
+
+            .gallery-preview-container {
+                height: 50vh;
+            }
+
+            .thumbnails-section {
+                height: 25vh;
+            }
+
+            .thumbnail {
+                width: 90px;
+                height: 60px;
+            }
+
+            .thumbnails-slider {
+                padding: 10px 50px;
+            }
+
+            .url-instructions {
+                position: relative;
+                top: auto;
+                right: auto;
+                max-width: 100%;
+                margin: 10px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .gallery-section-headline {
+                font-size: 20px;
+            }
+
+            .gallery-btn {
+                width: 48px;
+                height: 48px;
+            }
+
+            .gallery-btn svg {
+                width: 48px;
+                height: 48px;
+            }
+
+            .thumbnail {
+                width: 70px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="gallery">
+        <!-- Control Bar - All controls in one row -->
+        <div class="control-bar">
+            <button class="reference-btn" onclick="openModal()">📋 View Reference</button>
+
+            <!-- Edit Controls -->
+            <div class="edit-controls" id="editControls">
+                <button class="edit-btn" id="editBtn" onclick="enterEditMode()">✏️ Edit</button>
+                <button class="save-btn" id="saveBtn" onclick="saveCurrentFile()" style="display:none;">💾 Save</button>
+                <button class="cancel-btn" id="cancelBtn" onclick="cancelEditMode()" style="display:none;">✖ Cancel</button>
+            </div>
+
+            <!-- Clipboard A buttons -->
+            <button id="copyToABtn" style="background: #9c27b0; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold;">📋 Copy to A</button>
+            <button id="returnABtn" style="background: #673ab7; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold;">📤 Return A</button>
+            <button id="openTextviewer2Btn" style="background: #2196f3; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold;">🔗 Textviewer 2</button>
+
+            <!-- Drag-drop button for folders -->
+            <button id="dragDropFolderBtn" onclick="document.getElementById('folder_input').click()">
+                📂 Drop Folder Here
+            </button>
+
+            <!-- Folder Path Input (hidden - not used) -->
+            <div class="folder-path-container" style="display: none;">
+                <input type="text" class="folder-path-input" id="folderPathInput" placeholder="./ or imageGallery/images" title="Enter ./ for current directory or a relative path to folder">
+                <button class="load-folder-btn" id="loadFolderBtn" onclick="loadFolderPath()">📂 Load Folder</button>
+            </div>
+
+            <!-- Font Size Controls -->
+            <div class="font-size-controls">
+                <button class="font-size-btn" id="fontSizeDecrease" onclick="changeFontSize(-2)" title="Decrease font size">-</button>
+                <button class="font-size-btn" id="fontSizeIncrease" onclick="changeFontSize(2)" title="Increase font size">+</button>
+            </div>
+
+            <!-- Copy Text Button -->
+            <button class="copy-text-btn" id="copyTextBtn" onclick="copyTextContent()" style="background: #6c5ce7; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold;">📋 Copy Text</button>
+
+            <!-- Save All Edited Files -->
+            <button class="save-all-btn" id="saveAllBtn" onclick="saveAllEditedFiles()" disabled title="No edited files">📦 Save Edited (0)</button>
+
+            <!-- Make New File Button -->
+            <button id="makeNewFileBtn" style="background: #00bcd4; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold;">📄 New File</button>
+
+            <div class="url-instructions">
+                <div>Navigate directly: <code>?5</code> - Fifth image</div>
+            </div>
+        </div>
+
+        <!-- Hidden file input for individual files -->
+        <input type="file" id="file_input" accept="image/*,video/*,text/plain,.txt,.md" multiple style="display: none;">
+
+        <!-- Hidden file input for folders -->
+        <input type="file" id="folder_input" accept="image/*,video/*,text/plain,.txt,.md" webkitdirectory style="display: none;">
+
+        <!-- Drag-drop button for files (hidden) -->
+        <button class="drag-drop-btn" id="dragDropBtn" onclick="document.getElementById('file_input').click()">
+            📁 Drop Files Here
+        </button>
+
+        <!-- Navigation Input (Hidden) -->
+        <div class="nav-input-container">
+            <input type="number" class="nav-input" id="navInput" placeholder="Go to #" min="1">
+            <button class="nav-go-btn" id="navGoBtn" onclick="navigateToInput()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <div class="gallery-section-headline">Gallery</div>
+
+        <div class="gallery-preview-container">
+            <div class="gallery-preview-title"></div>
+            <img class="gallery-preview-image" src="" alt="Gallery Image">
+            <video class="gallery-preview-video" controls loop autoplay muted preload="metadata">
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="gallery-preview-text">Loading text...</div>
+            <div class="gallery-preview-markdown">Loading markdown...</div>
+            <textarea class="gallery-preview-edit" id="previewEdit" placeholder="Edit content here..."></textarea>
+            <div class="gallery-preview-divider">
+                <div class="divider-title"></div>
+                <div class="divider-subtitle"></div>
+            </div>
+
+            <button class="gallery-btn prev-btn" aria-label="Previous Image">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+                    <path d="M44 8 L20 32 L44 56" stroke="white" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+            <button class="gallery-btn next-btn" aria-label="Next Image">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+                    <path d="M20 8 L44 32 L20 56" stroke="white" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="thumbnails-section">
+            <div class="thumbnails-container">
+                <div class="thumbnails-slider">
+                    <!-- Thumbnails will be generated here by JavaScript -->
+                </div>
+
+                <button class="thumbnail-nav-btn thumbnail-prev-btn" aria-label="Scroll Thumbnails Left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1280 1792">
+                        <path fill="#fff" d="M1171 301L640 832l531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19L173 877q-19-19-19-45t19-45L915 45q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z" />
+                    </svg>
+                </button>
+
+                <button class="thumbnail-nav-btn thumbnail-next-btn" aria-label="Scroll Thumbnails Right">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1280 1792">
+                        <path fill="#fff" d="M1107 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45L275 45q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reference Modal -->
+    <div id="referenceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h2>Image Reference Guide</h2>
+                    <div class="modal-instructions">
+                        <strong>💡 Quick Navigation:</strong> Navigate directly using URL parameters like <code>?5</code> to jump to the fifth image
+                    </div>
+                </div>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="reference-list" id="referenceList">
+                    <!-- Generated by JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gallery Images Dictionary - Replace with your own images and videos
+        // Mix of images and videos - videos will be lazy loaded
+        const gallery_images_dict = {
+            'image1': "https://placehold.co/1080x606/777777/FFF?text=Picture1",
+            'video1': "https://www.dropbox.com/scl/fi/rdnbn2id47786c9enla2o/Shylock.mp4?rlkey=4pluvspopyzuryi75dmsic088&st=jmxk2rqr&raw=1",
+            'image2': "https://placehold.co/1080x606/888888/FFF?text=Picture2",
+            'image3': "https://placehold.co/1080x606/999999/FFF?text=Picture3",
+            'video2': "https://www.dropbox.com/scl/fi/i9096parwwsmkkhedbwc3/Lover-s-Complaint.mp4?rlkey=0nh036q9llk9t1az9v3z71pp8&st=o2mlkawd&raw=1",
+            'image4': "https://placehold.co/1080x606/666666/FFF?text=Picture4",
+            'image5': "https://placehold.co/1080x606/555555/FFF?text=Picture5",
+            'image6': "https://placehold.co/1080x606/444444/FFF?text=Picture6",
+            'image7': "https://placehold.co/1080x606/333333/FFF?text=Picture7"
+        };
+
+        // Convert dictionary to array of objects for easier iteration
+        // Can include dividers for sets
+        const gallery_images = Object.entries(gallery_images_dict).map(([key, url]) => {
+            if (url === 'DIVIDER') {
+                return {
+                    key: key,
+                    url: url,
+                    type: 'divider',
+                    isVideo: false,
+                    isText: false,
+                    isMarkdown: false
+                };
+            }
+            return {
+                key: key,
+                url: url,
+                type: isMarkdownUrl(url) ? 'markdown' : (isTextUrl(url) ? 'text' : (isVideoUrl(url) ? 'video' : 'image')),
+                isVideo: isVideoUrl(url),
+                isText: isTextUrl(url),
+                isMarkdown: isMarkdownUrl(url)
+            };
+        });
+
+        // DOM Elements
+        let currentIndex = 0;
+        // Map to store blob URLs for all images (including subdirectory images for markdown)
+        const imagePathToBlobUrl = {};
+        const previewImg = document.querySelector('.gallery-preview-image');
+        const previewVideo = document.querySelector('.gallery-preview-video');
+        const previewText = document.querySelector('.gallery-preview-text');
+        const previewMarkdown = document.querySelector('.gallery-preview-markdown');
+        const previewDivider = document.querySelector('.gallery-preview-divider');
+        const previewTitle = document.querySelector('.gallery-preview-title');
+        const thumbnailsSlider = document.querySelector('.thumbnails-slider');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const thumbnailPrevBtn = document.querySelector('.thumbnail-prev-btn');
+        const thumbnailNextBtn = document.querySelector('.thumbnail-next-btn');
+
+        // Helper function to detect if URL is a video
+        function isVideoUrl(url) {
+            const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv', '.m4v'];
+            const urlLower = url.toLowerCase();
+            return videoExtensions.some(ext => urlLower.includes(ext));
+        }
+
+        // Helper function to detect if URL is a text file
+        function isTextUrl(url) {
+            const urlLower = url.toLowerCase();
+            return urlLower.includes('.txt');
+        }
+
+        // Helper function to detect if URL is a markdown file
+        function isMarkdownUrl(url) {
+            const urlLower = url.toLowerCase();
+            return urlLower.includes('.md');
+        }
+
+        // Check URL parameters on page load
+        function checkUrlParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const keys = Array.from(urlParams.keys());
+
+            if (keys.length === 0) return;
+
+            const param = keys[0]; // Get first parameter
+
+            // Treat all URL parameters as folder paths and auto-load them
+            // This includes: ./, ., imageGallery, imageGallery/images, don_quixote, etc.
+            const folderPathInputElement = document.getElementById('folderPathInput');
+            if (folderPathInputElement) {
+                folderPathInputElement.value = param;
+            }
+            console.log(`URL parameter "${param}" detected as folder path. Auto-loading...`);
+            setTimeout(() => {
+                loadFolderPath();
+            }, 100);
+        }
+
+        // Generate Thumbnails
+        function generateThumbnails() {
+            gallery_images.forEach((imgData, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = 'thumbnail';
+                thumbnail.setAttribute('data-key', imgData.key);
+                if (index === currentIndex) thumbnail.classList.add('active');
+
+                // Create wrapper for the image/video content
+                const wrapper = document.createElement('div');
+                wrapper.className = 'thumbnail-image-wrapper';
+
+                if (imgData.type === 'divider') {
+                    // For divider thumbnails
+                    thumbnail.classList.add('thumbnail-divider');
+                    const placeholder = document.createElement('div');
+                    placeholder.style.width = '100%';
+                    placeholder.style.height = '100%';
+                    placeholder.style.display = 'flex';
+                    placeholder.style.alignItems = 'center';
+                    placeholder.style.justifyContent = 'center';
+                    placeholder.style.color = 'white';
+                    placeholder.style.fontSize = '11px';
+                    placeholder.style.fontWeight = 'bold';
+                    placeholder.style.textAlign = 'center';
+                    placeholder.style.padding = '5px';
+                    placeholder.textContent = imgData.key;
+                    wrapper.appendChild(placeholder);
+                } else if (imgData.isMarkdown) {
+                    // For markdown file thumbnails, create a placeholder with MD label
+                    const placeholder = document.createElement('div');
+                    placeholder.style.width = '100%';
+                    placeholder.style.height = '100%';
+                    placeholder.style.background = 'rgba(100,150,255,0.9)';
+                    placeholder.style.display = 'flex';
+                    placeholder.style.alignItems = 'center';
+                    placeholder.style.justifyContent = 'center';
+                    placeholder.style.color = 'white';
+                    placeholder.style.fontSize = '14px';
+                    placeholder.style.fontWeight = 'bold';
+                    placeholder.textContent = 'MD';
+                    wrapper.appendChild(placeholder);
+                } else if (imgData.isText) {
+                    // For text file thumbnails, create a placeholder with TXT label
+                    const placeholder = document.createElement('div');
+                    placeholder.style.width = '100%';
+                    placeholder.style.height = '100%';
+                    placeholder.style.background = 'rgba(255,255,255,0.9)';
+                    placeholder.style.display = 'flex';
+                    placeholder.style.alignItems = 'center';
+                    placeholder.style.justifyContent = 'center';
+                    placeholder.style.color = '#333';
+                    placeholder.style.fontSize = '14px';
+                    placeholder.style.fontWeight = 'bold';
+                    placeholder.textContent = 'TXT';
+                    wrapper.appendChild(placeholder);
+                } else if (imgData.isVideo) {
+                    // For video thumbnails, create a placeholder with video icon
+                    const placeholder = document.createElement('div');
+                    placeholder.style.width = '100%';
+                    placeholder.style.height = '100%';
+                    placeholder.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                    placeholder.style.display = 'flex';
+                    placeholder.style.alignItems = 'center';
+                    placeholder.style.justifyContent = 'center';
+                    placeholder.style.color = 'white';
+                    placeholder.style.fontSize = '24px';
+                    placeholder.innerHTML = '▶️';
+                    wrapper.appendChild(placeholder);
+                } else {
+                    // Create img element for thumbnail
+                    const img = document.createElement('img');
+                    img.src = imgData.url;
+                    img.alt = imgData.key;
+                    wrapper.appendChild(img);
+                }
+
+                thumbnail.appendChild(wrapper);
+
+                // Add caption with number and key name
+                const caption = document.createElement('div');
+                caption.className = 'thumbnail-caption';
+                caption.textContent = imgData.key;
+                thumbnail.appendChild(caption);
+
+                thumbnailsSlider.appendChild(thumbnail);
+
+                thumbnail.addEventListener('click', () => {
+                    changeImage(index);
+                });
+            });
+        }
+
+        // Change Main Image
+        function changeImage(index) {
+            currentIndex = index;
+            const currentItem = gallery_images[currentIndex];
+            const currentMedia = currentItem.url;
+            const isDivider = currentItem.type === 'divider';
+            const isVideo = currentItem.isVideo;
+            const isText = currentItem.isText;
+            const isMarkdown = currentItem.isMarkdown || currentItem.type === 'markdown';
+
+            console.log('changeImage:', { index, type: currentItem.type, isMarkdown, url: currentMedia });
+
+            // Always pause video first to prevent play/pause conflicts
+            previewVideo.pause();
+
+            if (isDivider) {
+                // Hide all, show divider
+                previewImg.style.display = 'none';
+                previewVideo.style.display = 'none';
+                previewText.style.display = 'none';
+                previewMarkdown.style.display = 'none';
+                previewDivider.style.display = 'flex';
+
+                // Update divider content
+                const dividerTitle = previewDivider.querySelector('.divider-title');
+                const dividerSubtitle = previewDivider.querySelector('.divider-subtitle');
+                dividerTitle.textContent = currentItem.key;
+
+                // Count items in this set
+                let itemCount = 0;
+                for (let i = index + 1; i < gallery_images.length && gallery_images[i].type !== 'divider'; i++) {
+                    itemCount++;
+                }
+                dividerSubtitle.textContent = `${itemCount} item${itemCount !== 1 ? 's' : ''}`;
+            } else if (isMarkdown) {
+                // Hide all except markdown
+                previewImg.style.display = 'none';
+                previewVideo.style.display = 'none';
+                previewText.style.display = 'none';
+                previewDivider.style.display = 'none';
+                previewMarkdown.style.display = 'block';
+                previewMarkdown.style.opacity = '0';
+                previewMarkdown.textContent = 'Loading markdown...';
+
+                // Fetch and display markdown file content
+                // Get the base directory of the markdown file for relative image paths
+                const mdBasePath = currentMedia.substring(0, currentMedia.lastIndexOf('/') + 1);
+
+                console.log('Fetching markdown from:', currentMedia);
+
+                // Helper function to render markdown content
+                const renderMarkdown = (text) => {
+                        // Preprocess markdown to fix image paths with spaces
+                        // marked.js has issues parsing image syntax with spaces in filenames
+                        const processedText = text.replace(/!\[(.*?)\]\(([^)]+)\)/g, (match, alt, path) => {
+                            // URL-encode spaces and other special chars in the path
+                            const encodedPath = path.replace(/ /g, '%20');
+                            return `![${alt}](${encodedPath})`;
+                        });
+
+                        // Parse markdown to HTML
+                        const htmlContent = marked.parse(processedText);
+
+                        // Add title before content
+                        const titleHtml = `<div class="content-title">${currentItem.key}</div>`;
+                        previewMarkdown.innerHTML = titleHtml + htmlContent;
+
+                        console.log('Number of img tags found:', previewMarkdown.querySelectorAll('img').length);
+
+                        // Fix relative image paths
+                        previewMarkdown.querySelectorAll('img').forEach((img) => {
+                            const src = img.getAttribute('src');
+                            // Decode URL-encoded path for lookup
+                            const decodedSrc = decodeURIComponent(src);
+
+                            // Only fix relative paths (not absolute URLs or data URIs)
+                            if (src && !src.startsWith('http') && !src.startsWith('data:') && !src.startsWith('/') && !src.startsWith('blob:')) {
+                                // Handle ./path or just path
+                                const cleanSrc = decodedSrc.startsWith('./') ? decodedSrc.substring(2) : decodedSrc;
+
+                                // Check if we have a blob URL for this image (from folder upload)
+                                if (imagePathToBlobUrl[cleanSrc]) {
+                                    img.src = imagePathToBlobUrl[cleanSrc];
+                                    console.log(`✓ Resolved image from blob map: ${cleanSrc}`);
+                                } else if (imagePathToBlobUrl[decodedSrc]) {
+                                    img.src = imagePathToBlobUrl[decodedSrc];
+                                    console.log(`✓ Resolved image from blob map (decoded): ${decodedSrc}`);
+                                } else {
+                                    // Fall back to relative path from markdown file location
+                                    img.src = mdBasePath + cleanSrc;
+                                    console.log(`⚠ Using relative path for image: ${mdBasePath + cleanSrc}`);
+                                }
+                            }
+                        });
+
+                        // Apply syntax highlighting to code blocks
+                        previewMarkdown.querySelectorAll('pre code').forEach((block) => {
+                            hljs.highlightElement(block);
+                        });
+
+                        previewMarkdown.style.opacity = '1';
+                };
+
+                // Check if we have edited content for this file
+                if (editedFiles[index]) {
+                    // Use edited content
+                    renderMarkdown(editedFiles[index].content);
+                } else {
+                    // Fetch from blob URL
+                    fetch(currentMedia)
+                        .then(response => response.text())
+                        .then(text => {
+                            renderMarkdown(text);
+                        })
+                        .catch(error => {
+                            previewMarkdown.textContent = 'Error loading markdown file: ' + error.message;
+                            previewMarkdown.style.opacity = '1';
+                        });
+                }
+            } else if (isText) {
+                // Hide all except text
+                previewImg.style.display = 'none';
+                previewVideo.style.display = 'none';
+                previewDivider.style.display = 'none';
+                previewMarkdown.style.display = 'none';
+                previewText.style.display = 'block';
+                previewText.style.opacity = '0';
+                previewText.textContent = 'Loading text...';
+
+                // Check if we have edited content for this file
+                if (editedFiles[index]) {
+                    // Use edited content
+                    const title = `${currentItem.key}\n${'='.repeat(50)}\n\n`;
+                    previewText.textContent = title + editedFiles[index].content;
+                    previewText.style.opacity = '1';
+                } else {
+                    // Fetch and display text file content
+                    fetch(currentMedia)
+                        .then(response => response.text())
+                        .then(text => {
+                            // Add title before content
+                            const title = `${currentItem.key}\n${'='.repeat(50)}\n\n`;
+                            previewText.textContent = title + text;
+                            previewText.style.opacity = '1';
+                        })
+                        .catch(error => {
+                            previewText.textContent = 'Error loading text file: ' + error.message;
+                            previewText.style.opacity = '1';
+                        });
+                }
+            } else if (isVideo) {
+                // Hide all except video
+                previewImg.style.display = 'none';
+                previewText.style.display = 'none';
+                previewMarkdown.style.display = 'none';
+                previewDivider.style.display = 'none';
+                previewVideo.style.display = 'block';
+                previewVideo.style.opacity = '0';
+
+                setTimeout(() => {
+                    const source = previewVideo.querySelector('source');
+                    source.src = currentMedia;
+
+                    // Dynamically set the correct MIME type based on file extension
+                    const extension = currentMedia.toLowerCase().split('.').pop().split('?')[0];
+                    const mimeTypes = {
+                        'mp4': 'video/mp4',
+                        'webm': 'video/webm',
+                        'ogg': 'video/ogg',
+                        'mov': 'video/quicktime',
+                        'avi': 'video/x-msvideo',
+                        'mkv': 'video/x-matroska',
+                        'm4v': 'video/x-m4v'
+                    };
+                    source.type = mimeTypes[extension] || 'video/mp4';
+
+                    console.log(`🎥 Loading video: ${currentMedia}`);
+                    console.log(`   Extension: ${extension}`);
+                    console.log(`   MIME type: ${source.type}`);
+
+                    // Add comprehensive error handling
+                    previewVideo.onerror = function(e) {
+                        console.error('❌ Video error:', e);
+                        console.error('   Error code:', previewVideo.error?.code);
+                        console.error('   Error message:', previewVideo.error?.message);
+                        console.error('   Network state:', previewVideo.networkState);
+                        console.error('   Ready state:', previewVideo.readyState);
+                    };
+
+                    previewVideo.onloadstart = function() {
+                        console.log('📡 Video load started');
+                    };
+
+                    previewVideo.onloadedmetadata = function() {
+                        console.log('✓ Metadata loaded');
+                        console.log('   Duration:', previewVideo.duration);
+                        console.log('   Video dimensions:', previewVideo.videoWidth, 'x', previewVideo.videoHeight);
+                    };
+
+                    previewVideo.oncanplay = function() {
+                        console.log('✓ Video can play');
+                    };
+
+                    previewVideo.oncanplaythrough = function() {
+                        console.log('✓ Video can play through');
+                    };
+
+                    previewVideo.load(); // Lazy load the video only when navigating to it
+
+                    // Wait for metadata to load before playing
+                    previewVideo.addEventListener('loadedmetadata', function playWhenReady() {
+                        // Remove listener after first use to prevent duplicates
+                        previewVideo.removeEventListener('loadedmetadata', playWhenReady);
+
+                        // Attempt to play and handle the promise
+                        const playPromise = previewVideo.play();
+                        if (playPromise !== undefined) {
+                            playPromise
+                                .then(() => {
+                                    console.log('✓ Video playing successfully');
+                                })
+                                .catch(error => {
+                                    console.warn('⚠️ Video play interrupted:', error);
+                                });
+                        }
+                    });
+
+                    previewVideo.style.opacity = '1';
+                }, 150);
+            } else {
+                // Hide all except image
+                previewVideo.style.display = 'none';
+                previewText.style.display = 'none';
+                previewMarkdown.style.display = 'none';
+                previewDivider.style.display = 'none';
+                previewImg.style.display = 'block';
+                previewImg.style.opacity = '0';
+
+                setTimeout(() => {
+                    previewImg.src = currentMedia;
+                    previewImg.style.opacity = '1';
+                }, 150);
+            }
+
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === currentIndex);
+            });
+
+            // Scroll thumbnail into view
+            scrollThumbnailIntoView(currentIndex);
+        }
+
+        // Update URL parameter to reflect current folder path or image index
+        function updateUrlParameter(index) {
+            // If we have a folder path loaded, keep it in the URL
+            const folderPathInputElement = document.getElementById('folderPathInput');
+            const loadedFolderPath = folderPathInputElement ? folderPathInputElement.value.trim() : '';
+            if (loadedFolderPath) {
+                const newUrl = `${window.location.pathname}?${encodeURIComponent(loadedFolderPath)}`;
+                window.history.replaceState({}, '', newUrl);
+            } else {
+                // Fall back to numeric index if no folder path
+                const newUrl = `${window.location.pathname}?${index + 1}`;
+                window.history.replaceState({}, '', newUrl);
+            }
+        }
+
+        // Scroll thumbnail into view (vertical sidebar)
+        function scrollThumbnailIntoView(index) {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            if (thumbnails[index]) {
+                thumbnails[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Navigate to Previous Image
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + gallery_images.length) % gallery_images.length;
+            changeImage(currentIndex);
+        }
+
+        // Navigate to Next Image
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % gallery_images.length;
+            changeImage(currentIndex);
+        }
+
+        // Thumbnail Carousel Navigation
+        function scrollThumbnails(direction) {
+            const scrollAmount = 250;
+            const container = thumbnailsSlider.parentElement;
+            const maxScroll = thumbnailsSlider.scrollWidth - container.offsetWidth;
+
+            // Get current transform value
+            const currentTransform = thumbnailsSlider.style.transform || 'translateX(0px)';
+            const currentScroll = parseFloat(currentTransform.match(/-?\d+\.?\d*/)[0]) || 0;
+
+            let newScroll;
+            if (direction === 'prev') {
+                newScroll = Math.max(0, currentScroll - scrollAmount);
+            } else {
+                newScroll = Math.min(maxScroll, currentScroll + scrollAmount);
+            }
+
+            thumbnailsSlider.style.transform = `translateX(-${newScroll}px)`;
+            updateThumbnailNavButtons();
+        }
+
+        // Update thumbnail navigation button states
+        function updateThumbnailNavButtons() {
+            const currentTransform = thumbnailsSlider.style.transform || 'translateX(0px)';
+            const currentScroll = parseFloat(currentTransform.match(/-?\d+\.?\d*/)[0]) || 0;
+            const container = thumbnailsSlider.parentElement;
+            const maxScroll = thumbnailsSlider.scrollWidth - container.offsetWidth;
+
+            // Disable/enable buttons based on scroll position
+            if (currentScroll <= 0) {
+                thumbnailPrevBtn.classList.add('disabled');
+            } else {
+                thumbnailPrevBtn.classList.remove('disabled');
+            }
+
+            if (currentScroll >= maxScroll - 10) { // -10 for tolerance
+                thumbnailNextBtn.classList.add('disabled');
+            } else {
+                thumbnailNextBtn.classList.remove('disabled');
+            }
+        }
+
+        // Event Listeners
+        prevBtn.addEventListener('click', prevImage);
+        nextBtn.addEventListener('click', nextImage);
+        thumbnailPrevBtn.addEventListener('click', () => scrollThumbnails('prev'));
+        thumbnailNextBtn.addEventListener('click', () => scrollThumbnails('next'));
+
+        // ============================================
+        // NUMERIC KEYCODE NAVIGATION (0-9)
+        // ============================================
+
+        let numericBuffer = '';
+        let numericTimeout = null;
+        const NUMERIC_DELAY = 1500; // 1.5 seconds delay
+
+        function handleNumericNavigation(digit) {
+            // Add digit to buffer
+            numericBuffer += digit;
+
+            // Update input field to show what's being typed
+            navInput.value = numericBuffer;
+            navInput.classList.add('typing');
+
+            // Clear previous timeout
+            if (numericTimeout) {
+                clearTimeout(numericTimeout);
+            }
+
+            // Set new timeout
+            numericTimeout = setTimeout(() => {
+                const targetNumber = parseInt(numericBuffer);
+
+                if (!isNaN(targetNumber) && targetNumber >= 1 && targetNumber <= gallery_images.length) {
+                    changeImage(targetNumber - 1); // Convert to 0-based index
+                    navInput.style.borderColor = 'rgba(0, 255, 0, 0.7)';
+                } else {
+                    // Invalid number - show red border
+                    navInput.style.borderColor = 'rgba(255, 0, 0, 0.8)';
+                }
+
+                // Clear buffer and input after short delay
+                setTimeout(() => {
+                    numericBuffer = '';
+                    navInput.value = '';
+                    navInput.classList.remove('typing');
+                    navInput.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                }, 500);
+            }, NUMERIC_DELAY);
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            // Check if user is typing in an input field
+            const isInputFocused = document.activeElement.tagName === 'INPUT' ||
+                                   document.activeElement.tagName === 'TEXTAREA';
+
+            // Arrow key navigation
+            if (e.key === 'ArrowLeft') {
+                prevImage();
+            } else if (e.key === 'ArrowRight' || (e.key === 'Enter' && !isInputFocused)) {
+                // Enter (when not in input) also advances to next image
+                if (e.key === 'Enter' && !isInputFocused) {
+                    e.preventDefault(); // Prevent default behavior
+                }
+                if (e.key !== 'Enter' || !isInputFocused) {
+                    nextImage();
+                }
+            }
+            // Numeric key navigation (0-9)
+            else if (!isInputFocused && /^[0-9]$/.test(e.key)) {
+                e.preventDefault(); // Prevent default behavior
+                handleNumericNavigation(e.key);
+            }
+        });
+
+        // Initialize Gallery
+        checkUrlParameters(); // Check URL first to set the correct starting index
+        generateThumbnails();
+        changeImage(currentIndex); // This will display the image from URL parameter or default
+        updateThumbnailNavButtons();
+
+        // Update nav buttons on window resize
+        window.addEventListener('resize', updateThumbnailNavButtons);
+
+        // ============================================
+        // DRAG-AND-DROP FILE HANDLING
+        // ============================================
+
+        // Prevent browser from opening dropped files in new tab
+        window.addEventListener('dragover', function(e) {
+            e.preventDefault();
+        }, false);
+
+        window.addEventListener('drop', function(e) {
+            e.preventDefault();
+        }, false);
+
+        const dragDropBtn = document.getElementById('dragDropBtn');
+        const dragDropFolderBtn = document.getElementById('dragDropFolderBtn');
+        const fileInput = document.getElementById('file_input');
+        const folderInput = document.getElementById('folder_input');
+
+        // Prevent default drag behaviors on the buttons
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dragDropBtn.addEventListener(eventName, preventDefaults, false);
+            dragDropFolderBtn.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        // Highlight buttons when dragging over them
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dragDropBtn.addEventListener(eventName, () => {
+                dragDropBtn.classList.add('drag-over');
+            }, false);
+            dragDropFolderBtn.addEventListener(eventName, () => {
+                dragDropFolderBtn.classList.add('drag-over');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dragDropBtn.addEventListener(eventName, () => {
+                dragDropBtn.classList.remove('drag-over');
+            }, false);
+            dragDropFolderBtn.addEventListener(eventName, () => {
+                dragDropFolderBtn.classList.remove('drag-over');
+            }, false);
+        });
+
+        // Handle dropped files
+        dragDropBtn.addEventListener('drop', handleDrop, false);
+        dragDropFolderBtn.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+
+        // Handle files selected via file input
+        fileInput.addEventListener('change', function(e) {
+            const files = e.target.files;
+            handleFiles(files);
+        });
+
+        // Handle folder selected via folder input
+        folderInput.addEventListener('change', function(e) {
+            const files = e.target.files;
+            handleFilesWithSets(files);
+        });
+
+        // Process uploaded files (simple mode - no sets)
+        function handleFiles(files) {
+            const filesArray = Array.from(files);
+
+            // Filter for images, videos, text files, and markdown files
+            const validFiles = filesArray.filter(file => {
+                const fileName = file.name.toLowerCase();
+                return fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') ||
+                       fileName.endsWith('.mp4') || fileName.endsWith('.webm') || fileName.endsWith('.ogg') ||
+                       fileName.endsWith('.mov') || fileName.endsWith('.avi') || fileName.endsWith('.mkv') ||
+                       fileName.endsWith('.m4v') || fileName.endsWith('.txt') || fileName.endsWith('.md');
+            });
+
+            if (validFiles.length === 0) {
+                alert('Please upload only image, video, text, or markdown files');
+                return;
+            }
+
+            // Clear existing gallery
+            gallery_images.length = 0;
+            Object.keys(gallery_images_dict).forEach(key => delete gallery_images_dict[key]);
+
+            // Add new files to gallery
+            validFiles.forEach((file, index) => {
+                const objectURL = URL.createObjectURL(file);
+                const fileName = file.name.replace(/\.(png|jpg|jpeg|mp4|webm|ogg|mov|avi|mkv|m4v|txt|md)$/i, ''); // Remove extension
+                const key = `file${index + 1}_${fileName}`;
+                const isVideo = file.type.startsWith('video/');
+                const isText = file.type === 'text/plain' || file.name.toLowerCase().endsWith('.txt');
+                const isMarkdown = file.name.toLowerCase().endsWith('.md');
+
+                gallery_images_dict[key] = objectURL;
+                gallery_images.push({
+                    key: key,
+                    url: objectURL,
+                    type: isMarkdown ? 'markdown' : (isText ? 'text' : (isVideo ? 'video' : 'image')),
+                    isVideo: isVideo,
+                    isText: isText,
+                    isMarkdown: isMarkdown
+                });
+            });
+
+            // Reset gallery
+            currentIndex = 0;
+
+            // Clear and regenerate thumbnails
+            thumbnailsSlider.innerHTML = '';
+            generateThumbnails();
+
+            // Display first image/video
+            changeImage(currentIndex);
+            updateThumbnailNavButtons();
+
+            // Update button text to show files loaded
+            dragDropBtn.textContent = `✓ ${validFiles.length} Files Loaded`;
+            dragDropBtn.style.background = 'rgba(76, 175, 80, 1)';
+
+            setTimeout(() => {
+                dragDropBtn.textContent = '📁 Drop Files Here';
+                dragDropBtn.style.background = 'rgba(76, 175, 80, 0.9)';
+            }, 2000);
+        }
+
+        // Process uploaded files with set organization (for folder upload)
+        function handleFilesWithSets(files) {
+            const filesArray = Array.from(files);
+
+            // Filter for images, videos, text files, and markdown files
+            const validFiles = filesArray.filter(file => {
+                const fileName = file.name.toLowerCase();
+                return fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') ||
+                       fileName.endsWith('.mp4') || fileName.endsWith('.webm') || fileName.endsWith('.ogg') ||
+                       fileName.endsWith('.mov') || fileName.endsWith('.avi') || fileName.endsWith('.mkv') ||
+                       fileName.endsWith('.m4v') || fileName.endsWith('.txt') || fileName.endsWith('.md');
+            });
+
+            if (validFiles.length === 0) {
+                alert('Please upload only image, video, text, or markdown files');
+                return;
+            }
+
+            // Organize files by subdirectory (supports multiple depth levels)
+            const filesByFolder = {};
+            const rootFiles = [];
+            const MAX_DRAG_DROP_DEPTH = 2; // Limit depth for drag-and-drop
+
+            validFiles.forEach(file => {
+                const relativePath = file.webkitRelativePath || file.name;
+                const pathParts = relativePath.split('/');
+                // pathParts[0] is the root folder name, pathParts[1...] are subfolders/file
+
+                if (pathParts.length === 1) {
+                    // File with no path (shouldn't happen with folder upload)
+                    rootFiles.push(file);
+                } else if (pathParts.length === 2) {
+                    // Path: rootFolder/file.ext - file in root of selected folder
+                    rootFiles.push(file);
+                } else if (pathParts.length >= 3) {
+                    // Path: rootFolder/subfolder/file.ext or deeper
+                    // Check depth limit (pathParts.length - 2 gives depth from root folder's perspective)
+                    const depth = pathParts.length - 2; // e.g., rootFolder/sub/file.ext = depth 1
+
+                    if (depth <= MAX_DRAG_DROP_DEPTH) {
+                        // Get the full subfolder path (excluding root folder and filename)
+                        const subfolderPath = pathParts.slice(1, -1).join('/');
+
+                        if (!filesByFolder[subfolderPath]) {
+                            filesByFolder[subfolderPath] = [];
+                        }
+                        filesByFolder[subfolderPath].push(file);
+
+                        // Also store images for markdown references
+                        const fileName = file.name.toLowerCase();
+                        if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') ||
+                            fileName.endsWith('.gif') || fileName.endsWith('.webp') || fileName.endsWith('.svg')) {
+                            const relativePathFromRoot = pathParts.slice(1).join('/');
+                            const blobUrl = URL.createObjectURL(file);
+                            imagePathToBlobUrl[relativePathFromRoot] = blobUrl;
+                            imagePathToBlobUrl['./' + relativePathFromRoot] = blobUrl;
+                            console.log(`Stored subdirectory image for markdown: ${relativePathFromRoot}`);
+                        }
+                    } else {
+                        console.log(`Skipping file beyond max depth (${MAX_DRAG_DROP_DEPTH}): ${relativePath}`);
+                    }
+                }
+            });
+
+            // Clear existing gallery
+            gallery_images.length = 0;
+            Object.keys(gallery_images_dict).forEach(key => delete gallery_images_dict[key]);
+
+            let itemIndex = 0;
+            let totalFiles = 0;
+            const folderNames = Object.keys(filesByFolder).sort((a, b) =>
+                a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' })
+            );
+
+            // Add sets for each folder
+            folderNames.forEach(folderName => {
+                const folderFiles = filesByFolder[folderName];
+
+                // Sort files naturally
+                folderFiles.sort((a, b) => {
+                    const aName = a.name || a.webkitRelativePath.split('/').pop();
+                    const bName = b.name || b.webkitRelativePath.split('/').pop();
+                    return aName.localeCompare(bName, undefined, { numeric: true, sensitivity: 'base' });
+                });
+
+                // Add divider for this set
+                const dividerKey = folderName;
+                gallery_images_dict[dividerKey] = 'DIVIDER';
+                gallery_images.push({
+                    key: dividerKey,
+                    url: 'DIVIDER',
+                    type: 'divider',
+                    isVideo: false,
+                    isText: false
+                });
+
+                // Add files from this folder
+                folderFiles.forEach(file => {
+                    const objectURL = URL.createObjectURL(file);
+                    const fileName = file.name.replace(/\.(png|jpg|jpeg|mp4|webm|ogg|mov|avi|mkv|m4v|txt|md)$/i, '');
+                    const key = `${++itemIndex}_${fileName}`;
+                    const isVideo = file.type.startsWith('video/');
+                    const isText = file.type === 'text/plain' || file.name.toLowerCase().endsWith('.txt');
+                    const isMarkdown = file.name.toLowerCase().endsWith('.md');
+
+                    gallery_images_dict[key] = objectURL;
+                    gallery_images.push({
+                        key: key,
+                        url: objectURL,
+                        type: isMarkdown ? 'markdown' : (isText ? 'text' : (isVideo ? 'video' : 'image')),
+                        isVideo: isVideo,
+                        isText: isText,
+                        isMarkdown: isMarkdown
+                    });
+                    totalFiles++;
+                });
+            });
+
+            // Add root files if any (and if there are folders)
+            if (rootFiles.length > 0) {
+                if (folderNames.length > 0) {
+                    // Add divider for root files
+                    const dividerKey = 'Root Files';
+                    gallery_images_dict[dividerKey] = 'DIVIDER';
+                    gallery_images.push({
+                        key: dividerKey,
+                        url: 'DIVIDER',
+                        type: 'divider',
+                        isVideo: false,
+                        isText: false
+                    });
+                }
+
+                rootFiles.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+
+                rootFiles.forEach(file => {
+                    const objectURL = URL.createObjectURL(file);
+                    const fileName = file.name.replace(/\.(png|jpg|jpeg|mp4|webm|ogg|mov|avi|mkv|m4v|txt|md)$/i, '');
+                    const key = `${++itemIndex}_${fileName}`;
+                    const isVideo = file.type.startsWith('video/');
+                    const isText = file.type === 'text/plain' || file.name.toLowerCase().endsWith('.txt');
+                    const isMarkdown = file.name.toLowerCase().endsWith('.md');
+
+                    gallery_images_dict[key] = objectURL;
+                    gallery_images.push({
+                        key: key,
+                        url: objectURL,
+                        type: isMarkdown ? 'markdown' : (isText ? 'text' : (isVideo ? 'video' : 'image')),
+                        isVideo: isVideo,
+                        isText: isText,
+                        isMarkdown: isMarkdown
+                    });
+                    totalFiles++;
+                });
+            }
+
+            // Reset gallery
+            currentIndex = 0;
+
+            // Clear and regenerate thumbnails
+            thumbnailsSlider.innerHTML = '';
+            generateThumbnails();
+
+            // Display first item
+            changeImage(currentIndex);
+            updateThumbnailNavButtons();
+
+            // Update button text to show files loaded
+            const setsCount = folderNames.length + (rootFiles.length > 0 && folderNames.length > 0 ? 1 : 0);
+            const displayText = setsCount > 0 ? `✓ ${totalFiles} Files (${setsCount} Sets)` : `✓ ${totalFiles} Files Loaded`;
+            dragDropFolderBtn.textContent = displayText;
+            dragDropFolderBtn.style.background = 'rgba(76, 175, 80, 1)';
+
+            setTimeout(() => {
+                dragDropFolderBtn.textContent = '📂 Drop Folder Here';
+                dragDropFolderBtn.style.background = 'rgba(76, 175, 80, 0.9)';
+            }, 2000);
+
+            console.log(`✓ Loaded ${totalFiles} files (${setsCount} sets)`);
+        }
+
+        // Modal Functions
+        function openModal() {
+            const modal = document.getElementById('referenceModal');
+            const referenceList = document.getElementById('referenceList');
+
+            // Clear existing content
+            referenceList.innerHTML = '';
+
+            // Generate reference list
+            gallery_images.forEach((imgData, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'reference-item';
+
+                const number = document.createElement('span');
+                number.className = 'reference-number';
+                number.textContent = `${index + 1}`;
+
+                const key = document.createElement('span');
+                key.className = 'reference-key';
+
+                // Determine file type/extension
+                let fileType = '';
+                if (imgData.type === 'divider') {
+                    fileType = '[DIVIDER]';
+                } else if (imgData.isMarkdown) {
+                    fileType = '.md';
+                } else if (imgData.isText) {
+                    fileType = '.txt';
+                } else if (imgData.isVideo) {
+                    // Try to extract actual extension from URL
+                    const videoMatch = imgData.url.match(/\.(mp4|webm|ogg|mov|avi|mkv|m4v)/i);
+                    fileType = videoMatch ? videoMatch[0].toLowerCase() : '.mp4';
+                } else {
+                    // Try to extract actual extension from URL for images
+                    const imageMatch = imgData.url.match(/\.(jpg|jpeg|png|gif|bmp|webp|tiff|svg)/i);
+                    fileType = imageMatch ? imageMatch[0].toLowerCase() : '.jpg';
+                }
+
+                key.textContent = `${imgData.key} ${fileType}`;
+
+                const goBtn = document.createElement('button');
+                goBtn.className = 'reference-go-btn';
+                goBtn.textContent = 'Go';
+                goBtn.onclick = function(e) {
+                    e.stopPropagation();
+                    goBtn.textContent = '✓';
+                    goBtn.classList.add('clicked');
+                    changeImage(index);
+                    setTimeout(() => {
+                        closeModal();
+                    }, 500);
+                };
+
+                // Click to navigate
+                listItem.onclick = function() {
+                    goBtn.textContent = '✓';
+                    goBtn.classList.add('clicked');
+                    changeImage(index);
+                    setTimeout(() => {
+                        closeModal();
+                    }, 500);
+                };
+                listItem.style.cursor = 'pointer';
+
+                listItem.appendChild(number);
+                listItem.appendChild(key);
+                listItem.appendChild(goBtn);
+                referenceList.appendChild(listItem);
+            });
+
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('referenceModal');
+            modal.classList.remove('show');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('referenceModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // ============================================
+        // NAVIGATION INPUT FUNCTIONALITY
+        // ============================================
+
+        const navInput = document.getElementById('navInput');
+
+        // Navigate to input number
+        function navigateToInput() {
+            const inputValue = parseInt(navInput.value);
+
+            if (isNaN(inputValue) || inputValue < 1) {
+                navInput.style.borderColor = 'rgba(255, 0, 0, 0.8)';
+                setTimeout(() => {
+                    navInput.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                }, 500);
+                return;
+            }
+
+            const targetIndex = inputValue - 1; // Convert to 0-based index
+
+            if (targetIndex >= 0 && targetIndex < gallery_images.length) {
+                changeImage(targetIndex);
+                navInput.value = ''; // Clear input after navigation
+                navInput.blur(); // Remove focus
+            } else {
+                // Invalid index
+                navInput.style.borderColor = 'rgba(255, 0, 0, 0.8)';
+                setTimeout(() => {
+                    navInput.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                }, 500);
+            }
+        }
+
+        // Allow Enter key to navigate
+        navInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                navigateToInput();
+            }
+        });
+
+        // Update max attribute when gallery changes
+        navInput.addEventListener('focus', function() {
+            navInput.setAttribute('max', gallery_images.length);
+        });
+
+        // ============================================
+        // FOLDER PATH LOADING (Server Mode)
+        // ============================================
+
+        const folderPathInput = document.getElementById('folderPathInput');
+
+        // Common image, video, text, and markdown extensions
+        const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'tiff', 'svg'];
+        const videoExtensions = ['mp4', 'webm', 'ogg', 'mov', 'avi', 'mkv', 'm4v'];
+        const textExtensions = ['txt'];
+        const markdownExtensions = ['md'];
+        const allExtensions = [...imageExtensions, ...videoExtensions, ...textExtensions, ...markdownExtensions];
+
+        // Max depth for recursive scanning (limited for text viewer)
+        const MAX_DEPTH = 3;
+
+        // Recursively scan a directory and return all files with their paths
+        async function scanDirectory(path, relativePath = '', depth = 0) {
+            const results = { files: [], subdirs: [] };
+
+            // Stop if we've reached max depth
+            if (depth > MAX_DEPTH) {
+                console.warn(`Max depth (${MAX_DEPTH}) reached at: ${path}`);
+                return results;
+            }
+
+            try {
+                const response = await fetch(path);
+                if (!response.ok) return results;
+
+                const html = await response.text();
+                const isDirectoryListing = html.includes('Index of') || html.includes('Directory listing for');
+                if (!isDirectoryListing) return results;
+
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const links = Array.from(doc.querySelectorAll('a'));
+
+                for (const link of links) {
+                    const href = link.getAttribute('href');
+                    if (!href || href === '../' || href.startsWith('?')) continue;
+
+                    const isDir = href.endsWith('/') || !href.includes('.');
+
+                    if (isDir) {
+                        const dirName = href.replace(/\/$/, '');
+                        const fullPath = `${path}/${dirName}`;
+                        const newRelativePath = relativePath ? `${relativePath}/${dirName}` : dirName;
+
+                        // Recursively scan subdirectory (increment depth)
+                        const subResults = await scanDirectory(fullPath, newRelativePath, depth + 1);
+
+                        if (subResults.files.length > 0) {
+                            results.subdirs.push({
+                                name: newRelativePath,
+                                files: subResults.files
+                            });
+                        }
+
+                        // Merge nested subdirs
+                        results.subdirs.push(...subResults.subdirs);
+                    } else {
+                        // Check if it's a supported file
+                        const ext = href.split('.').pop().toLowerCase();
+                        if (allExtensions.includes(ext)) {
+                            results.files.push({
+                                name: decodeURIComponent(href),
+                                url: `${path}/${href}`
+                            });
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error(`Error scanning ${path}:`, e);
+            }
+
+            return results;
+        }
+
+        // Load images from folder path via server
+        async function loadFolderPath() {
+            // Skip folder path loading on CodePen (no directory listing support)
+            if (window.location.hostname.includes('codepen.io') ||
+                window.location.hostname.includes('cdpn.io')) {
+                console.log('Folder path loading not supported on CodePen - use drag & drop');
+                return;
+            }
+
+            let folderPath = folderPathInput.value.trim();
+
+            if (!folderPath) {
+                alert('Please enter a folder path');
+                return;
+            }
+
+            // Handle ./ as current directory
+            if (folderPath === './') {
+                folderPath = '.';
+            }
+
+            // Show loading state
+            dragDropFolderBtn.textContent = 'Scanning...';
+            folderPathInput.style.borderColor = 'rgba(255, 165, 0, 0.7)';
+
+            try {
+                // Try to fetch directory listing from server
+                const response = await fetch(folderPath);
+
+                if (!response.ok) {
+                    throw new Error(`Failed to access folder: ${response.status} ${response.statusText}`);
+                }
+
+                const html = await response.text();
+                const isDirectoryListing = html.includes('Index of') || html.includes('Directory listing for');
+
+                if (!isDirectoryListing) {
+                    throw new Error(`The folder contains an index.html file. Please:\n1. Temporarily rename the index.html\n2. Or use the folder browser buttons instead`);
+                }
+
+                // Recursively scan the entire directory tree
+                const scanResults = await scanDirectory(folderPath);
+
+                // Clear existing gallery
+                gallery_images.length = 0;
+                Object.keys(gallery_images_dict).forEach(key => delete gallery_images_dict[key]);
+
+                let totalFiles = 0;
+                let itemIndex = 0;
+
+                // Sort subdirs by name
+                scanResults.subdirs.sort((a, b) =>
+                    a.name.localeCompare(b.name, undefined, { numeric: true })
+                );
+
+                // Add files from each subdirectory
+                for (const subdir of scanResults.subdirs) {
+                    if (subdir.files.length > 0) {
+                        // Add divider for this set
+                        const dividerKey = subdir.name;
+                        gallery_images_dict[dividerKey] = 'DIVIDER';
+                        gallery_images.push({
+                            key: dividerKey,
+                            url: 'DIVIDER',
+                            type: 'divider',
+                            isVideo: false,
+                            isText: false
+                        });
+
+                        subdir.files
+                            .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
+                            .forEach(file => {
+                                const fileName = file.name.replace(/\.(png|jpg|jpeg|mp4|gif|bmp|webp|tiff|svg|webm|ogg|mov|avi|mkv|m4v|txt|md)$/i, '');
+                                const key = `${++itemIndex}_${fileName}`;
+                                const extension = file.name.split('.').pop().toLowerCase();
+                                const isVideo = videoExtensions.includes(extension);
+                                const isText = textExtensions.includes(extension);
+                                const isMarkdown = markdownExtensions.includes(extension);
+
+                                gallery_images_dict[key] = file.url;
+                                gallery_images.push({
+                                    key: key,
+                                    url: file.url,
+                                    type: isMarkdown ? 'markdown' : (isText ? 'text' : (isVideo ? 'video' : 'image')),
+                                    isVideo: isVideo,
+                                    isText: isText,
+                                    isMarkdown: isMarkdown
+                                });
+                                totalFiles++;
+                            });
+                    }
+                }
+
+                // Add root files
+                if (scanResults.files.length > 0) {
+                    if (scanResults.subdirs.length > 0) {
+                        // Add divider for root files
+                        const dividerKey = 'Root Files';
+                        gallery_images_dict[dividerKey] = 'DIVIDER';
+                        gallery_images.push({
+                            key: dividerKey,
+                            url: 'DIVIDER',
+                            type: 'divider',
+                            isVideo: false,
+                            isText: false
+                        });
+                    }
+
+                    scanResults.files
+                        .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
+                        .forEach(file => {
+                            const fileName = file.name.replace(/\.(png|jpg|jpeg|mp4|gif|bmp|webp|tiff|svg|webm|ogg|mov|avi|mkv|m4v|txt|md)$/i, '');
+                            const key = `${++itemIndex}_${fileName}`;
+                            const extension = file.name.split('.').pop().toLowerCase();
+                            const isVideo = videoExtensions.includes(extension);
+                            const isText = textExtensions.includes(extension);
+                            const isMarkdown = markdownExtensions.includes(extension);
+
+                            gallery_images_dict[key] = file.url;
+                            gallery_images.push({
+                                key: key,
+                                url: file.url,
+                                type: isMarkdown ? 'markdown' : (isText ? 'text' : (isVideo ? 'video' : 'image')),
+                                isVideo: isVideo,
+                                isText: isText,
+                                isMarkdown: isMarkdown
+                            });
+                            totalFiles++;
+                        });
+                }
+
+                if (totalFiles === 0) {
+                    alert(`No supported files found in folder: ${folderPath}`);
+                    folderPathInput.style.borderColor = 'rgba(255, 165, 0, 0.8)';
+                    dragDropFolderBtn.textContent = '📂 Drop Folder Here';
+                    setTimeout(() => {
+                        folderPathInput.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                    }, 2000);
+                    return;
+                }
+
+                // Reset gallery
+                currentIndex = 0;
+
+                // Clear and regenerate thumbnails
+                thumbnailsSlider.innerHTML = '';
+                generateThumbnails();
+
+                // Display first image/video
+                changeImage(currentIndex);
+                updateThumbnailNavButtons();
+
+                // Update URL to reflect the loaded folder path
+                updateUrlParameter(currentIndex);
+
+                // Update input to show success
+                folderPathInput.style.borderColor = 'rgba(0, 255, 0, 0.7)';
+                const setsCount = scanResults.subdirs.length + (scanResults.files.length > 0 && scanResults.subdirs.length > 0 ? 1 : 0);
+                const displayText = setsCount > 0 ? `✓ ${totalFiles} Files (${setsCount} Sets)` : `✓ ${totalFiles} Files Loaded`;
+                dragDropFolderBtn.textContent = displayText;
+                dragDropFolderBtn.style.background = 'rgba(76, 175, 80, 1)';
+
+                setTimeout(() => {
+                    folderPathInput.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                    dragDropFolderBtn.textContent = '📂 Drop Folder Here';
+                    dragDropFolderBtn.style.background = 'rgba(76, 175, 80, 0.9)';
+                }, 2000);
+
+                console.log(`✓ Loaded ${totalFiles} files from ${folderPath} (${setsCount} sets)`);
+
+            } catch (error) {
+                console.error('Error loading folder:', error);
+
+                // Fallback to file browser if server request fails
+                alert(`Server access failed. Opening file browser instead.\n\nError: ${error.message}`);
+
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.webkitdirectory = true;
+                fileInput.multiple = true;
+
+                fileInput.onchange = function(e) {
+                    const files = Array.from(e.target.files);
+
+                    // Filter files that match the folder path pattern
+                    const matchingFiles = files.filter(file => {
+                        const filePath = file.webkitRelativePath || file.name;
+                        const matchesPath = filePath.includes(folderPath);
+                        const extension = file.name.split('.').pop().toLowerCase();
+                        const isMedia = allExtensions.includes(extension);
+                        return matchesPath && isMedia;
+                    });
+
+                    if (matchingFiles.length === 0) {
+                        alert(`No matching files found for path: ${folderPath}`);
+                        return;
+                    }
+
+                    // Sort files naturally
+                    matchingFiles.sort((a, b) => {
+                        return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+                    });
+
+                    // Clear existing gallery
+                    gallery_images.length = 0;
+                    Object.keys(gallery_images_dict).forEach(key => delete gallery_images_dict[key]);
+
+                    // Add files to gallery
+                    matchingFiles.forEach((file, index) => {
+                        const objectURL = URL.createObjectURL(file);
+                        const fileName = file.name.replace(/\.(png|jpg|jpeg|mp4|gif|bmp|webp|tiff|svg|webm|ogg|mov|avi|mkv|m4v|txt)$/i, '');
+                        const key = `${index + 1}_${fileName}`;
+                        const extension = file.name.split('.').pop().toLowerCase();
+                        const isVideo = videoExtensions.includes(extension);
+                        const isText = textExtensions.includes(extension);
+
+                        gallery_images_dict[key] = objectURL;
+                        gallery_images.push({ key: key, url: objectURL, isVideo: isVideo, isText: isText });
+                    });
+
+                    // Reset gallery
+                    currentIndex = 0;
+
+                    // Clear and regenerate thumbnails
+                    thumbnailsSlider.innerHTML = '';
+                    generateThumbnails();
+
+                    // Display first image/video
+                    changeImage(currentIndex);
+                    updateThumbnailNavButtons();
+
+                    // Update input to show success
+                    folderPathInput.style.borderColor = 'rgba(0, 255, 0, 0.7)';
+                    setTimeout(() => {
+                        folderPathInput.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                    }, 2000);
+                };
+
+                fileInput.click();
+            }
+        }
+
+        // Allow Enter key to load folder
+        folderPathInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loadFolderPath();
+            }
+        });
+
+        // ============================================
+        // FONT SIZE CONTROLS
+        // ============================================
+
+        let currentFontSize = 16; // Default font size in pixels
+
+        function changeFontSize(delta) {
+            currentFontSize += delta;
+
+            // Set minimum and maximum font sizes
+            if (currentFontSize < 8) currentFontSize = 8;
+            if (currentFontSize > 32) currentFontSize = 32;
+
+            // Apply to both text and markdown preview elements
+            previewText.style.fontSize = currentFontSize + 'px';
+            previewMarkdown.style.fontSize = currentFontSize + 'px';
+
+            // Visual feedback
+            const increaseBtn = document.getElementById('fontSizeIncrease');
+            const decreaseBtn = document.getElementById('fontSizeDecrease');
+
+            if (delta > 0) {
+                increaseBtn.style.background = 'rgba(76, 175, 80, 1)';
+                setTimeout(() => {
+                    increaseBtn.style.background = 'rgba(33, 150, 243, 0.9)';
+                }, 200);
+            } else {
+                decreaseBtn.style.background = 'rgba(76, 175, 80, 1)';
+                setTimeout(() => {
+                    decreaseBtn.style.background = 'rgba(33, 150, 243, 0.9)';
+                }, 200);
+            }
+        }
+
+        // ============================================
+        // COPY TEXT FUNCTIONALITY
+        // ============================================
+
+        function copyTextContent() {
+            // Get the text content from the visible preview element
+            const previewTextEl = document.querySelector('.gallery-preview-text');
+            const previewMarkdownEl = document.querySelector('.gallery-preview-markdown');
+            const previewEditEl = document.querySelector('.gallery-preview-edit');
+
+            let textToCopy = '';
+
+            // First check if we have edited content for current file
+            if (editedFiles[currentIndex]) {
+                textToCopy = editedFiles[currentIndex].content;
+            }
+            // Check if edit textarea is visible (currently editing)
+            else if (previewEditEl && previewEditEl.style.display !== 'none') {
+                textToCopy = previewEditEl.value;
+            }
+            // Check which preview element is visible and get its text content
+            else if (previewTextEl && previewTextEl.style.display !== 'none') {
+                textToCopy = previewTextEl.textContent || previewTextEl.innerText;
+            } else if (previewMarkdownEl && previewMarkdownEl.style.display !== 'none') {
+                textToCopy = previewMarkdownEl.textContent || previewMarkdownEl.innerText;
+            }
+
+            if (!textToCopy) {
+                alert('No text content to copy');
+                return;
+            }
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                // Visual feedback - change button color temporarily
+                const copyBtn = document.getElementById('copyTextBtn');
+                const originalBg = copyBtn.style.background;
+                copyBtn.style.background = '#00b894';
+                copyBtn.textContent = '✓ Copied!';
+
+                setTimeout(function() {
+                    copyBtn.style.background = originalBg;
+                    copyBtn.textContent = '📋 Copy Text';
+                }, 1500);
+            }).catch(function(err) {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy text to clipboard');
+            });
+        }
+
+        // ============================================
+        // CLIPBOARD A FUNCTIONALITY
+        // ============================================
+
+        let clipboardA = ''; // Storage for clipboard A
+
+        // Copy to A - reads from user's clipboard and stores in variable A
+        document.getElementById('copyToABtn').addEventListener('click', async function() {
+            try {
+                const text = await navigator.clipboard.readText();
+                clipboardA = text;
+                this.textContent = '✓ Saved to A';
+                this.style.background = '#4caf50';
+                setTimeout(() => {
+                    this.textContent = '📋 Copy to A';
+                    this.style.background = '#9c27b0';
+                }, 1500);
+                console.log('Clipboard saved to A:', clipboardA.substring(0, 50) + '...');
+            } catch (err) {
+                console.error('Failed to read clipboard:', err);
+                this.textContent = '❌ Failed';
+                this.style.background = '#f44336';
+                setTimeout(() => {
+                    this.textContent = '📋 Copy to A';
+                    this.style.background = '#9c27b0';
+                }, 1500);
+            }
+        });
+
+        // Return A - copies the stored A value back to user's clipboard
+        document.getElementById('returnABtn').addEventListener('click', async function() {
+            if (!clipboardA) {
+                this.textContent = '❌ A is empty';
+                this.style.background = '#f44336';
+                setTimeout(() => {
+                    this.textContent = '📤 Return A';
+                    this.style.background = '#673ab7';
+                }, 1500);
+                return;
+            }
+            try {
+                await navigator.clipboard.writeText(clipboardA);
+                this.textContent = '✓ Copied!';
+                this.style.background = '#4caf50';
+                setTimeout(() => {
+                    this.textContent = '📤 Return A';
+                    this.style.background = '#673ab7';
+                }, 1500);
+                console.log('Returned A to clipboard');
+            } catch (err) {
+                console.error('Failed to write to clipboard:', err);
+                this.textContent = '❌ Failed';
+                this.style.background = '#f44336';
+                setTimeout(() => {
+                    this.textContent = '📤 Return A';
+                    this.style.background = '#673ab7';
+                }, 1500);
+            }
+        });
+
+        // Open Textviewer 2 in new tab
+        document.getElementById('openTextviewer2Btn').addEventListener('click', function() {
+            window.open('https://cdpn.io/pen/debug/LENmdeZ', '_blank');
+        });
+
+        // ============================================
+        // MAKE NEW FILE FUNCTIONALITY
+        // ============================================
+
+        // Helper function to check if a display name already exists in the gallery
+        function getUniqueDisplayName(baseName) {
+            // Get all existing display names (without index prefix)
+            const existingNames = gallery_images.map(item => {
+                // Strip index prefix and get base name
+                return stripIndexPrefix(item.key).toLowerCase();
+            });
+
+            let uniqueName = baseName;
+            let counter = 1;
+
+            // Check if name exists and append number if needed
+            while (existingNames.includes(uniqueName.toLowerCase())) {
+                counter++;
+                uniqueName = `${baseName}_${counter}`;
+            }
+
+            return uniqueName;
+        }
+
+        document.getElementById('makeNewFileBtn').addEventListener('click', function() {
+            // Prompt for filename
+            const filename = prompt('Enter filename (e.g., notes.txt or readme.md):');
+
+            if (!filename || filename.trim() === '') {
+                return; // User cancelled or empty input
+            }
+
+            const trimmedFilename = filename.trim();
+
+            // Determine file type based on extension
+            const isMarkdown = trimmedFilename.toLowerCase().endsWith('.md');
+            const isText = trimmedFilename.toLowerCase().endsWith('.txt') || (!isMarkdown && !trimmedFilename.includes('.'));
+
+            // Add .txt extension if no extension provided
+            const finalFilename = trimmedFilename.includes('.') ? trimmedFilename : trimmedFilename + '.txt';
+
+            // Create a blob URL for empty content
+            const emptyContent = '';
+            const blob = new Blob([emptyContent], { type: 'text/plain' });
+            const objectURL = URL.createObjectURL(blob);
+
+            // Create key from filename (remove extension for display)
+            let displayName = finalFilename.replace(/\.(txt|md)$/i, '');
+
+            // Check for duplicates and get unique name
+            displayName = getUniqueDisplayName(displayName);
+
+            const newIndex = gallery_images.length;
+            const key = `${newIndex + 1}_${displayName}`;
+
+            // Add to gallery arrays
+            gallery_images_dict[key] = objectURL;
+            gallery_images.push({
+                key: key,
+                url: objectURL,
+                type: isMarkdown ? 'markdown' : 'text',
+                isVideo: false,
+                isText: !isMarkdown,
+                isMarkdown: isMarkdown
+            });
+
+            // Create and add thumbnail to sidebar
+            const thumbnail = document.createElement('div');
+            thumbnail.className = 'thumbnail';
+            thumbnail.setAttribute('data-key', key);
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'thumbnail-image-wrapper';
+
+            const placeholder = document.createElement('div');
+            placeholder.style.width = '100%';
+            placeholder.style.height = '100%';
+            placeholder.style.background = isMarkdown ? 'rgba(100,150,255,0.9)' : 'rgba(255,255,255,0.9)';
+            placeholder.style.display = 'flex';
+            placeholder.style.alignItems = 'center';
+            placeholder.style.justifyContent = 'center';
+            placeholder.style.color = isMarkdown ? 'white' : '#333';
+            placeholder.style.fontSize = '14px';
+            placeholder.style.fontWeight = 'bold';
+            placeholder.textContent = isMarkdown ? 'MD' : 'TXT';
+            wrapper.appendChild(placeholder);
+
+            thumbnail.appendChild(wrapper);
+
+            const caption = document.createElement('div');
+            caption.className = 'thumbnail-caption';
+            caption.textContent = key;
+            thumbnail.appendChild(caption);
+
+            thumbnail.addEventListener('click', () => {
+                changeImage(newIndex);
+            });
+
+            thumbnailsSlider.appendChild(thumbnail);
+
+            // Navigate to the new file and enter edit mode
+            changeImage(newIndex);
+
+            // Auto-enter edit mode for the new file
+            setTimeout(() => {
+                if (typeof enterEditMode === 'function') {
+                    enterEditMode();
+                }
+            }, 100);
+
+            // Show success feedback
+            this.textContent = '✓ Created!';
+            this.style.background = '#4caf50';
+            setTimeout(() => {
+                this.textContent = '📄 New File';
+                this.style.background = '#00bcd4';
+            }, 1500);
+
+            console.log('Created new file:', finalFilename, 'at index', newIndex);
+        });
+
+        // ============================================
+        // FILE EDITING AND SAVING FUNCTIONALITY
+        // ============================================
+
+        const previewEdit = document.getElementById('previewEdit');
+        const editControls = document.getElementById('editControls');
+        const editBtn = document.getElementById('editBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const saveAllBtn = document.getElementById('saveAllBtn');
+
+        let isEditMode = false;
+        let originalContent = ''; // Store original content before editing
+        let editedFiles = {}; // Track edited files: { index: { content: string, filename: string } }
+
+        // Show/hide edit button based on current file type
+        function updateEditControls() {
+            const currentItem = gallery_images[currentIndex];
+            if (currentItem && (currentItem.isText || currentItem.isMarkdown)) {
+                editControls.classList.add('visible');
+            } else {
+                editControls.classList.remove('visible');
+                if (isEditMode) {
+                    cancelEditMode();
+                }
+            }
+        }
+
+        // Enter edit mode
+        function enterEditMode() {
+            const currentItem = gallery_images[currentIndex];
+            if (!currentItem || (!currentItem.isText && !currentItem.isMarkdown)) {
+                alert('Only for text files');
+                return;
+            }
+
+            isEditMode = true;
+
+            // Get current content
+            if (currentItem.isMarkdown) {
+                // For markdown, we need to fetch the raw content
+                fetch(currentItem.url)
+                    .then(response => response.text())
+                    .then(text => {
+                        originalContent = text;
+                        // Check if we have edited content for this file
+                        if (editedFiles[currentIndex]) {
+                            previewEdit.value = editedFiles[currentIndex].content;
+                        } else {
+                            previewEdit.value = text;
+                        }
+                        showEditTextarea();
+                    })
+                    .catch(error => {
+                        alert('Error loading file for editing: ' + error.message);
+                    });
+            } else {
+                // For text files
+                fetch(currentItem.url)
+                    .then(response => response.text())
+                    .then(text => {
+                        originalContent = text;
+                        if (editedFiles[currentIndex]) {
+                            previewEdit.value = editedFiles[currentIndex].content;
+                        } else {
+                            previewEdit.value = text;
+                        }
+                        showEditTextarea();
+                    })
+                    .catch(error => {
+                        alert('Error loading file for editing: ' + error.message);
+                    });
+            }
+        }
+
+        function showEditTextarea() {
+            // Hide preview elements
+            previewText.style.display = 'none';
+            previewMarkdown.style.display = 'none';
+            previewImg.style.display = 'none';
+            previewVideo.style.display = 'none';
+            previewDivider.style.display = 'none';
+
+            // Show edit textarea
+            previewEdit.style.display = 'block';
+            previewEdit.style.fontSize = currentFontSize + 'px';
+            previewEdit.focus();
+
+            // Update buttons
+            editBtn.style.display = 'none';
+            saveBtn.style.display = 'inline-block';
+            cancelBtn.style.display = 'inline-block';
+        }
+
+        // Cancel edit mode
+        function cancelEditMode() {
+            isEditMode = false;
+
+            // Hide edit textarea
+            previewEdit.style.display = 'none';
+
+            // Update buttons
+            editBtn.style.display = 'inline-block';
+            saveBtn.style.display = 'none';
+            cancelBtn.style.display = 'none';
+
+            // Redisplay the current file
+            changeImage(currentIndex);
+        }
+
+        // Helper function to strip index prefix from filename (e.g., "271_stephcurry" -> "stephcurry")
+        function stripIndexPrefix(filename) {
+            return filename.replace(/^\d+_/, '');
+        }
+
+        // Save current file (marks as edited and stores content)
+        function saveCurrentFile() {
+            const currentItem = gallery_images[currentIndex];
+            const newContent = previewEdit.value;
+
+            // Check if content actually changed
+            if (newContent !== originalContent) {
+                // Get filename from key and strip the index prefix
+                let filename = stripIndexPrefix(currentItem.key);
+                // Add extension back
+                if (currentItem.isMarkdown) {
+                    filename += '.md';
+                } else if (currentItem.isText) {
+                    filename += '.txt';
+                }
+
+                // Store edited content
+                editedFiles[currentIndex] = {
+                    content: newContent,
+                    filename: filename
+                };
+
+                // Mark thumbnail as modified
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                if (thumbnails[currentIndex]) {
+                    thumbnails[currentIndex].classList.add('modified');
+                }
+
+                // Update save all button
+                updateSaveAllButton();
+
+                console.log(`✓ File "${filename}" marked as edited`);
+            }
+
+            // Exit edit mode
+            cancelEditMode();
+        }
+
+        // Update save all button state
+        function updateSaveAllButton() {
+            const editedCount = Object.keys(editedFiles).length;
+            saveAllBtn.textContent = `📦 Save Edited (${editedCount})`;
+            saveAllBtn.disabled = editedCount === 0;
+            saveAllBtn.title = editedCount === 0 ? 'No edited files' : `Download ${editedCount} edited file(s)`;
+        }
+
+        // Save all edited files as zip or individual download
+        async function saveAllEditedFiles() {
+            const editedCount = Object.keys(editedFiles).length;
+
+            if (editedCount === 0) {
+                alert('No files have been edited.');
+                return;
+            }
+
+            if (editedCount === 1) {
+                // Single file - download directly
+                const index = Object.keys(editedFiles)[0];
+                const file = editedFiles[index];
+                downloadFile(file.filename, file.content);
+            } else {
+                // Multiple files - create zip
+                const zip = new JSZip();
+
+                for (const index in editedFiles) {
+                    const file = editedFiles[index];
+                    zip.file(file.filename, file.content);
+                }
+
+                // Generate and download zip
+                const blob = await zip.generateAsync({ type: 'blob' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'edited_files.zip';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                console.log(`✓ Downloaded ${editedCount} files as zip`);
+            }
+
+            // Visual feedback
+            saveAllBtn.textContent = '✓ Downloaded!';
+            saveAllBtn.style.background = 'rgba(76, 175, 80, 1)';
+            setTimeout(() => {
+                updateSaveAllButton();
+                saveAllBtn.style.background = '';
+            }, 2000);
+        }
+
+        // Download single file
+        function downloadFile(filename, content) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            console.log(`✓ Downloaded "${filename}"`);
+        }
+
+        // Override changeImage to update edit controls
+        const originalChangeImage = changeImage;
+        changeImage = function(index) {
+            // If in edit mode, ask to save changes first
+            if (isEditMode) {
+                const currentItem = gallery_images[currentIndex];
+                const newContent = previewEdit.value;
+                if (newContent !== originalContent) {
+                    if (confirm('You have unsaved changes. Save before navigating?')) {
+                        saveCurrentFile();
+                    }
+                }
+                isEditMode = false;
+                previewEdit.style.display = 'none';
+                editBtn.style.display = 'inline-block';
+                saveBtn.style.display = 'none';
+                cancelBtn.style.display = 'none';
+            }
+
+            originalChangeImage(index);
+            updateEditControls();
+        };
+
+        // Initialize edit controls visibility
+        updateEditControls();
+    </script>
+</body>
+</html>
+
+

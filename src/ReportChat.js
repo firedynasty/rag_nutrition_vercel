@@ -49,6 +49,7 @@ const ReportChat = () => {
 
   // Refs
   const chatContainerRef = useRef(null);
+  const folderInputRef = useRef(null);
 
   // Available roles
   const roles = {
@@ -355,6 +356,50 @@ ${fileContent}
     }
   };
 
+  // Handle folder selection - load .txt and .md files
+  const handleFolderSelect = async (e) => {
+    const files = Array.from(e.target.files);
+
+    // Filter for .txt and .md files only
+    const textFiles = files.filter(file => {
+      const name = file.name.toLowerCase();
+      return name.endsWith('.txt') || name.endsWith('.md');
+    });
+
+    if (textFiles.length === 0) {
+      alert('No .txt or .md files found in the selected folder');
+      return;
+    }
+
+    setIsLoadingFiles(true);
+
+    const newFileContents = {};
+    const newFileNames = [];
+
+    // Read each file
+    for (const file of textFiles) {
+      try {
+        const content = await file.text();
+        newFileContents[file.name] = content;
+        newFileNames.push(file.name);
+      } catch (err) {
+        console.error(`Error reading ${file.name}:`, err);
+      }
+    }
+
+    // Sort filenames alphabetically
+    newFileNames.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+    // Update state
+    setPreloadedFiles(newFileNames);
+    setAllFileContents(newFileContents);
+    setSelectedFile(''); // Reset selection
+    setIsLoadingFiles(false);
+
+    // Reset the input so the same folder can be selected again
+    e.target.value = '';
+  };
+
   const fileContent = getSelectedFileContent();
 
   return (
@@ -486,6 +531,27 @@ ${fileContent}
               </option>
             ))}
           </select>
+
+          {/* Hidden folder input */}
+          <input
+            type="file"
+            ref={folderInputRef}
+            onChange={handleFolderSelect}
+            style={{ display: 'none' }}
+            webkitdirectory=""
+            directory=""
+            multiple
+          />
+
+          {/* Load Folder Button */}
+          <button
+            onClick={() => folderInputRef.current?.click()}
+            style={{ ...styles.button, marginTop: '8px', background: '#28a745' }}
+            disabled={isLoadingFiles}
+          >
+            {isLoadingFiles ? 'Loading...' : '📂 Load Folder'}
+          </button>
+
           {isLoadingFiles && (
             <p style={styles.charCount}>Loading...</p>
           )}
