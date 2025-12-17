@@ -38,6 +38,7 @@ const ReportChat = () => {
   const [selectedFile, setSelectedFile] = useState('');
   const [allFileContents, setAllFileContents] = useState({}); // {filename: content}
   const [isLoadingFiles, setIsLoadingFiles] = useState(false);
+  const [sendAllFiles, setSendAllFiles] = useState(false); // false = current file only, true = all files
 
   // Modal state
   const [showPromptModal, setShowPromptModal] = useState(false);
@@ -166,15 +167,29 @@ KEEP RESPONSES SHORT (under 150 words). End with a probing question.`
       parts.push(rolePrompt);
     }
 
-    // Add selected file content as context
-    const fileContent = getSelectedFileContent();
-    if (fileContent) {
-      const fileContext = `You have access to the following document. Use it to answer questions and provide analysis.
+    // Add file content(s) as context
+    if (sendAllFiles && Object.keys(allFileContents).length > 0) {
+      // Send ALL files concatenated
+      const allFilesContext = Object.entries(allFileContents)
+        .map(([filename, content]) => `--- FILE: ${filename} ---\n${content}`)
+        .join('\n\n---\n\n');
+
+      const fileContext = `You have access to the following ${Object.keys(allFileContents).length} documents. Use them to answer questions and provide analysis.
+
+${allFilesContext}
+`;
+      parts.push(fileContext);
+    } else {
+      // Send only the selected file (default)
+      const fileContent = getSelectedFileContent();
+      if (fileContent) {
+        const fileContext = `You have access to the following document. Use it to answer questions and provide analysis.
 
 --- FILE: ${selectedFile} ---
 ${fileContent}
 `;
-      parts.push(fileContext);
+        parts.push(fileContext);
+      }
     }
 
     return parts.length > 0 ? parts.join('\n\n') : null;
@@ -556,6 +571,38 @@ ${fileContent}
             <p style={styles.charCount}>Loading...</p>
           )}
         </div>
+
+        {/* Send Mode Toggle */}
+        <div style={styles.section}>
+          <label style={styles.label}>Send to Chat:</label>
+          <div style={styles.toggleContainer}>
+            <span style={{ fontSize: '12px', color: !sendAllFiles ? '#4da6ff' : '#888', fontWeight: !sendAllFiles ? 'bold' : 'normal' }}>
+              📄 Current
+            </span>
+            <div
+              onClick={() => setSendAllFiles(!sendAllFiles)}
+              style={{
+                ...styles.sliderTrack,
+                backgroundColor: sendAllFiles ? '#4da6ff' : '#6c757d',
+              }}
+            >
+              <div
+                style={{
+                  ...styles.sliderKnob,
+                  transform: sendAllFiles ? 'translateX(22px)' : 'translateX(0)',
+                }}
+              />
+            </div>
+            <span style={{ fontSize: '12px', color: sendAllFiles ? '#4da6ff' : '#888', fontWeight: sendAllFiles ? 'bold' : 'normal' }}>
+              📚 All Files
+            </span>
+          </div>
+          <p style={styles.charCount}>
+            {sendAllFiles
+              ? `Sending all ${Object.keys(allFileContents).length} files`
+              : selectedFile ? `Sending: ${selectedFile}` : 'No file selected'}
+          </p>
+        </div>
       </div>
 
       {/* Main Area - Side by Side */}
@@ -726,6 +773,33 @@ const styles = {
     fontSize: '14px',
     color: '#fff',
     cursor: 'pointer',
+  },
+  toggleContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    padding: '8px',
+    background: '#2d2d44',
+    borderRadius: '6px',
+  },
+  sliderTrack: {
+    position: 'relative',
+    width: '44px',
+    height: '22px',
+    borderRadius: '22px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+  },
+  sliderKnob: {
+    position: 'absolute',
+    top: '2px',
+    left: '2px',
+    width: '18px',
+    height: '18px',
+    borderRadius: '50%',
+    backgroundColor: '#fff',
+    boxShadow: '0 1px 3px rgba(0,0,0,0.3)',
+    transition: 'transform 0.3s',
   },
   checkbox: {
     width: '18px',
