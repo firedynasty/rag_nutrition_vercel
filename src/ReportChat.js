@@ -29,12 +29,12 @@ const ReportChat = () => {
   const [apiKey, setApiKey] = useState('');
   const [selectedModel, setSelectedModel] = useState('gpt-4o-mini');
   const [webSearchEnabled, setWebSearchEnabled] = useState(false);
-  const [ragEnabled, setRagEnabled] = useState(false);
+  const [ragEnabled, setRagEnabled] = useState(true); // Default: RAG enabled
   const [ragContext, setRagContext] = useState(''); // Store last RAG context
   const [showRagContext, setShowRagContext] = useState(false);
   const [useSharedKey, setUseSharedKey] = useState(false);
   const [accessCode, setAccessCode] = useState('');
-  const [selectedRole, setSelectedRole] = useState('default');
+  const [selectedRole, setSelectedRole] = useState('nutrition_rag'); // Default: Nutrition RAG role
 
   // File state
   const [preloadedFiles, setPreloadedFiles] = useState([]); // list of filenames
@@ -439,6 +439,32 @@ ${ragData.context}
     }
   };
 
+  // Clear chat
+  const clearChat = () => {
+    if (messages.length === 0 || window.confirm('Clear all messages?')) {
+      setMessages([]);
+      setRagContext('');
+    }
+  };
+
+  // Copy chat to clipboard
+  const copyChat = async () => {
+    if (messages.length === 0) {
+      alert('No messages to copy');
+      return;
+    }
+    const chatText = messages
+      .map(m => `${m.role === 'user' ? 'You' : 'Assistant'}:\n${m.content}`)
+      .join('\n\n---\n\n');
+    try {
+      await navigator.clipboard.writeText(chatText);
+      alert('Chat copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      alert('Failed to copy chat');
+    }
+  };
+
   // Handle folder selection - load .txt and .md files
   const handleFolderSelect = async (e) => {
     const files = Array.from(e.target.files);
@@ -757,7 +783,15 @@ ${ragData.context}
         {/* Chat Panel (Right) */}
         <div style={styles.chatPanel}>
           <div style={styles.chatPanelHeader}>
-            Chat with {aiProvider === 'ChatGPT' ? 'ChatGPT' : 'Claude'}
+            <span>Chat with {aiProvider === 'ChatGPT' ? 'ChatGPT' : 'Claude'}</span>
+            <div style={styles.chatHeaderButtons}>
+              <button onClick={copyChat} style={styles.chatHeaderBtn} title="Copy chat">
+                📋 Copy
+              </button>
+              <button onClick={clearChat} style={styles.chatHeaderBtn} title="Clear chat">
+                🗑️ Clear
+              </button>
+            </div>
           </div>
 
           {/* Chat Messages */}
@@ -1065,6 +1099,23 @@ const styles = {
     fontSize: '14px',
     fontWeight: '600',
     borderBottom: '1px solid #333',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  chatHeaderButtons: {
+    display: 'flex',
+    gap: '8px',
+  },
+  chatHeaderBtn: {
+    padding: '6px 12px',
+    borderRadius: '4px',
+    border: 'none',
+    fontSize: '12px',
+    background: '#2d2d44',
+    color: '#fff',
+    cursor: 'pointer',
+    transition: 'background 0.2s',
   },
   chatContainer: {
     flex: 1,
