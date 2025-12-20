@@ -178,18 +178,19 @@ class handler(BaseHTTPRequestHandler):
         }).encode())
 
     def do_POST(self):
-        self.send_cors_headers()
-
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
+        def send_json_response(status_code, data):
+            self.send_response(status_code)
+            self.send_header('Content-Type', 'application/json')
+            self.send_cors_headers()
+            self.end_headers()
+            self.wfile.write(json.dumps(data).encode())
 
         try:
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length) if content_length > 0 else b'{}'
             body = json.loads(post_data.decode('utf-8'))
-        except json.JSONDecodeError:
-            self.send_response(400)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({"error": "Invalid JSON"}).encode())
+        except (json.JSONDecodeError, ValueError) as e:
+            send_json_response(400, {"error": f"Invalid request: {str(e)}"})
             return
 
         query = body.get("query", "")
@@ -206,10 +207,7 @@ class handler(BaseHTTPRequestHandler):
         pinecone_key = os.environ.get("PINECONE_API_KEY")
 
         if not pinecone_key:
-            self.send_response(500)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({"error": "PINECONE_API_KEY not configured"}).encode())
+            send_json_response(500, {"error": "PINECONE_API_KEY not configured"})
             return
 
         if api_key:
@@ -217,17 +215,11 @@ class handler(BaseHTTPRequestHandler):
         elif access_code:
             valid_code = os.environ.get("ACCESS_CODE")
             if access_code != valid_code:
-                self.send_response(401)
-                self.send_header('Content-Type', 'application/json')
-                self.end_headers()
-                self.wfile.write(json.dumps({"error": "Invalid access code"}).encode())
+                send_json_response(401, {"error": "Invalid access code"})
                 return
             openai_key = os.environ.get("OPENAI_API_KEY")
         else:
-            self.send_response(400)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({"error": "No API key provided"}).encode())
+            send_json_response(400, {"error": "No API key provided"})
             return
 
         try:
@@ -237,14 +229,11 @@ class handler(BaseHTTPRequestHandler):
 
             # If retrieve_only, just return the context
             if retrieve_only:
-                self.send_response(200)
-                self.send_header('Content-Type', 'application/json')
-                self.end_headers()
-                self.wfile.write(json.dumps({
+                send_json_response(200, {
                     "context": context,
                     "query": query,
                     "n_results": len(results)
-                }).encode())
+                })
                 return
 
             # Build augmented message
@@ -259,17 +248,11 @@ User Question: {query}"""
             # Call LLM
             response_text = call_llm(augmented_messages, RAG_SYSTEM_PROMPT, openai_key, model, provider)
 
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({
+            send_json_response(200, {
                 "content": response_text,
                 "context": context,
                 "query": query
-            }).encode())
+            })
 
         except Exception as e:
-            self.send_response(500)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({"error": str(e)}).encode())
+            send_json_response(500, {"error": str(e)})

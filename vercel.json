@@ -7,10 +7,5 @@
     "api/rag.py": {
       "maxDuration": 60
     }
-  },
-  "build": {
-    "env": {
-      "PYTHONPATH": "rag_nutrition"
-    }
   }
 }
