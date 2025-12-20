@@ -1,0 +1,11 @@
+# Ignore LanceDB database (now using Pinecone)
+rag_nutrition/
+
+# Ignore migration scripts
+migrate_to_pinecone.py
+rebuild_embeddings.py
+
+# Other common ignores
+node_modules/
+.git/
+*.log
