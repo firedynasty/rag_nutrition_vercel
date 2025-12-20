@@ -1,21 +1,14 @@
 # Vercel Serverless Function for RAG (Retrieval-Augmented Generation)
-# Uses OpenAI embeddings (lightweight, no heavy ML dependencies)
+# Uses Pinecone for vector search + OpenAI embeddings
 
 from http.server import BaseHTTPRequestHandler
 import json
 import os
 import urllib.request
 
-# LanceDB import
-try:
-    import lancedb
-    LANCEDB_AVAILABLE = True
-except ImportError:
-    LANCEDB_AVAILABLE = False
-
 # Configuration
-LANCEDB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "rag_nutrition/databases/my_lancedb")
-TABLE_NAME = "nutrition_openai"  # From rag_config.toml
+PINECONE_INDEX_NAME = "nutrition-rag"  # Your Pinecone index name
+PINECONE_HOST = os.environ.get("PINECONE_HOST", "")  # Set in Vercel env vars
 
 
 def get_embedding(text: str, api_key: str) -> list:
@@ -39,19 +32,49 @@ def get_embedding(text: str, api_key: str) -> list:
         return data["data"][0]["embedding"]
 
 
-def search_nutrition_docs(query: str, api_key: str, n_results: int = 5) -> list:
+def search_pinecone(query_vector: list, pinecone_key: str, n_results: int = 5) -> list:
+    """Search Pinecone for similar vectors."""
+    if not PINECONE_HOST:
+        raise ValueError("PINECONE_HOST environment variable not set")
+
+    request_body = {
+        "vector": query_vector,
+        "topK": n_results,
+        "includeMetadata": True
+    }
+
+    req = urllib.request.Request(
+        f"https://{PINECONE_HOST}/query",
+        data=json.dumps(request_body).encode('utf-8'),
+        headers={
+            "Content-Type": "application/json",
+            "Api-Key": pinecone_key
+        }
+    )
+
+    with urllib.request.urlopen(req) as response:
+        data = json.loads(response.read().decode('utf-8'))
+        return data.get("matches", [])
+
+
+def search_nutrition_docs(query: str, openai_key: str, pinecone_key: str, n_results: int = 5) -> list:
     """Search the nutrition knowledge base using vector similarity."""
-    if not LANCEDB_AVAILABLE:
-        return []
+    # Get query embedding from OpenAI
+    query_vector = get_embedding(query, openai_key)
 
-    # Get query embedding
-    query_vector = get_embedding(query, api_key)
+    # Search Pinecone
+    matches = search_pinecone(query_vector, pinecone_key, n_results)
 
-    # Search LanceDB
-    db = lancedb.connect(LANCEDB_PATH)
-    table = db.open_table(TABLE_NAME)
-
-    results = table.search(query_vector).limit(n_results).to_list()
+    # Convert to our format
+    results = []
+    for match in matches:
+        metadata = match.get("metadata", {})
+        results.append({
+            "text": metadata.get("text", ""),
+            "title": metadata.get("title", "Unknown Title"),
+            "url": metadata.get("url", ""),
+            "score": match.get("score", 0)
+        })
 
     return results
 
@@ -150,8 +173,8 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps({
             "status": "ok",
-            "lancedb_available": LANCEDB_AVAILABLE,
-            "message": "Nutrition RAG API (OpenAI embeddings)"
+            "backend": "pinecone",
+            "message": "Nutrition RAG API (Pinecone + OpenAI embeddings)"
         }).encode())
 
     def do_POST(self):
@@ -178,34 +201,38 @@ class handler(BaseHTTPRequestHandler):
         retrieve_only = body.get("retrieveOnly", False)
         n_results = body.get("nResults", 5)
 
-        # Get API key
-        if not api_key:
-            if access_code:
-                valid_code = os.environ.get("ACCESS_CODE")
-                if access_code != valid_code:
-                    self.send_response(401)
-                    self.send_header('Content-Type', 'application/json')
-                    self.end_headers()
-                    self.wfile.write(json.dumps({"error": "Invalid access code"}).encode())
-                    return
-                api_key = os.environ.get("OPENAI_API_KEY")
-            else:
-                self.send_response(400)
-                self.send_header('Content-Type', 'application/json')
-                self.end_headers()
-                self.wfile.write(json.dumps({"error": "No API key provided"}).encode())
-                return
+        # Get API keys
+        openai_key = None
+        pinecone_key = os.environ.get("PINECONE_API_KEY")
 
-        if not LANCEDB_AVAILABLE:
+        if not pinecone_key:
             self.send_response(500)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
-            self.wfile.write(json.dumps({"error": "LanceDB not available"}).encode())
+            self.wfile.write(json.dumps({"error": "PINECONE_API_KEY not configured"}).encode())
+            return
+
+        if api_key:
+            openai_key = api_key
+        elif access_code:
+            valid_code = os.environ.get("ACCESS_CODE")
+            if access_code != valid_code:
+                self.send_response(401)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"error": "Invalid access code"}).encode())
+                return
+            openai_key = os.environ.get("OPENAI_API_KEY")
+        else:
+            self.send_response(400)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({"error": "No API key provided"}).encode())
             return
 
         try:
             # Search for relevant documents
-            results = search_nutrition_docs(query, api_key, n_results)
+            results = search_nutrition_docs(query, openai_key, pinecone_key, n_results)
             context = format_context(results)
 
             # If retrieve_only, just return the context
@@ -230,7 +257,7 @@ User Question: {query}"""
             augmented_messages = messages + [{"role": "user", "content": user_message}]
 
             # Call LLM
-            response_text = call_llm(augmented_messages, RAG_SYSTEM_PROMPT, api_key, model, provider)
+            response_text = call_llm(augmented_messages, RAG_SYSTEM_PROMPT, openai_key, model, provider)
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
