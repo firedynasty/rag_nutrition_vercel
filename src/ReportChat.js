@@ -245,7 +245,6 @@ ${fileContent}
     try {
       let systemPrompt = buildSystemPrompt();
       let assistantMessage;
-      let ragContextForMessage = null;
 
       // If RAG is enabled, first retrieve context from the knowledge base
       if (ragEnabled) {
@@ -263,7 +262,6 @@ ${fileContent}
 
           if (ragResponse.ok) {
             const ragData = await ragResponse.json();
-            ragContextForMessage = ragData.context;
             setRagContext(ragData.context);
 
             // Prepend RAG context to system prompt
