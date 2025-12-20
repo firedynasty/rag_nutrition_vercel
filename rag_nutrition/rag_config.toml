@@ -1,0 +1,79 @@
+[embeddings]
+# Device (like "cuda", "cpu", "mps", "npu") that should be used for computation
+device = "cpu"
+
+# similarity function
+metric = "cosine"
+
+# whether the embeddings should be done before the ingestion or if LanceDB should take care of it
+# To use hybrid search, this should be set to `false
+emb_manual = false
+
+model_provider = "sentence-transformers"
+# Pretrained Models : https://www.sbert.net/docs/sentence_transformer/pretrained_models.html
+#
+# `multi-qa-MiniLM-L6-cos-v1`
+model_name = "multi-qa-MiniLM-L6-cos-v1"
+# - https://huggingface.co/sentence-transformers/multi-qa-MiniLM-L6-cos-v1
+# - It was "tuned for semantic search: Given a query/question, it can find relevant passages. It was trained on a large and diverse set of (question, answer) pairs."
+n_dim_vec = 384 # Dimensions of the output vectors
+
+# Token limits of the model
+# "there is a limit of 512 word pieces: Text longer than that will be truncated. Further note that the model was just trained on input text up to 250 word pieces. It might not work well for longer text. "
+n_token_max = 250 # recommended 250
+# 1 token per 4-6 characters for english
+
+# pharagraph chunking setup (calibrated to the embedding model)
+n_char_max = 1000 # The maximum number of characters of each chunk. Default is 1000 (~250 tokens).
+overlap = 100 # The number of characters to overlap between chunks. Default is 100 (~25 tokens).
+
+
+[knowledge_base]
+uri = "databases/my_lancedb" # relative to the project root
+table_name = "table_simple05"
+
+[retriever]
+# Number of relevant text chunks to retrieve after reranking
+n_retrieve = 10
+# Number of top titles returned after grouping retrieved text chunks by title
+# & sorting titles by their relevance score (accumulated by their retrieved chunks)
+n_titles = 5
+# Sentence-window retrieval: wether to enrich the 1st title with additional text chunks
+enrich_first = true
+# for reranker: "Cross Encoder"
+reranker.device = "cpu"
+reranker.model_name = "cross-encoder/ms-marco-MiniLM-L-2-v2"
+
+
+
+[chat]
+user_avatar = "❔"
+bot_avatar = "🥦"
+stream_default = true
+chat_history_height = 650
+
+[llm.settings]
+model_temp = 0.5
+api_name = "groq"
+
+[llm.api.groq]
+base_url = "https://api.groq.com" # (not used) if not set, client looks for `GROQ_BASE_URL` in env. before use default
+key_name = "GROQ_TOKEN" # if not set, client looks for `GROQ_API_KEY` in the env.. Throws an `GroqError` if not set
+key_url = "https://console.groq.com/keys"
+token.total_max = 8192
+models.url = "https://api.groq.com/openai/v1/models"
+# based on RAG evaluation 11/09/2024
+# https://console.groq.com/docs/models
+# updated models 15/09/2025
+models.ranked = ["llama-3.3-70b-versatile","llama-3.1-8b-instant"]
+
+
+[mongodb.local]
+db_name = "rag_user_info"
+coll_name = "chatbot_dr_greger"
+uri = "mongodb://user:password@localhost:27017/admin"
+
+[mongodb.docker]
+db_name = "rag_user_info"
+coll_name = "chatbot_dr_greger"
+uri = "mongodb://user:password@mongodb:27017/admin"

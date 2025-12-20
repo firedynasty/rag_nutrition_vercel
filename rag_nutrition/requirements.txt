@@ -1,0 +1,5 @@
+lancedb
+pandas
+numpy
+sentence-transformers
+tomli

@@ -2,5 +2,16 @@
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  ],
+  "functions": {
+    "api/rag.py": {
+      "runtime": "python3.9",
+      "maxDuration": 60
+    }
+  },
+  "build": {
+    "env": {
+      "PYTHONPATH": "rag_nutrition"
+    }
+  }
 }

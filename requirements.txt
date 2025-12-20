@@ -1,0 +1,7 @@
+# Requirements for Vercel Python runtime (RAG API)
+# Using OpenAI embeddings - no heavy ML dependencies needed
+openai>=1.0.0
+lancedb>=0.1.0
+pandas>=2.0.0
+numpy>=1.24.0
+pyarrow>=12.0.0

@@ -1,0 +1,109 @@
+HOW TO ACCESS THE LANCEDB VECTOR DATABASE
+==========================================
+
+Database Location:
+  databases/my_lancedb/table_simple05.lance/
+
+Table Name:
+  table_simple05
+
+
+QUICK START (Python)
+--------------------
+
+1. Install lancedb:
+   pip install lancedb
+
+2. Connect and query:
+
+   import lancedb
+
+   # Connect to the database
+   db = lancedb.connect("databases/my_lancedb")
+
+   # Open the table
+   table = db.open_table("table_simple05")
+
+   # View all data as a pandas DataFrame
+   df = table.to_pandas()
+   print(df.head())
+
+   # Check number of records
+   print(f"Total chunks: {len(df)}")
+
+
+SEARCH EXAMPLES
+---------------
+
+# Vector search (semantic similarity)
+results = table.search("Is peppermint good for digestion?").limit(5).to_list()
+
+# Hybrid search (vector + full-text)
+results = table.search("vitamin D benefits", query_type="hybrid").limit(10).to_list()
+
+# Filter by metadata
+results = table.search().where("title = 'Some Article Title'").to_list()
+
+
+TABLE SCHEMA
+------------
+
+Each row (chunk) contains:
+
+  - text          : The actual text chunk content
+  - vector        : 384-dimensional embedding (multi-qa-MiniLM-L6-cos-v1)
+  - hash_doc      : Unique ID for this chunk
+  - hash_title    : Unique ID for the parent article
+  - title         : Article title
+  - url           : Original article URL
+  - tags_all      : Article tags
+  - rank_abs      : Chunk position in article (0, 1, 2, ...)
+  - rank_rel      : Relative position (0.0 to 1.0)
+  - n_docs        : Total chunks in this article
+  - sim_doc_title : Similarity score to title
+  - sim_doc_tags  : Similarity score to tags
+
+
+USING THE PROJECT'S BUILT-IN FUNCTIONS
+--------------------------------------
+
+The project provides helper functions in src/retrieval.py:
+
+   from src.retrieval import get_knowledge_base, get_context
+
+   # Get the table
+   k_base = get_knowledge_base()
+
+   # Get formatted context for a query
+   context = get_context(
+       k_base=k_base,
+       query_text="What foods help with inflammation?",
+       n_titles=5,
+       n_retrieve=10
+   )
+   print(context)
+
+
+DATABASE STATS
+--------------
+
+  - Total chunks: 7,023
+  - Source articles: 1,281
+  - Average chunks per article: ~5.5
+  - Embedding dimensions: 384
+  - Database size: ~130 MB
+
+
+CONFIGURATION
+-------------
+
+Settings are in rag_config.toml:
+
+  [knowledge_base]
+  uri = "databases/my_lancedb"
+  table_name = "table_simple05"
+
+  [embeddings]
+  model_name = "multi-qa-MiniLM-L6-cos-v1"
+  n_char_max = 1000
+  overlap = 100

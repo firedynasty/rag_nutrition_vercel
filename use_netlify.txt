@@ -1,0 +1,11 @@
+⏺ Netlify - it's the closest to Vercel in simplicity.
+
+  1. Go to https://netlify.com
+  2. Drag & drop your project folder
+  3. Done - you get a public URL instantly
+
+  For env vars: Site Settings → Environment Variables
+
+  It's free, fast, and the easiest option with env var support.
+
+

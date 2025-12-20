@@ -29,6 +29,9 @@ const ReportChat = () => {
   const [apiKey, setApiKey] = useState('');
   const [selectedModel, setSelectedModel] = useState('gpt-4o-mini');
   const [webSearchEnabled, setWebSearchEnabled] = useState(false);
+  const [ragEnabled, setRagEnabled] = useState(false);
+  const [ragContext, setRagContext] = useState(''); // Store last RAG context
+  const [showRagContext, setShowRagContext] = useState(false);
   const [useSharedKey, setUseSharedKey] = useState(false);
   const [accessCode, setAccessCode] = useState('');
   const [selectedRole, setSelectedRole] = useState('default');
@@ -75,6 +78,19 @@ EXAMPLE RESPONSES:
 TONE: Curious, challenging, thought-provoking. Push them to think deeper.
 
 KEEP RESPONSES SHORT (under 150 words). End with a probing question.`
+    },
+    'nutrition_rag': {
+      name: 'Nutrition RAG Assistant',
+      prompt: `You are a helpful nutrition and health assistant with access to a knowledge base of nutrition research articles.
+
+When answering questions:
+1. Base your answers on the provided context from retrieved articles
+2. Cite the source titles/URLs when referencing specific information
+3. If the context doesn't contain relevant information, say so and offer general guidance
+4. Be accurate and don't make claims not supported by the provided sources
+5. If multiple sources have different perspectives, acknowledge this
+
+Use the RAG context to provide informed, evidence-based answers about nutrition and health topics.`
     },
   };
 
@@ -227,8 +243,46 @@ ${fileContent}
     setIsLoading(true);
 
     try {
-      const systemPrompt = buildSystemPrompt();
+      let systemPrompt = buildSystemPrompt();
       let assistantMessage;
+      let ragContextForMessage = null;
+
+      // If RAG is enabled, first retrieve context from the knowledge base
+      if (ragEnabled) {
+        try {
+          const ragResponse = await fetch('/api/rag', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              query: inputValue,
+              retrieveOnly: true, // Just get context, we'll call LLM ourselves
+              apiKey: useSharedKey ? null : apiKey,
+              accessCode: useSharedKey ? accessCode : null,
+            }),
+          });
+
+          if (ragResponse.ok) {
+            const ragData = await ragResponse.json();
+            ragContextForMessage = ragData.context;
+            setRagContext(ragData.context);
+
+            // Prepend RAG context to system prompt
+            const ragPrefix = `[RAG Context from Nutrition Knowledge Base]
+${ragData.context}
+[End RAG Context]
+
+`;
+            systemPrompt = ragPrefix + (systemPrompt || roles['nutrition_rag'].prompt);
+          } else {
+            const errorData = await ragResponse.json();
+            console.error('RAG retrieval failed:', errorData.error);
+            // Continue without RAG context
+          }
+        } catch (ragError) {
+          console.error('RAG API error:', ragError);
+          // Continue without RAG context
+        }
+      }
 
       if (aiProvider === 'ChatGPT') {
         const openaiMessages = [];
@@ -524,6 +578,34 @@ ${fileContent}
           </div>
         )}
 
+        {/* RAG Toggle - Nutrition Knowledge Base */}
+        <div style={styles.section}>
+          <label style={styles.checkboxLabel}>
+            <input
+              type="checkbox"
+              checked={ragEnabled}
+              onChange={(e) => {
+                setRagEnabled(e.target.checked);
+                if (e.target.checked) {
+                  setSelectedRole('nutrition_rag');
+                }
+              }}
+              style={styles.checkbox}
+            />
+            <span style={{ color: ragEnabled ? '#28a745' : '#fff' }}>
+              🥦 Nutrition RAG
+            </span>
+          </label>
+          {ragEnabled && ragContext && (
+            <button
+              onClick={() => setShowRagContext(!showRagContext)}
+              style={{ ...styles.button, marginTop: '8px', background: '#6c757d', fontSize: '12px' }}
+            >
+              {showRagContext ? 'Hide Context' : 'Show RAG Context'}
+            </button>
+          )}
+        </div>
+
         {/* Role Selection */}
         <div style={styles.section}>
           <label style={styles.label}>Role:</label>
@@ -746,6 +828,26 @@ ${fileContent}
             </div>
             <div style={styles.modalContent}>
               <pre style={styles.promptText}>{roles[selectedRole]?.prompt}</pre>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* RAG Context Modal */}
+      {showRagContext && ragContext && (
+        <div style={styles.modalOverlay} onClick={() => setShowRagContext(false)}>
+          <div style={{ ...styles.modal, width: '800px' }} onClick={(e) => e.stopPropagation()}>
+            <div style={{ ...styles.modalHeader, background: '#28a745' }}>
+              <h3 style={styles.modalTitle}>🥦 RAG Context - Retrieved Articles</h3>
+              <button
+                onClick={() => setShowRagContext(false)}
+                style={styles.modalCloseBtn}
+              >
+                Close
+              </button>
+            </div>
+            <div style={styles.modalContent}>
+              <pre style={styles.promptText}>{ragContext}</pre>
             </div>
           </div>
         </div>
