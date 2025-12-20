@@ -693,6 +693,11 @@ ${ragData.context}
           )}
         </div>
 
+        {/* Credit */}
+        <div style={styles.credit}>
+          Credit to <a href="https://github.com/alexkolo/rag_nutrition_facts_blog" target="_blank" rel="noopener noreferrer" style={styles.creditLink}>alexkolo/rag_nutrition_facts_blog</a>
+        </div>
+
         {/* Send Mode Toggle */}
         <div style={styles.section}>
           <label style={styles.label}>Send to Chat:</label>
@@ -1008,6 +1013,17 @@ const styles = {
     fontSize: '12px',
     color: '#888',
     margin: '4px 0 0 0',
+  },
+  credit: {
+    fontSize: '11px',
+    color: '#666',
+    textAlign: 'center',
+    padding: '8px',
+    borderTop: '1px solid #333',
+  },
+  creditLink: {
+    color: '#4da6ff',
+    textDecoration: 'none',
   },
   mainArea: {
     flex: 1,
