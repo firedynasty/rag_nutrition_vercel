@@ -30,8 +30,18 @@ const ReportChat = () => {
   const [selectedModel, setSelectedModel] = useState('gpt-4o-mini');
   const [webSearchEnabled, setWebSearchEnabled] = useState(false);
   const [ragEnabled, setRagEnabled] = useState(true); // Default: RAG enabled
+  const [ragSource, setRagSource] = useState('nutrition'); // Which RAG knowledge base to use
   const [ragContext, setRagContext] = useState(''); // Store last RAG context
   const [showRagContext, setShowRagContext] = useState(false);
+
+  // Available RAG sources (knowledge bases)
+  const ragSources = {
+    nutrition: { name: '🥦 Nutrition', index: 'nutrition-rag' },
+    romeo_and_juliet: { name: '📖 Romeo & Juliet', index: 'rag-romeo-and-juliet' },
+    don_quixote: { name: '📖 Don Quixote', index: 'rag-don-quixote' },
+    pilgrims_progress: { name: '📖 Pilgrim\'s Progress', index: 'rag-pilgrims-progress' },
+    all_she_was_worth: { name: '📖 All She Was Worth', index: 'rag-all-she-was-worth' },
+  };
   const [useSharedKey, setUseSharedKey] = useState(false);
   const [accessCode, setAccessCode] = useState('');
   const [selectedRole, setSelectedRole] = useState('nutrition_rag'); // Default: Nutrition RAG role
@@ -257,6 +267,8 @@ ${fileContent}
               retrieveOnly: true, // Just get context, we'll call LLM ourselves
               apiKey: useSharedKey ? null : apiKey,
               accessCode: useSharedKey ? accessCode : null,
+              ragSource: ragSource, // Which knowledge base to search
+              indexName: ragSources[ragSource]?.index, // Pinecone index name
             }),
           });
 
@@ -265,7 +277,8 @@ ${fileContent}
             setRagContext(ragData.context);
 
             // Prepend RAG context to system prompt
-            const ragPrefix = `[RAG Context from Nutrition Knowledge Base]
+            const sourceName = ragSources[ragSource]?.name || 'Knowledge Base';
+            const ragPrefix = `[RAG Context from ${sourceName}]
 ${ragData.context}
 [End RAG Context]
 
@@ -602,24 +615,29 @@ ${ragData.context}
           </div>
         )}
 
-        {/* RAG Toggle - Nutrition Knowledge Base */}
+        {/* RAG Knowledge Base Selection */}
         <div style={styles.section}>
-          <label style={styles.checkboxLabel}>
-            <input
-              type="checkbox"
-              checked={ragEnabled}
-              onChange={(e) => {
-                setRagEnabled(e.target.checked);
-                if (e.target.checked) {
+          <label style={styles.label}>📚 Knowledge Base:</label>
+          <select
+            value={ragEnabled ? ragSource : ''}
+            onChange={(e) => {
+              if (e.target.value === '') {
+                setRagEnabled(false);
+              } else {
+                setRagEnabled(true);
+                setRagSource(e.target.value);
+                if (e.target.value === 'nutrition') {
                   setSelectedRole('nutrition_rag');
                 }
-              }}
-              style={styles.checkbox}
-            />
-            <span style={{ color: ragEnabled ? '#28a745' : '#fff' }}>
-              🥦 Nutrition RAG
-            </span>
-          </label>
+              }
+            }}
+            style={styles.select}
+          >
+            <option value="">Off</option>
+            {Object.entries(ragSources).map(([key, source]) => (
+              <option key={key} value={key}>{source.name}</option>
+            ))}
+          </select>
           {ragEnabled && ragContext && (
             <button
               onClick={() => setShowRagContext(!showRagContext)}

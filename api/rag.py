@@ -6,9 +6,21 @@ import json
 import os
 import urllib.request
 
-# Configuration
-PINECONE_INDEX_NAME = "nutrition-rag"  # Your Pinecone index name
-PINECONE_HOST = os.environ.get("PINECONE_HOST", "")  # Set in Vercel env vars
+# Configuration - Multiple Pinecone indexes for different knowledge bases
+# Each index has its own host. Format: PINECONE_HOST_{INDEX_NAME_UPPERCASE}
+# e.g., PINECONE_HOST_NUTRITION_RAG, PINECONE_HOST_RAG_ROMEO_AND_JULIET
+DEFAULT_INDEX = "nutrition-rag"
+
+
+def get_pinecone_host(index_name: str) -> str:
+    """Get the Pinecone host for a given index name."""
+    # Try index-specific environment variable first
+    env_key = f"PINECONE_HOST_{index_name.upper().replace('-', '_')}"
+    host = os.environ.get(env_key)
+    if host:
+        return host
+    # Fallback to default PINECONE_HOST for backwards compatibility
+    return os.environ.get("PINECONE_HOST", "")
 
 
 def get_embedding(text: str, api_key: str) -> list:
@@ -32,10 +44,11 @@ def get_embedding(text: str, api_key: str) -> list:
         return data["data"][0]["embedding"]
 
 
-def search_pinecone(query_vector: list, pinecone_key: str, n_results: int = 5) -> list:
+def search_pinecone(query_vector: list, pinecone_key: str, index_name: str = DEFAULT_INDEX, n_results: int = 5) -> list:
     """Search Pinecone for similar vectors."""
-    if not PINECONE_HOST:
-        raise ValueError("PINECONE_HOST environment variable not set")
+    pinecone_host = get_pinecone_host(index_name)
+    if not pinecone_host:
+        raise ValueError(f"Pinecone host not configured for index: {index_name}")
 
     request_body = {
         "vector": query_vector,
@@ -44,7 +57,7 @@ def search_pinecone(query_vector: list, pinecone_key: str, n_results: int = 5) -
     }
 
     req = urllib.request.Request(
-        f"https://{PINECONE_HOST}/query",
+        f"https://{pinecone_host}/query",
         data=json.dumps(request_body).encode('utf-8'),
         headers={
             "Content-Type": "application/json",
@@ -57,13 +70,13 @@ def search_pinecone(query_vector: list, pinecone_key: str, n_results: int = 5) -
         return data.get("matches", [])
 
 
-def search_nutrition_docs(query: str, openai_key: str, pinecone_key: str, n_results: int = 5) -> list:
-    """Search the nutrition knowledge base using vector similarity."""
+def search_docs(query: str, openai_key: str, pinecone_key: str, index_name: str = DEFAULT_INDEX, n_results: int = 5) -> list:
+    """Search a knowledge base using vector similarity."""
     # Get query embedding from OpenAI
     query_vector = get_embedding(query, openai_key)
 
     # Search Pinecone
-    matches = search_pinecone(query_vector, pinecone_key, n_results)
+    matches = search_pinecone(query_vector, pinecone_key, index_name, n_results)
 
     # Convert to our format
     results = []
@@ -143,11 +156,11 @@ def call_llm(messages: list, system_prompt: str, api_key: str, model: str = "gpt
             return data["choices"][0]["message"]["content"]
 
 
-# System prompt for nutrition RAG
-RAG_SYSTEM_PROMPT = """You are a helpful nutrition and health assistant with access to a knowledge base of nutrition research articles.
+# System prompt for RAG (used when retrieveOnly=False)
+RAG_SYSTEM_PROMPT = """You are a helpful assistant with access to a knowledge base of documents.
 
 When answering questions:
-1. Base your answers on the provided context from retrieved articles
+1. Base your answers on the provided context from retrieved documents
 2. Cite the source titles/URLs when referencing specific information
 3. If the context doesn't contain relevant information, say so and offer general guidance
 4. Be accurate and don't make claims not supported by the provided sources
@@ -174,7 +187,7 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps({
             "status": "ok",
             "backend": "pinecone",
-            "message": "Nutrition RAG API (Pinecone + OpenAI embeddings)"
+            "message": "RAG API (Pinecone + OpenAI embeddings) - supports multiple knowledge bases"
         }).encode())
 
     def do_POST(self):
@@ -201,6 +214,8 @@ class handler(BaseHTTPRequestHandler):
         access_code = body.get("accessCode")
         retrieve_only = body.get("retrieveOnly", False)
         n_results = body.get("nResults", 5)
+        index_name = body.get("indexName", DEFAULT_INDEX)  # Which Pinecone index to search
+        rag_source = body.get("ragSource", "nutrition")  # For display purposes
 
         # Get API keys
         openai_key = None
@@ -223,8 +238,8 @@ class handler(BaseHTTPRequestHandler):
             return
 
         try:
-            # Search for relevant documents
-            results = search_nutrition_docs(query, openai_key, pinecone_key, n_results)
+            # Search for relevant documents in the specified index
+            results = search_docs(query, openai_key, pinecone_key, index_name, n_results)
             context = format_context(results)
 
             # If retrieve_only, just return the context
@@ -232,12 +247,14 @@ class handler(BaseHTTPRequestHandler):
                 send_json_response(200, {
                     "context": context,
                     "query": query,
-                    "n_results": len(results)
+                    "n_results": len(results),
+                    "indexName": index_name,
+                    "ragSource": rag_source
                 })
                 return
 
             # Build augmented message
-            user_message = f"""[RAG Context from Nutrition Knowledge Base]
+            user_message = f"""[RAG Context from {rag_source} Knowledge Base]
 {context}
 [End RAG Context]
 

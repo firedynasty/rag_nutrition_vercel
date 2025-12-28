@@ -1,0 +1,6 @@
+# Core dependencies for RAG system
+lancedb>=0.4.0
+sentence-transformers>=2.2.0
+pandas>=2.0.0
+numpy>=1.24.0
+tantivy

@@ -1,0 +1,36 @@
+[embeddings]
+# Device for computation: "cuda", "cpu", "mps" (Apple Silicon)
+device = "cpu"
+
+# Similarity function
+metric = "cosine"
+
+# Let LanceDB handle embeddings (required for hybrid search)
+emb_manual = false
+
+model_provider = "sentence-transformers"
+# Pretrained model for semantic search
+model_name = "multi-qa-MiniLM-L6-cos-v1"
+n_dim_vec = 384
+
+# Token limits (model trained on up to 250 word pieces)
+n_token_max = 250
+
+# Chunk settings
+n_char_max = 1500  # Larger chunks for narrative content
+overlap = 150
+
+[knowledge_base]
+uri = "databases/novel_lancedb"
+table_name = "all_she_was_worth"
+
+[retriever]
+# Number of text chunks to retrieve after reranking
+n_retrieve = 10
+# Number of top chapters/sections to return
+n_titles = 5
+# Enrich first result with surrounding context
+enrich_first = true
+# Cross-encoder reranker
+reranker.device = "cpu"
+reranker.model_name = "cross-encoder/ms-marco-MiniLM-L-2-v2"
