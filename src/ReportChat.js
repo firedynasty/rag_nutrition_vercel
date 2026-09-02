@@ -315,102 +315,30 @@ ${ragData.context}
         }
         openaiMessages.push(...newMessages.map(m => ({ role: m.role, content: m.content })));
 
-        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            messages: openaiMessages,
+            model: selectedModel,
+            userApiKey: useSharedKey ? null : apiKey,
+            accessCode: useSharedKey ? accessCode : null,
+            webSearch: webSearchEnabled,
+          }),
+        });
 
-        if (isLocalhost && !useSharedKey) {
-          let response;
-
-          if (webSearchEnabled) {
-            response = await fetch('https://api.openai.com/v1/responses', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`,
-              },
-              body: JSON.stringify({
-                model: selectedModel,
-                tools: [{ type: 'web_search' }],
-                tool_choice: 'auto',
-                input: openaiMessages,
-              }),
-            });
-
-            if (!response.ok) {
-              const errorData = await response.json();
-              throw new Error(errorData.error?.message || 'API request failed');
-            }
-
-            const data = await response.json();
-            let responseText = data.output_text;
-            if (!responseText && data.output) {
-              for (const item of data.output) {
-                if (item.type === 'message' && item.content) {
-                  for (const content of item.content) {
-                    if (content.type === 'output_text' && content.text) {
-                      responseText = content.text;
-                      break;
-                    }
-                  }
-                }
-                if (responseText) break;
-              }
-            }
-
-            assistantMessage = {
-              role: 'assistant',
-              content: responseText || 'No response from web search',
-            };
-          } else {
-            response = await fetch('https://api.openai.com/v1/chat/completions', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`,
-              },
-              body: JSON.stringify({
-                model: selectedModel,
-                max_tokens: 4096,
-                messages: openaiMessages,
-              }),
-            });
-
-            if (!response.ok) {
-              const errorData = await response.json();
-              throw new Error(errorData.error?.message || 'API request failed');
-            }
-
-            const data = await response.json();
-            assistantMessage = {
-              role: 'assistant',
-              content: data.choices[0].message.content,
-            };
-          }
-        } else {
-          const response = await fetch('/api/chat', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              messages: openaiMessages,
-              model: selectedModel,
-              userApiKey: useSharedKey ? null : apiKey,
-              accessCode: useSharedKey ? accessCode : null,
-              webSearch: webSearchEnabled,
-            }),
-          });
-
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'API request failed');
-          }
-
-          const data = await response.json();
-          assistantMessage = {
-            role: 'assistant',
-            content: data.content,
-          };
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'API request failed');
         }
+
+        const data = await response.json();
+        assistantMessage = {
+          role: 'assistant',
+          content: data.content,
+        };
       } else {
         const requestBody = {
           model: selectedModel,
