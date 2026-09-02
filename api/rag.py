@@ -82,11 +82,15 @@ def format_context(results: list) -> str:
 
     context_parts = []
     for i, doc in enumerate(results, 1):
-        title = doc.get("title", "Unknown Title")
+        title = doc.get("title") or doc.get("section") or "Unknown Title"
         url = doc.get("url", "")
         text = doc.get("text", "")
 
-        context_parts.append(f"{i}. Title: '{title}' (URL: {url}):\n\t- {text}")
+        entry = f"{i}. {title}"
+        if url:
+            entry += f" (URL: {url})"
+        entry += f":\n\t- {text}"
+        context_parts.append(entry)
 
     return "\n\n".join(context_parts)
 
