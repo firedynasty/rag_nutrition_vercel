@@ -1,0 +1,66 @@
+on run {input, parameters}
+    -- Check if any files were provided
+    if (count of input) = 0 then
+        display dialog "No files were selected." buttons {"OK"} default button "OK"
+        return input
+    end if
+
+    -- Build the list of top-level paths (files or folders)
+    set filePaths to ""
+    repeat with selectedFile in input
+        set filePath to POSIX path of selectedFile
+        set filePaths to filePaths & quoted form of filePath & " "
+    end repeat
+
+    -- Shell script: expands folders recursively, then processes every file found
+    set shellScript to "
+process_file() {
+    local file=\"$1\"
+    local ext=\"${file##*.}\"
+    case \"$ext\" in
+        [Pp][Nn][Gg]|[Jj][Pp][Gg]|[Jj][Pp][Ee][Gg]|[Gg][Ii][Ff]|[Bb][Mm][Pp]|[Tt][Ii][Ff][Ff]|[Hh][Ee][Ii][Cc]|[Ww][Ee][Bb][Pp]|[Pp][Dd][Ff])
+            return
+            ;;
+    esac
+
+    echo \"\"
+    echo \"\"
+    echo \"Chapter: $(basename \"$file\")\"
+    case \"$ext\" in
+        [Dd][Oo][Cc][Xx]|[Dd][Oo][Cc]|[Rr][Tt][Ff]|[Oo][Dd][Tt])
+            pandoc \"$file\" -t plain --wrap=none
+            ;;
+        *)
+            cat \"$file\"
+            ;;
+    esac
+    echo \"\"
+}
+
+for item in " & filePaths & "; do
+    if [ -d \"$item\" ]; then
+        find \"$item\" -type f -not -name '.*' -print0 | sort -z | while IFS= read -r -d '' f; do
+            process_file \"$f\"
+        done
+    else
+        process_file \"$item\"
+    fi
+done
+"
+
+    try
+        -- Get combined text with headers
+        set combinedText to do shell script shellScript
+
+        -- Copy to clipboard
+        set the clipboard to combinedText
+
+        -- Show notification
+        display notification "Combined files → clipboard only" with title "Concat Complete"
+
+    on error errMsg
+        display dialog "Error: " & errMsg buttons {"OK"} default button "OK"
+    end try
+
+    return input
+end run

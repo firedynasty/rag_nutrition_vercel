@@ -1,0 +1,89 @@
+RAG DEVELOPMENT GUIDE
+=====================
+
+BUILDING A NEW RAG (4 steps)
+------------------------------
+
+Step 1 — Create chunks + initial embeddings
+  cd /Users/stanleytan/Documents/technical/python/extract_and_create
+  python create_rag_from_text.py --input /path/to/notes/ --output /path/to/rag_myrag/
+
+  python create_rag_from_text.py -c (will take from the clipboard) 
+
+  This produces a LanceDB with 384-dim sentence-transformer embeddings.
+
+Step 2 — Rebuild to OpenAI embeddings (1536-dim)
+  cd /Users/stanleytan/Documents/technical/github/react-chat-rag-nutrition
+  python rebuild_embeddings.py --rag-folder /path/to/rag_myrag
+
+  Output table: <source_table>_openai
+
+Step 3 — Upload to Qdrant
+  python migrate_to_qdrant.py --rag-folder /path/to/rag_myrag --collection my-collection-name
+
+Step 4 — Add to dropdown in src/ReportChat.js
+  my_rag: { name: 'My RAG', index: 'my-collection-name' },
+
+  Then deploy: vercel --prod
+
+
+UPDATING WITH NEW DEVELOPMENTS
+--------------------------------
+
+Qdrant doesn't support incremental updates cleanly — easiest approach is full re-upload.
+
+1. Add new content/notes to your source folder
+2. Re-run create_rag_from_text.py (regenerates all chunks)
+3. Re-run rebuild_embeddings.py
+4. Re-run migrate_to_qdrant.py — it deletes and recreates the collection automatically
+
+No code changes to the app needed since the collection name stays the same.
+
+
+QUICK REFERENCE PIPELINE
+--------------------------
+
+notes/txt files
+  -> create_rag_from_text.py   (chunks + 384-dim embeddings, local LanceDB)
+  -> rebuild_embeddings.py     (converts to 1536-dim OpenAI embeddings)
+  -> migrate_to_qdrant.py      (uploads to Qdrant cloud)
+  -> ReportChat.js dropdown    (add new ragSource entry)
+  -> vercel --prod             (deploy)
+
+
+KEY PATHS
+----------
+
+RAG creation script:
+  /Users/stanleytan/Documents/technical/python/extract_and_create/create_rag_from_text.py
+
+Migration scripts (in react-chat-rag-nutrition repo):
+  rebuild_embeddings.py
+  migrate_to_qdrant.py
+
+Frontend dropdown:
+  /Users/stanleytan/Documents/technical/github/react-chat-rag-nutrition/src/ReportChat.js
+  -> ragSources object
+
+Backend API:
+  /Users/stanleytan/Documents/technical/github/react-chat-rag-nutrition/api/rag.py
+
+
+CURRENT RAG COLLECTIONS IN QDRANT
+------------------------------------
+
+  nutrition-rag     -> 7023 points  (Nutrition knowledge base)
+  lindsay_clancy    -> 122 points   (Lindsay Clancy case)
+  rag-romeo-and-juliet
+  rag-don-quixote
+  rag-pilgrims-progress
+  rag-all-she-was-worth
+
+
+ENV VARS NEEDED (set in Vercel dashboard)
+-------------------------------------------
+
+  QDRANT_URL        Qdrant cluster URL
+  QDRANT_API_KEY    Qdrant API key
+  OPENAI_API_KEY    OpenAI API key (server-side, for embeddings + LLM)
+  ACCESS_CODE       Password for users to use Stanley's key
