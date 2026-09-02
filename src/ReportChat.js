@@ -126,8 +126,8 @@ Use the RAG context to provide informed, evidence-based answers about nutrition 
   };
 
   const openaiModels = {
-    'GPT-4o': 'gpt-4o',
     'GPT-4o Mini': 'gpt-4o-mini',
+    'GPT-4.1 Mini': 'gpt-4.1-mini',
   };
 
   const models = aiProvider === 'ChatGPT' ? openaiModels : anthropicModels;
