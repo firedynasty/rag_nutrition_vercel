@@ -23,6 +23,19 @@ const md2plain = (md) => {
     .trim();
 };
 
+const renderWithLinks = (text) => {
+  const parts = text.split(/(https?:\/\/[^\s)]+)/g);
+  return parts.map((part, i) =>
+    part.match(/^https?:\/\//) ? (
+      <a key={i} href={part} target="_blank" rel="noopener noreferrer" style={{ color: '#4fc3f7', wordBreak: 'break-all' }}>
+        {part}
+      </a>
+    ) : (
+      part
+    )
+  );
+};
+
 const ReportChat = () => {
   // API and model state
   const [aiProvider, setAiProvider] = useState('ChatGPT');
@@ -902,7 +915,7 @@ ${ragData.context}
               </button>
             </div>
             <div style={styles.modalContent}>
-              <pre style={styles.promptText}>{ragContext}</pre>
+              <pre style={styles.promptText}>{renderWithLinks(ragContext)}</pre>
             </div>
           </div>
         </div>
