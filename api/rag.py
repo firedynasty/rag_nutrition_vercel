@@ -1,26 +1,13 @@
 # Vercel Serverless Function for RAG (Retrieval-Augmented Generation)
-# Uses Pinecone for vector search + OpenAI embeddings
+# Uses Qdrant for vector search + OpenAI embeddings
 
 from http.server import BaseHTTPRequestHandler
 import json
 import os
 import urllib.request
 
-# Configuration - Multiple Pinecone indexes for different knowledge bases
-# Each index has its own host. Format: PINECONE_HOST_{INDEX_NAME_UPPERCASE}
-# e.g., PINECONE_HOST_NUTRITION_RAG, PINECONE_HOST_RAG_ROMEO_AND_JULIET
+# Configuration - collection name in Qdrant (was "index" in Pinecone)
 DEFAULT_INDEX = "nutrition-rag"
-
-
-def get_pinecone_host(index_name: str) -> str:
-    """Get the Pinecone host for a given index name."""
-    # Try index-specific environment variable first
-    env_key = f"PINECONE_HOST_{index_name.upper().replace('-', '_')}"
-    host = os.environ.get(env_key)
-    if host:
-        return host
-    # Fallback to default PINECONE_HOST for backwards compatibility
-    return os.environ.get("PINECONE_HOST", "")
 
 
 def get_embedding(text: str, api_key: str) -> list:
@@ -44,48 +31,44 @@ def get_embedding(text: str, api_key: str) -> list:
         return data["data"][0]["embedding"]
 
 
-def search_pinecone(query_vector: list, pinecone_key: str, index_name: str = DEFAULT_INDEX, n_results: int = 5) -> list:
-    """Search Pinecone for similar vectors."""
-    pinecone_host = get_pinecone_host(index_name)
-    if not pinecone_host:
-        raise ValueError(f"Pinecone host not configured for index: {index_name}")
-
+def search_qdrant(query_vector: list, qdrant_url: str, qdrant_key: str, collection_name: str = DEFAULT_INDEX, n_results: int = 5) -> list:
+    """Search Qdrant for similar vectors."""
     request_body = {
         "vector": query_vector,
-        "topK": n_results,
-        "includeMetadata": True
+        "limit": n_results,
+        "with_payload": True
     }
 
     req = urllib.request.Request(
-        f"https://{pinecone_host}/query",
+        f"{qdrant_url}/collections/{collection_name}/points/search",
         data=json.dumps(request_body).encode('utf-8'),
         headers={
             "Content-Type": "application/json",
-            "Api-Key": pinecone_key
+            "api-key": qdrant_key
         }
     )
 
     with urllib.request.urlopen(req) as response:
         data = json.loads(response.read().decode('utf-8'))
-        return data.get("matches", [])
+        return data.get("result", [])
 
 
-def search_docs(query: str, openai_key: str, pinecone_key: str, index_name: str = DEFAULT_INDEX, n_results: int = 5) -> list:
+def search_docs(query: str, openai_key: str, qdrant_url: str, qdrant_key: str, collection_name: str = DEFAULT_INDEX, n_results: int = 5) -> list:
     """Search a knowledge base using vector similarity."""
     # Get query embedding from OpenAI
     query_vector = get_embedding(query, openai_key)
 
-    # Search Pinecone
-    matches = search_pinecone(query_vector, pinecone_key, index_name, n_results)
+    # Search Qdrant
+    matches = search_qdrant(query_vector, qdrant_url, qdrant_key, collection_name, n_results)
 
     # Convert to our format
     results = []
     for match in matches:
-        metadata = match.get("metadata", {})
+        payload = match.get("payload", {})
         results.append({
-            "text": metadata.get("text", ""),
-            "title": metadata.get("title", "Unknown Title"),
-            "url": metadata.get("url", ""),
+            "text": payload.get("text", ""),
+            "title": payload.get("title", "Unknown Title"),
+            "url": payload.get("url", ""),
             "score": match.get("score", 0)
         })
 
@@ -186,8 +169,8 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps({
             "status": "ok",
-            "backend": "pinecone",
-            "message": "RAG API (Pinecone + OpenAI embeddings) - supports multiple knowledge bases"
+            "backend": "qdrant",
+            "message": "RAG API (Qdrant + OpenAI embeddings) - supports multiple knowledge bases"
         }).encode())
 
     def do_POST(self):
@@ -219,10 +202,14 @@ class handler(BaseHTTPRequestHandler):
 
         # Get API keys
         openai_key = None
-        pinecone_key = os.environ.get("PINECONE_API_KEY")
+        qdrant_url = os.environ.get("QDRANT_URL", "").rstrip("/")
+        qdrant_key = os.environ.get("QDRANT_API_KEY")
 
-        if not pinecone_key:
-            send_json_response(500, {"error": "PINECONE_API_KEY not configured"})
+        if not qdrant_url:
+            send_json_response(500, {"error": "QDRANT_URL not configured"})
+            return
+        if not qdrant_key:
+            send_json_response(500, {"error": "QDRANT_API_KEY not configured"})
             return
 
         if api_key:
@@ -239,7 +226,7 @@ class handler(BaseHTTPRequestHandler):
 
         try:
             # Search for relevant documents in the specified index
-            results = search_docs(query, openai_key, pinecone_key, index_name, n_results)
+            results = search_docs(query, openai_key, qdrant_url, qdrant_key, index_name, n_results)
             context = format_context(results)
 
             # If retrieve_only, just return the context
