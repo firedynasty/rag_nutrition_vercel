@@ -50,6 +50,7 @@ const ReportChat = () => {
   // Available RAG sources (knowledge bases)
   const ragSources = {
     nutrition: { name: '🥦 Nutrition', index: 'nutrition-rag' },
+    lindsay_clancy: { name: '⚖️ Lindsay Clancy Case', index: 'lindsay_clancy' },
     romeo_and_juliet: { name: '📖 Romeo & Juliet', index: 'rag-romeo-and-juliet' },
     don_quixote: { name: '📖 Don Quixote', index: 'rag-don-quixote' },
     pilgrims_progress: { name: '📖 Pilgrim\'s Progress', index: 'rag-pilgrims-progress' },
