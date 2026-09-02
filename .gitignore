@@ -23,3 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 .vercel
 .env*
+
+# Local RAG databases and caches
+rag_*/
+__pycache__/
+*.pyc
