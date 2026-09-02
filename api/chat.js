@@ -58,7 +58,7 @@ export default async function handler(req, res) {
           model: model || 'gpt-4o-mini',
           tools: [{ type: 'web_search' }],
           tool_choice: 'auto',
-          input: messages[messages.length - 1].content,
+          input: messages,
         }),
       });
 

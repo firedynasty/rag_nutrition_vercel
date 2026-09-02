@@ -329,7 +329,7 @@ ${ragData.context}
                 model: selectedModel,
                 tools: [{ type: 'web_search' }],
                 tool_choice: 'auto',
-                input: newMessages[newMessages.length - 1].content,
+                input: openaiMessages,
               }),
             });
 
