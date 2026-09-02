@@ -274,6 +274,7 @@ ${fileContent}
             body: JSON.stringify({
               query: inputValue,
               retrieveOnly: true, // Just get context, we'll call LLM ourselves
+              nResults: 10,
               apiKey: useSharedKey ? null : apiKey,
               accessCode: useSharedKey ? accessCode : null,
               ragSource: ragSource, // Which knowledge base to search
@@ -476,6 +477,7 @@ ${ragData.context}
         body: JSON.stringify({
           query: inputValue,
           retrieveOnly: true,
+          nResults: 10,
           ragSource: ragSource,
           indexName: ragSources[ragSource]?.index,
         }),
