@@ -55,6 +55,7 @@ const ReportChat = () => {
     don_quixote: { name: '📖 Don Quixote', index: 'rag-don-quixote' },
     pilgrims_progress: { name: '📖 Pilgrim\'s Progress', index: 'rag-pilgrims-progress' },
     all_she_was_worth: { name: '📖 All She Was Worth', index: 'rag-all-she-was-worth' },
+    recipes: { name: '🍳 Recipes', index: 'recipes' },
   };
   const [useSharedKey, setUseSharedKey] = useState(false);
   const [accessCode, setAccessCode] = useState('');
