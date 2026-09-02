@@ -67,7 +67,8 @@ def search_docs(query: str, openai_key: str, qdrant_url: str, qdrant_key: str, c
         payload = match.get("payload", {})
         results.append({
             "text": payload.get("text", ""),
-            "title": payload.get("title", "Unknown Title"),
+            "title": payload.get("title", ""),
+            "section": payload.get("section", ""),
             "url": payload.get("url", ""),
             "score": match.get("score", 0)
         })
