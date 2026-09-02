@@ -220,6 +220,12 @@ class handler(BaseHTTPRequestHandler):
                 send_json_response(401, {"error": "Invalid access code"})
                 return
             openai_key = os.environ.get("OPENAI_API_KEY")
+        elif retrieve_only:
+            # Retrieval-only uses server key for embedding (cheap, no LLM call)
+            openai_key = os.environ.get("OPENAI_API_KEY")
+            if not openai_key:
+                send_json_response(500, {"error": "OPENAI_API_KEY not configured on server"})
+                return
         else:
             send_json_response(400, {"error": "No API key provided"})
             return

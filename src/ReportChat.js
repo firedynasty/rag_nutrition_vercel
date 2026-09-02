@@ -128,10 +128,6 @@ Use the RAG context to provide informed, evidence-based answers about nutrition 
   const openaiModels = {
     'GPT-4o': 'gpt-4o',
     'GPT-4o Mini': 'gpt-4o-mini',
-    'GPT-4 Turbo': 'gpt-4-turbo',
-    'GPT-3.5 Turbo': 'gpt-3.5-turbo',
-    'o1': 'o1',
-    'o1 Mini': 'o1-mini',
   };
 
   const models = aiProvider === 'ChatGPT' ? openaiModels : anthropicModels;
@@ -462,6 +458,40 @@ ${ragData.context}
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
+    }
+  };
+
+  // Retrieve RAG context only — no LLM call, no API key needed
+  const getRagContext = async () => {
+    if (!inputValue.trim()) return;
+    if (!ragEnabled) {
+      alert('Enable a knowledge base first');
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const ragResponse = await fetch('/api/rag', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: inputValue,
+          retrieveOnly: true,
+          ragSource: ragSource,
+          indexName: ragSources[ragSource]?.index,
+        }),
+      });
+      if (ragResponse.ok) {
+        const ragData = await ragResponse.json();
+        setRagContext(ragData.context);
+        setShowRagContext(true);
+      } else {
+        const err = await ragResponse.json();
+        alert(`RAG error: ${err.error}`);
+      }
+    } catch (e) {
+      alert(`Error: ${e.message}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -867,6 +897,21 @@ ${ragData.context}
               style={styles.textarea}
               disabled={isLoading}
             />
+            {ragEnabled && (
+              <button
+                onClick={getRagContext}
+                disabled={isLoading || !inputValue.trim()}
+                style={{
+                  ...styles.sendButton,
+                  background: '#28a745',
+                  opacity: isLoading || !inputValue.trim() ? 0.6 : 1,
+                  marginRight: '6px',
+                  fontSize: '12px',
+                }}
+              >
+                Get RAG Context
+              </button>
+            )}
             <button
               onClick={sendMessage}
               disabled={isLoading || !inputValue.trim()}
