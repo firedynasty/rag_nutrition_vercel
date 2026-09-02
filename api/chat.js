@@ -30,7 +30,7 @@ export default async function handler(req, res) {
   } else if (accessCode) {
     // User wants to use Stanley's key - validate access code
     const validAccessCode = process.env.ACCESS_CODE;
-    if (accessCode !== validAccessCode) {
+    if (accessCode.trim() !== validAccessCode?.trim()) {
       return res.status(401).json({ error: 'Invalid access code' });
     }
     apiKey = process.env.OPENAI_API_KEY;
