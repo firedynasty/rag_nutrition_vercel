@@ -58,7 +58,8 @@ const ReportChat = () => {
   };
   const [useSharedKey, setUseSharedKey] = useState(false);
   const [accessCode, setAccessCode] = useState('');
-  const [selectedRole, setSelectedRole] = useState('nutrition_rag'); // Default: Nutrition RAG role
+  const [selectedRole, setSelectedRole] = useState('default'); // Default: No Role
+  const [customRagIndex, setCustomRagIndex] = useState(''); // Custom Qdrant collection name
 
   // File state
   const [preloadedFiles, setPreloadedFiles] = useState([]); // list of filenames
@@ -279,7 +280,7 @@ ${fileContent}
               apiKey: useSharedKey ? null : apiKey,
               accessCode: useSharedKey ? accessCode : null,
               ragSource: ragSource, // Which knowledge base to search
-              indexName: ragSources[ragSource]?.index, // Pinecone index name
+              indexName: customRagIndex || ragSources[ragSource]?.index,
             }),
           });
 
@@ -288,7 +289,7 @@ ${fileContent}
             setRagContext(ragData.context);
 
             // Prepend RAG context to system prompt
-            const sourceName = ragSources[ragSource]?.name || 'Knowledge Base';
+            const sourceName = customRagIndex || ragSources[ragSource]?.name || 'Knowledge Base';
             const ragPrefix = `[RAG Context from ${sourceName}]
 ${ragData.context}
 [End RAG Context]
@@ -480,7 +481,7 @@ ${ragData.context}
           retrieveOnly: true,
           nResults: 10,
           ragSource: ragSource,
-          indexName: ragSources[ragSource]?.index,
+          indexName: customRagIndex || ragSources[ragSource]?.index,
         }),
       });
       if (ragResponse.ok) {
@@ -684,6 +685,16 @@ ${ragData.context}
               <option key={key} value={key}>{source.name}</option>
             ))}
           </select>
+          <input
+            type="text"
+            placeholder="Custom collection (e.g. rag-recipes)"
+            value={customRagIndex}
+            onChange={(e) => {
+              setCustomRagIndex(e.target.value);
+              if (e.target.value) setRagEnabled(true);
+            }}
+            style={{ ...styles.select, marginTop: '6px', fontSize: '13px' }}
+          />
           {ragEnabled && ragContext && (
             <button
               onClick={() => setShowRagContext(!showRagContext)}
