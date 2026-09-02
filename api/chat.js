@@ -30,11 +30,8 @@ export default async function handler(req, res) {
   } else if (accessCode) {
     // User wants to use Stanley's key - validate access code
     const validAccessCode = process.env.ACCESS_CODE;
-    console.log(`[debug] received accessCode length: ${accessCode.length}, trimmed: ${accessCode.trim().length}`);
-    console.log(`[debug] env ACCESS_CODE defined: ${!!validAccessCode}, length: ${validAccessCode?.length}, trimmed: ${validAccessCode?.trim().length}`);
-    console.log(`[debug] match: ${accessCode.trim() === validAccessCode?.trim()}`);
     if (accessCode.trim() !== validAccessCode?.trim()) {
-      return res.status(401).json({ error: `Invalid access code (received ${accessCode.trim().length} chars, expected ${validAccessCode?.trim().length ?? 'undefined'} chars)` });
+      return res.status(401).json({ error: 'Invalid access code' });
     }
     apiKey = process.env.OPENAI_API_KEY;
   } else {
